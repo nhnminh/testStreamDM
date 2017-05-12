@@ -81,17 +81,19 @@ class HoeffdingTree extends Classifier {
 
   val numGraceOption: IntOption = new IntOption("numGrace", 'g',
     "The number of examples a leaf should observe between split attempts.",
-    300, 1, Int.MaxValue)
+    200, 1, Int.MaxValue)
 
   val tieThresholdOption: FloatOption = new FloatOption("tieThreshold", 't',
     "Threshold below which a split will be forced to break ties.", 0.05, 0, 1)
+  //previously 0.05
 
   val splitConfidenceOption: FloatOption = new FloatOption("splitConfidence", 'c',
     "The allowable error in split decision, values closer to 0 will take longer to decide.",
     0.0000001, 0.0, 1.0)
 
   val learningNodeOption: IntOption = new IntOption("learningNodeType", 'l',
-    "Learning node type of leaf", 2, 0, 2)
+    "Learning node type of leaf", 0, 0, 2)
+  //originally: 2
 
   val nbThresholdOption: IntOption = new IntOption("nbThreshold", 'q',
     "The number of examples a leaf should observe between permitting Naive Bayes", 0, 0, Int.MaxValue)
@@ -112,8 +114,15 @@ class HoeffdingTree extends Classifier {
     val numFeatures = espec.numberInputFeatures()
     val outputSpec = espec.outputFeatureSpecification(0)
     val numClasses = outputSpec.range()
+    // model = new HoeffdingTreeModel(espec, numericObserverTypeOption.getValue, splitCriterionOption.getValue(),
+    //   growthAllowedOption.isSet(), binaryOnlyOption.isSet(), numGraceOption.getValue(),
+    //   tieThresholdOption.getValue, splitConfidenceOption.getValue(),
+    //   learningNodeOption.getValue(), nbThresholdOption.getValue(),
+    //   noPrePruneOption.isSet(), removePoorFeaturesOption.isSet(), splitAllOption.isSet())
+    // model.init()
+    // println("Initialize model: ")
     model = new HoeffdingTreeModel(espec, numericObserverTypeOption.getValue, splitCriterionOption.getValue(),
-      growthAllowedOption.isSet(), binaryOnlyOption.isSet(), numGraceOption.getValue(),
+      true, binaryOnlyOption.isSet(), numGraceOption.getValue(),
       tieThresholdOption.getValue, splitConfidenceOption.getValue(),
       learningNodeOption.getValue(), nbThresholdOption.getValue(),
       noPrePruneOption.isSet(), removePoorFeaturesOption.isSet(), splitAllOption.isSet())
@@ -132,14 +141,70 @@ class HoeffdingTree extends Classifier {
    * @return Unit
    */
   override def train(input: DStream[Example]): Unit = {
+    // val seedModel = new HoeffdingTreeModel(espec, numericObserverTypeOption.getValue, splitCriterionOption.getValue(),
+    //   true, binaryOnlyOption.isSet(), numGraceOption.getValue(),
+    //   tieThresholdOption.getValue, splitConfidenceOption.getValue(),
+    //   learningNodeOption.getValue(), nbThresholdOption.getValue(),
+    //   noPrePruneOption.isSet(), removePoorFeaturesOption.isSet(), splitAllOption.isSet())
+    // seedModel.init()
+
+
+
     input.foreachRDD {
       rdd =>
-        val tmodel = rdd.aggregate(
-          new HoeffdingTreeModel(model))(
-            (mod, example) => { mod.update(example) }, (mod1, mod2) => mod1.merge(mod2, false))
+        // var newModel = new HoeffdingTreeModel(model)
+        // val keepModel = new HoeffdingTreeModel(model)
+        // newModel.init()
+        // println("Model before emptyLeaves: " + model.description())
+        // newModel.emptyLeaves()
+        
+        // println("New Model: " + newModel.description())
+        
+        val tmodel = rdd.aggregate(new HoeffdingTreeModel(model))(
+            
+            (mod, example) => {mod.update(example)  }, 
+
+            (mod1, mod2) => { mod1.merge(mod2, false) }
+            
+          )
+        
+        println("tmodel: " + tmodel.description())
+        println("Before merge: " + model.description())
+       
+        /*
+        *     To have this work as a Majority Classifier, put the flag to be false.
+        */ 
+        // println("Model: "+ model.description())
         model = model.merge(tmodel, true)
+       
+        println("After merge: " + model.description())
+        model.checkforSum()
+
+
+ 
+      
     }
+
   }
+
+  /*ORIGINAL VERSION 
+
+
+override def train(input: DStream[Example]): Unit = {
+    input.foreachRDD {
+      rdd =>
+        val tmodel = rdd.aggregate(new HoeffdingTreeModel(model))(
+            
+            (mod, example) => { mod.update(example)  }, 
+
+            (mod1, mod2) => {mod1.merge(mod2, false) }
+          )              
+        model = model.merge(tmodel, true)
+      
+    }
+
+  }
+*/
 
   /* Predict the label of the Instance, given the current model
    *
@@ -147,7 +212,10 @@ class HoeffdingTree extends Classifier {
    * @return a tuple containing the original instance and the predicted value
    */
   def predict(input: DStream[Example]): DStream[(Example, Double)] = {
+    // println("I am predicting!")
     input.map { x => (x, model.predict(x)) }
+
+
   }
 }
 
@@ -166,6 +234,8 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
   val outputSpec = espec.outputFeatureSpecification(0)
   val numClasses = outputSpec.range()
   logInfo("numClasses" + outputSpec.range())
+  // println("HoeffdingTreeModel: numClasses=" + outputSpec.range())
+
   var activeNodeCount: Int = 0
   var inactiveNodeCount: Int = 0
   var deactiveNodeCount: Int = 0
@@ -196,6 +266,23 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
     //create an ActiveLearningNode for root
     root = createLearningNode(learningNodeType, numClasses)
     activeNodeCount += 1
+    println("Learning Node Type: " + learningNodeType)
+  }
+
+  /* Empty all class distributions at leaves */
+  def emptyLeaves(): Unit = {
+    // val childIndex = root.children()
+    // println("Root isSplitNode: " + root.isInstanceOf[SplitNode])
+    if(root.isInstanceOf[SplitNode])
+    {
+      root.emptyClassDistribution()
+    }
+  }
+
+  def checkforSum(): Unit = {
+    if(root.isInstanceOf[SplitNode]){
+      println("Total instances: " + root.countClassDistribution)
+    }
   }
 
   /* Update the model from the stream of instances given for training.
@@ -229,32 +316,47 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
    * @return Unit 
    */
   def attemptToSplit(learnNode: LearningNode, parent: SplitNode, pIndex: Int): Unit = {
+    // println("ActiveLearningNode: " + learnNode.isInstanceOf[ActiveLearningNode])
+    // println("growthAllowed: " + growthAllowed)
+    // println("ActiveLearningNode: " + learnNode.isInstanceOf[ActiveLearningNode])
     if (growthAllowed && learnNode.isInstanceOf[ActiveLearningNode]) {
-      // split only happened when the tree is allowed to grow and the node is a ActiveLearningNode
+      // split only happens when the tree is allowed to grow and the node is a ActiveLearningNode
       val activeNode = learnNode.asInstanceOf[ActiveLearningNode]
+      println("HoeffdingTreeModel: addOnWeight = " + activeNode.addOnWeight())
       if (activeNode.addOnWeight() >= graceNum) {
+        
         val isPure = activeNode.isPure()
+        // println("is Pure: " + isPure)
         if (!isPure) {
+          
           // one best suggestion for each feature
           var bestSuggestions: Array[FeatureSplit] = activeNode.getBestSplitSuggestions(splitCriterion, this)
+          
           //sort the suggestion based on the merit
           bestSuggestions = bestSuggestions.sorted
+          // println("All suggestions: " + Utils.arraytoString(bestSuggestions))
+          // println("Best suggestions: " + Utils.arraytoString(bestSuggestions))
           if (shouldSplit(activeNode, bestSuggestions)) {
             val best: FeatureSplit = bestSuggestions.last
+            println("Best suggestion: " + best.toString())
             if (best.conditionalTest == null) {
               //deactive a learning node
               deactiveLearningNode(activeNode, parent, pIndex)
             } else {
+              // println("HoeffdingTree: Split!")
               logInfo("before Split:" + root.description())
+              // println("HoeffdingTreeModel: beforeSplit" + root.description())
               //replace the ActiveLearningNode with a SplitNode and create children
               val splitNode: SplitNode = new SplitNode(activeNode.classDistribution, best.conditionalTest)
               for (index <- 0 until best.numSplit) {
                 splitNode.setChild(index,
                   createLearningNode(learningNodeType, best.distributionFromSplit(index)))
+                println("Distribution From Split: class [" + index + "]= " + Utils.arraytoString(best.distributionFromSplit(index)))
               }
               // repalce the node
               addSplitNode(splitNode, parent, pIndex)
               logInfo("after Split:" + root.description())
+              // println("HoeffdingTreeModel: afterSplit" + root.description())
             }
 
           }
@@ -272,12 +374,16 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
    */
   def shouldSplit(activeNode: ActiveLearningNode, bestSuggestions: Array[FeatureSplit]): Boolean = {
     if (bestSuggestions.length < 2) {
+      //return value, if it's bigger than 0 --> return true, else, false.
       bestSuggestions.length > 0
     } else {
       val hoeffdingBound = computeHeoffdingBound(activeNode)
+      // println("hoeffdingBound = " + hoeffdingBound)
       val length = bestSuggestions.length
       if (hoeffdingBound < tieThreshold ||
         bestSuggestions.last.merit - bestSuggestions(length - 2).merit > hoeffdingBound) {
+        //if differece in merit/information_gain of the Best and the Second Best larger than HoeffdingBound, 
+        // return true.
         true
       } else false
     }
@@ -306,13 +412,19 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
     this.blockNumExamples += that.blockNumExamples
     this.lastExample = that.lastExample
     // merge root with another root
+    // println("TrySplit: " + trySplit)
+    println("This root: "  +root.description())
+    println("That root: " + that.root.description())
     root.merge(that.root, trySplit)
+    // println("Why???")
     if (trySplit) {
       if (!splitAll) {
         //try to split one leaf node
         val foundNode = root.filterToLeaf(lastExample, null, -1)
         foundNode.node match {
           case activeNode: ActiveLearningNode => {
+            logInfo("attemptToSplit")
+            // println("HoeffdingTreeModel: attemptToSplit")
             attemptToSplit(activeNode, foundNode.parent, foundNode.index)
           }
         }
@@ -335,9 +447,13 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
         }
       }
       logInfo("{tree size (nodes),tree size (leaves),active learning leaves,tree depth}")
+      // println("HoeffdingTreeModel: {tree size (nodes),tree size (leaves),active learning leaves,tree depth}")
       val tree_size_nodes = activeNodeCount + decisionNodeCount + inactiveNodeCount
       val tree_size_leaves = activeNodeCount + inactiveNodeCount
       logInfo("{" + tree_size_nodes + "," + tree_size_leaves + "," + activeNodeCount + "," + treeHeight() + "}")
+      println("HoeffdingTreeModel: " + "{" + tree_size_nodes + "," + tree_size_leaves + "," + activeNodeCount + "," + treeHeight() + "}")
+      // println("{activeNodeCount, inactiveNodeCount, decisionNodeCount}")
+      // println("HoeffdingTreeModel: " + "{"+ activeNodeCount + "," + inactiveNodeCount + "," + decisionNodeCount + "}")
     }
     this
   }
@@ -443,7 +559,9 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
       parent.setChild(pIndex, splitNode)
     }
     activeNodeCount += splitNode.numChildren() - 1
-    decisionNodeCount -= 1
+    // decisionNodeCount -= 1
+    // @editor: nhnminh. This should be added instead of subtraction.
+    decisionNodeCount += 1
   }
 
   /* Computes Heoffding Bound withe activeNode's class distribution

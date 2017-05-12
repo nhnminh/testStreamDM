@@ -1,0 +1,632 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"cu",
+				"cumulativeAccuracy"
+			],
+			[
+				"num",
+				"numInstancesSeen"
+			],
+			[
+				"spark",
+				"sparkContext"
+			],
+			[
+				"true",
+				"truePrediction"
+			],
+			[
+				"count",
+				"countClassDistribution"
+			],
+			[
+				"coun",
+				"countClassDistribution"
+			],
+			[
+				"HoeffdingTree",
+				"HoeffdingTreeModel"
+			],
+			[
+				"Split",
+				"SplitNode"
+			],
+			[
+				"distr",
+				"distributionFromSplit"
+			],
+			[
+				"array",
+				"arraytoString"
+			],
+			[
+				"try",
+				"trySplit"
+			],
+			[
+				"best",
+				"bestSuggestions"
+			],
+			[
+				"arra",
+				"arraytoString"
+			],
+			[
+				"class",
+				"classDistribution"
+			],
+			[
+				"M",
+				"MajorityClass"
+			],
+			[
+				"learning",
+				"learningNodeType"
+			],
+			[
+				"counter",
+				"counterall"
+			],
+			[
+				"show",
+				"showConfusionMatrixOption"
+			],
+			[
+				"c",
+				"c	shortcut - class"
+			],
+			[
+				"val",
+				"valueOfClass"
+			],
+			[
+				"Confu",
+				"ConfusionMatrix"
+			],
+			[
+				"example",
+				"exampleSpecification"
+			],
+			[
+				"getExa",
+				"getExampleSpecification"
+			],
+			[
+				"foreach",
+				"foreachRDD"
+			],
+			[
+				"inac",
+				"inactiveNodeCount"
+			],
+			[
+				"ac",
+				"activeNodeCount"
+			],
+			[
+				"dec",
+				"decisionNodeCount"
+			],
+			[
+				"growth",
+				"growthAllowed"
+			],
+			[
+				"ist",
+				"isInstanceOf"
+			],
+			[
+				"add",
+				"addOnWeight"
+			],
+			[
+				"active",
+				"activeNode"
+			],
+			[
+				"bes",
+				"bestSuggestions"
+			],
+			[
+				"Hoeff",
+				"HoeffdingTreeModel"
+			],
+			[
+				"get",
+				"getExamples"
+			],
+			[
+				"chun",
+				"chunkSizeOption"
+			],
+			[
+				"instanceLimit",
+				"instanceLimitOption"
+			],
+			[
+				"number",
+				"numberFeatures"
+			],
+			[
+				"numFeature",
+				"numFeaturesOption"
+			],
+			[
+				"input",
+				"inputFeatures"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"pointArray",
+				"pointArrayHCR"
+			],
+			[
+				"Heatmap",
+				"HeatmapLayer"
+			],
+			[
+				"point",
+				"pointArray"
+			],
+			[
+				"backg",
+				"background"
+			],
+			[
+				"bord",
+				"border-bottom"
+			],
+			[
+				"margi",
+				"margin-right"
+			],
+			[
+				"bor",
+				"border-radius"
+			],
+			[
+				"list-sty",
+				"list-style-type"
+			],
+			[
+				"list",
+				"list-style-type"
+			],
+			[
+				"lis",
+				"list-style-type"
+			],
+			[
+				"background",
+				"background-position"
+			],
+			[
+				"back",
+				"background"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 127.0,
+		"selected_items":
+		[
+			[
+				"commit",
+				"Git: Commit"
+			],
+			[
+				"add",
+				"Git: Add All"
+			],
+			[
+				"git",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Preferences: Browse Packages"
+			],
+			[
+				"scala",
+				"Set Syntax: Scala"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 146.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/Evaluator.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/accuracy.py",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/Utils.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/evaluation/ClusteringEvaluator.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl5_t_checkGaussianApproximation.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4_t.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl5_t.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/spark.sh",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4_t.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/SGDLearner.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4Null_t.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4Null_t.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4Null.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt12.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/checkHDT5.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/checkHDT5_accuracy.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/checkHDT7.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl2.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl3.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt6.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt11.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/HoeffdingTree.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt8.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt10.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt9.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/runserver.sh",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hd9.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/hdt2.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/bodyfat.arff",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/generateData.sh",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/DenseInstance.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/model/LinearModel.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/SplitCriterion.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/randomtreedata.arff",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/hyperplanesampledata",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/hyperplanesampledata.arff.head",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/hdt2.log",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/02.Last Christmas - Wham [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/03.More Than I Can Say - Leo Sayer [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/04. Donna Donna - Claude Francois [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/05.Donna Donna - Yao Si Ting [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/06.Careless Whisper - Wham [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/07.Yesterday Once More - Carpenters [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/08.Because I Love You - Shakin_ Stevens [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/09.Until You - Shayne Ward [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/10.No Promises - Shayne Ward [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/11.One More Night - Maroon 5 [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/12.It_s Not Goodbye - Laura Pausini [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/13.Cry On My Shoulder - Super Stars [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/14.Hotel California - The Eagles [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/15.Sealed With A Kiss - Brian Hyland [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/16.Tonight I Celebrate My Love For You - Ya [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/17.Big Big World - Emilia [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/18.Love To Be Loved By You - Marc Terenzi [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/19.Take Me To Your Heart - Michael Learns T [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/Rolling In The Deep - Adele [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/Sealed With A Kiss - Yao Si Ting [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/20.Safe And Sound - Taylor Swift_ The Civil [FLAC Lossless].flac",
+		"/Users/minhnguyen/Music/US-UK/Lossless/Lossless-selected/01. Lemon Tree - Fools Garden [FLAC Lossless].flac",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/evaluation/Evaluator.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/hdt.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/specification/FeatureSpecification.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/learn.sbt",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/java/com/github/javacliparser/Option.java",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/java/com/github/javacliparser/Options.java",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/tasks/ClusteringTrainEvaluate.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/FeatureSplit.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/PrintStreamWriter.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/stage1.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/covtypeNorm.arff",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/hdt.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/StreamReader.scala",
+		"/Users/minhnguyen/StreamingAlgo/replaceText.py",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/spark_cluster.sh",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/evaluation/BasicClassificationEvaluator.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/tasks/EvaluatePrequential.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/new.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/target/test-reports/org.apache.spark.streamdm.classifiers.model.ZeroRegularizerSuite.xml",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/project/plugins.sbt",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/instance_server/server.py",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/KafkaReader.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/TextStreamReader.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/SocketTextStreamReader.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/generators/Generator.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/generators/HyperplaneGenerator.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/java/com/github/javacliparser/ClassOption.java",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streamDMJob.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/..sth.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/..sth.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/HoeffdingTree.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/instance_server/generate_dataset.py",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/run.sh",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/MultiClassLearner.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/sth.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/toserver.sh",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/specification/ExampleSpecification.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/Learner.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run.sh",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run_server.sh",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/Instance.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/ExampleParser.scala",
+		"/Users/minhnguyen/Downloads/reportDrug.ipynb.json",
+		"/Users/minhnguyen/Downloads/sample.java",
+		"/Users/minhnguyen/Downloads/sample.txt",
+		"/Users/minhnguyen/Google Drive/Telecom-ParisTech/Study/P2_IMA203/Tp5/TP_ModelesDeformables/TP_Modeles_Deformables.m",
+		"/Users/minhnguyen/Google Drive/Telecom-ParisTech/Study/P2_SD203 Web /TP/JS/helloworld.js",
+		"/Users/minhnguyen/Downloads/Bus Map/busmapPrediction/data 10.txt",
+		"/Users/minhnguyen/Downloads/Win10_English_x64/autorun.inf",
+		"/Users/minhnguyen/Google Drive/Telecom-ParisTech/Study/MDI210 Optimisation/TP1 /src/simplexeDemo_source_from_cfr/simplexe/Main.java",
+		"/Users/minhnguyen/Google Drive/Telecom-ParisTech/Study/MDI210 Optimisation/TP1 /src/simplexeDemo_source_from_cfr/matrice/Matrice.java",
+		"/Users/minhnguyen/Downloads/Bus Map/busmapPrediction/BusHeatMap-HCR-prediction copy.html",
+		"/Users/minhnguyen/Downloads/Bus Map/bus heat map - Ho con rua/BusHeatMapofFeb1-at6hour.html",
+		"/Users/minhnguyen/Downloads/Bus Map/BusHeatMap-HCR-HVT.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/its/sitebs.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/its/pagebs.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/its/heatmap.html",
+		"/Users/minhnguyen/Downloads/Bus Map/bus heat map - Ho con rua/BusHeatMapofFeb1-at18hour.html",
+		"/Users/minhnguyen/Downloads/Bus Map/bus heat map - Hoang Van Thu/BusHeatMapofFeb1-at18hour.html",
+		"/Users/minhnguyen/Downloads/Bus Map/bus heat map - Hoang Van Thu/newbusmap.html",
+		"/Users/minhnguyen/Downloads/BusHeatMap.html",
+		"/Applications/XAMPP/xamppfiles/htdocs/its/index.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/its/page.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/its/test.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/its/site.php",
+		"/Applications/XAMPP/xamppfiles/htdocs/its/site.css",
+		"/Applications/XAMPP/xamppfiles/htdocs/learn/ex1.php"
+	],
+	"find":
+	{
+		"height": 37.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"correct",
+			"accuracy",
+			"Cumulative",
+			"numInstancesCorrect",
+			"HoeffdingTreeModel: {",
+			"HoeffdingTreeModel",
+			"Total del",
+			"delay",
+			"HoeffdingTreeModel: {",
+			"total",
+			"ClassDistr:",
+			"ClassDistr ",
+			"classdistr ",
+			"classdistr",
+			"new model",
+			"merge",
+			"CheckActive",
+			"checkActive",
+			"println",
+			"new model",
+			"root.description",
+			"description",
+			"extends Node",
+			"children",
+			"splitNode",
+			"filterto",
+			"numBins",
+			"splitTranspose",
+			"classDis",
+			"splitall",
+			"binary",
+			"bestSplit",
+			"featureObservers",
+			"train",
+			"merge",
+			"createLearningNode",
+			"addOnWeight",
+			"addOnweigh",
+			"addOn",
+			"addn",
+			"pure",
+			"suggestions",
+			"Hoeffding",
+			"suggestions",
+			"best sug",
+			"suggestion",
+			"suggest",
+			"suggestion",
+			"blockNumExamples",
+			"block",
+			"learn",
+			"arraytoString",
+			"train",
+			"split",
+			"HoeffdingTreeModel",
+			"Update",
+			"tree",
+			"tModel",
+			"before",
+			"root.descr",
+			"description",
+			"blockClassDis",
+			"block",
+			"Before",
+			"counter",
+			" =>",
+			"toString",
+			"accuracy7232",
+			".931",
+			".06",
+			"blockClass",
+			"blockCl",
+			"learn",
+			"blockClas",
+			"learn",
+			".learn",
+			"learn.",
+			"learn",
+			"classD",
+			"Majorit",
+			"learningNodeOpt",
+			"update",
+			"SparkUI",
+			"8080",
+			"delay",
+			"train",
+			"merge",
+			"HoeffdingTreeModel",
+			"{",
+			"merge",
+			"merit",
+			"math_log",
+			"splitCriterion",
+			"create",
+			"blockClassDistribution",
+			"best",
+			"result",
+			"distribution",
+			"createLearningNode",
+			"classDistribution",
+			"train",
+			"delay",
+			"stop",
+			"headParser",
+			"Some",
+			"numClasses",
+			"specifica",
+			"error",
+			"println",
+			"class1,",
+			"error",
+			"class1",
+			"Error",
+			"decisionNode",
+			"decision",
+			"inactive",
+			"createLearning",
+			"creat",
+			"decision",
+			"decisionNodeCount",
+			"activeNodeCount",
+			"learningNodeType",
+			"createLearningNode",
+			"root",
+			"height",
+			"treeHeight",
+			"depth",
+			"growthAllowed"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.804537605526,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"t",
+				"streamDM/scripts/run/toserver.sh"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 287.0,
+	"status_bar_visible": true
+}

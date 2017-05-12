@@ -35,7 +35,7 @@ class ClusteringCohesionEvaluator extends Evaluator {
    * @param input the input stream containing (Example,Double) tuples
    * @return a stream of String with the processed evaluation
    */
-  override def addResult(input: DStream[(Example, Double)]): DStream[String] =
+  override def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int, valueOfClass: Array[String]): DStream[String] =
     input.transform(rdd => {
       val inv=rdd.map{case (e,c)=>(c,e)}
       val centr = ClusteringEvaluationUtil.computeAllCentroids(rdd).
@@ -64,7 +64,7 @@ class ClusteringSeparationEvaluator extends Evaluator {
    * @param input the input stream containing (Example,Double) tuples
    * @return a stream of String with the processed evaluation
    */
-  override def addResult(input: DStream[(Example, Double)]): DStream[String] =
+  override def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int, valueOfClass: Array[String]): DStream[String] =
     input.transform(rdd => {
       val inv=rdd.map{case (e,c) => (c,e)}
       val centr = ClusteringEvaluationUtil.computeAllCentroids(rdd)

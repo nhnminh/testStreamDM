@@ -18,7 +18,8 @@
 package org.apache.spark.streamdm.evaluation
 
 import java.io.Serializable
-
+import scalaz._
+import Scalaz._
 import org.apache.spark.streamdm.core.Example
 import org.apache.spark.streaming.dstream.DStream
 
@@ -28,8 +29,10 @@ import org.apache.spark.streaming.dstream.DStream
  * predicted by the learners.
  */
 class BasicClassificationEvaluator extends Evaluator{
-  var numInstancesCorrect = 0;
-  var numInstancesSeen = 0;
+  var numInstancesCorrect = 0.0; 
+  var numInstancesSeen = 0.0;
+ 
+  
 
   /**
    * Process the result of a predicted stream of Examples and Doubles.
@@ -37,13 +40,113 @@ class BasicClassificationEvaluator extends Evaluator{
    * @param input the input stream containing (Example,Double) tuples
    * @return a stream of String with the processed evaluation
    */
-  override def addResult(input: DStream[(Example, Double)]): DStream[String] = {
-    //print the confusion matrix for each batch
-    val pred = ConfusionMatrix.computeMatrix(input)
-    pred.map(x => {"%.3f,%.0f,%.0f,%.0f,%.0f"
-      .format((x._1+x._4)/(x._1+x._2+x._3+x._4),x._1,x._2,x._3,x._4)})
-  }
+//   override def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int, valueOfClass: Array[String]): DStream[(Int, Int)] = {
+//     //print the confusion matrix for each batch
+    
+//     // if option = 0 --> only accuracy is shown 
+//     // if option = 1 --> confusion matrix is shown 
 
+//     //numClasses determine which type of confusion matrix will be shown.
+
+//     val pred = ConfusionMatrix.computeMatrix(input)
+//     val predMC = ConfusionMatrix.computeMatrix(input, numClasses, valueOfClass)
+
+//     // show full confusion matrix 
+//     if (option == 1){
+//       if(numClasses < 3){
+//         pred.map(x => {
+//           // "%.3f,%.0f,%.0f,%.0f,%.0f".format((x._1+x._4)/(x._1+x._2+x._3+x._4),x._1,x._2,x._3,x._4)})
+//         (numInstancesCorrect.toInt,numInstancesSeen.toInt)
+//     })}
+//       else{pred.map(x=>(numInstancesCorrect.toInt,numInstancesSeen.toInt))
+//         // predMC.map(x => "Not implemented")
+        
+//       }
+      
+//     }
+  
+//     // only show accuracy. Option != 1 
+//     else {
+//       if (numClasses < 3){
+//         // 2 classes only 
+//         pred.map(x => {
+//           this.numInstancesCorrect += (x._1 + x._4)
+//           this.numInstancesSeen += (x._1+x._2+x._3+x._4)
+//           // "Each Rdd Accuracy : %.3f".format((x._1+x._4)/(x._1+x._2+x._3+x._4))})
+//           // "Accuracy : %.3f, Correct: %.3f, Total %.3f".format(this.numInstancesCorrect/this.numInstancesSeen, this.numInstancesCorrect, this.numInstancesSeen)})
+//         (numInstancesCorrect.toInt,numInstancesSeen.toInt)})
+//       }
+//       else{
+//         //multiclass 
+//         predMC.map(x => {
+//           this.numInstancesCorrect += x._1
+//           this.numInstancesSeen += (x._1 + x._2)
+//           // "Each Rdd Accuracy : %.3f".format(x._1/(x._1+x._2))})
+//           // "Accuracy : %.3f, Correct: %.3f, Total %.3f".format(this.numInstancesCorrect/this.numInstancesSeen, this.numInstancesCorrect, this.numInstancesSeen)})
+//         (numInstancesCorrect.toInt,numInstancesSeen.toInt)
+//         // predMC.map(x => "Not implemented")
+//       })}
+
+//       // b.map( x => {for (var i=0 <- 0 to 2){"%.3f".format(x(i)(i))}}
+      
+//     }
+          
+// }
+
+override def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int, valueOfClass: Array[String]): DStream[(String)] = {
+    //print the confusion matrix for each batch
+    
+    // if option = 0 --> only accuracy is shown 
+    // if option = 1 --> confusion matrix is shown 
+
+    //numClasses determine which type of confusion matrix will be shown.
+
+    val pred = ConfusionMatrix.computeMatrix(input)
+    val predMC = ConfusionMatrix.computeMatrix(input, numClasses, valueOfClass)
+
+    // show full confusion matrix 
+    if (option == 1){
+      if(numClasses < 3){
+        pred.map(x => {
+          "%.3f,%.0f,%.0f,%.0f,%.0f".format((x._1+x._4)/(x._1+x._2+x._3+x._4),x._1,x._2,x._3,x._4)})
+        // (numInstancesCorrect.toInt,numInstancesSeen.toInt)})
+    }
+      else{pred.map(x=>(numInstancesCorrect.toInt,numInstancesSeen.toInt))
+        predMC.map(x => "Not implemented")
+        
+      }
+      
+    }
+  
+    // only show accuracy. Option != 1 
+    else {
+      if (numClasses < 3){
+        // 2 classes only 
+        pred.map(x => {
+          this.numInstancesCorrect += (x._1 + x._4)
+          this.numInstancesSeen += (x._1+x._2+x._3+x._4)
+          // "Each Rdd Accuracy : %.3f".format((x._1+x._4)/(x._1+x._2+x._3+x._4))})
+          // "Accuracy : %.3f, Correct: %.3f, Total %.3f".format(this.numInstancesCorrect/this.numInstancesSeen, this.numInstancesCorrect, this.numInstancesSeen)})
+          "%.3f,%.3f".format(this.numInstancesCorrect, this.numInstancesSeen)})
+        // (numInstancesCorrect.toInt,numInstancesSeen.toInt)})
+      }
+      else{
+        //multiclass 
+        predMC.map(x => {
+          this.numInstancesCorrect += x._1
+          this.numInstancesSeen += (x._1 + x._2)
+          // "Each Rdd Accuracy : %.3f".format(x._1/(x._1+x._2))})
+          // "Accuracy : %.3f, Correct: %.3f, Total %.3f".format(this.numInstancesCorrect/this.numInstancesSeen, this.numInstancesCorrect, this.numInstancesSeen)})
+          "%.3f,%.3f".format(this.numInstancesCorrect, this.numInstancesSeen)})
+        // (numInstancesCorrect.toInt,numInstancesSeen.toInt)})
+        // predMC.map(x => "Not implemented")
+     }
+
+      // b.map( x => {for (var i=0 <- 0 to 2){"%.3f".format(x(i)(i))}}
+      
+    }
+          
+}
   /**
    * Get the evaluation result.
    *
@@ -56,8 +159,22 @@ class BasicClassificationEvaluator extends Evaluator{
  * Helper class for computing the confusion matrix for binary classification.
  */
 object ConfusionMatrix extends Serializable{
+
+  def confusionMulticlass(x: (Example, Double), numClasses : Int, valueOfClass: Array[String]): (Double,Double) = {
+    //now only compute accuracy 
+    val truePositive = if (x._1.labelAt(0) == x._2) 1.0 else 0.0
+    val others = if (x._1.labelAt(0) == x._2) 0.0 else 1.0
+
+    // val map1 = Map ((x._1.labelAt(0),x._2) ->1)
+    // map1
+    (truePositive, others) 
+
+  }
+  
   def confusion(x: (Example,Double)):
   (Double, Double, Double, Double) = {
+
+    //Confusion Matrix for multiple classes : return an Array[(String,String, Double)]
     val a = if ((x._1.labelAt(0)==x._2)&&(x._2==0.0)) 1.0 else 0.0
     val b = if ((x._1.labelAt(0)!=x._2)&&(x._2==0.0)) 1.0 else 0.0
     val c = if ((x._1.labelAt(0)!=x._2)&&(x._2==1.0)) 1.0 else 0.0
@@ -69,4 +186,15 @@ object ConfusionMatrix extends Serializable{
   DStream[(Double,Double,Double,Double)] =
     input.map(x=>confusion(x))
       .reduce((x,y)=>(x._1+y._1,x._2+y._2,x._3+y._3,x._4+y._4))
+
+
+  def computeMatrix(input: DStream[(Example, Double)], numClasses: Int, valueOfClass: Array[String]): DStream[(Double, Double)] = {
+    input.map(x=>confusionMulticlass(x, numClasses, valueOfClass)).reduce((x,y) => (x._1+y._1,x._2+y._2) )
+    // input.map(x=>confusionMulticlass(x, numClasses, valueOfClass).reduce((x,y) => x |+| y))
+
+
+
+    
+  }  
 }
+

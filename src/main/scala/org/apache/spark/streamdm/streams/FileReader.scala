@@ -52,13 +52,18 @@ class FileReader extends StreamReader with Logging {
     "Chunk Size", 10000, 1, Integer.MAX_VALUE)
 
   val slideDurationOption: IntOption = new IntOption("slideDuration", 'd',
-    "Slide Duration in milliseconds", 1000, 1, Integer.MAX_VALUE)
+    "Slide Duration in milliseconds", 2000, 1, Integer.MAX_VALUE)
 
   val instanceOption: StringOption = new StringOption("instanceType", 't',
     "Type of the instance to use", "dense")
 
+  val instanceLimitOption: IntOption = new IntOption("instanceLimit", 'i',
+    "Limit of number of instance", 1000000,1, Integer.MAX_VALUE)
+
   val fileNameOption: StringOption = new StringOption("fileName", 'f',
-    "File Name", "../data/hyperplanesampledata")
+    "File Name", "../data/covtypeNorm.arff")
+    //covtypeNorm
+    //../data/randomtreedata.arff
 
   val dataHeadTypeOption: StringOption = new StringOption("dataHeadType", 'h',
     "Data Head Format", "arff")
@@ -71,19 +76,30 @@ class FileReader extends StreamReader with Logging {
   var lines: Iterator[String] = null
   var spec: ExampleSpecification = null
 
+    /**
+    * 
+    * @nhnminh: Add instanceLimit to stop the stream after predefined N instances 
+    */
+  // override def getInstanceLimit():Int ={
+  //   val times = instanceLimitOption.getValue / chunkSizeOption.getValue
+  //   // val times = 1000000 / chunkSizeOption.getValue
+  //   times
+  // }
   def init() {
     if (!isInited) {
       fileName = fileNameOption.getValue
+      println(fileName)
       val file = new File(fileName)
       if (!file.exists()) {
-        logError("file does not exists, input a new file name")
+        logError("file does not exist, input a new file name")
+        println("file does not exist, input a new file name")
         exit()
       }
       headFileName = fileNameOption.getValue() + "." +
         dataHeadTypeOption.getValue + ".head"
       val hfile: File = new File(headFileName)
       if (hfile.exists()) {
-        // has a head file 
+        // has a head file
         hasHeadFile = true
       }
       spec = headParser.getSpecification(
@@ -103,47 +119,68 @@ class FileReader extends StreamReader with Logging {
    */
   override def getExampleSpecification(): ExampleSpecification = {
     init()
+    // println("Specification: ")
+    // println(spec.numberInputFeatures())
     spec
   }
 
   /**
-   * Get one Exmaple from file
+   * Get one Example from file
    *
-   * @return an Exmaple
+   * @return an Example 
    */
   def getExampleFromFile(): Example = {
+    
+    // val instanceLimit = instanceLimitOption.getValue
+    
     var exp: Example = null
+    // start to read file from its beginning.
     if (lines == null || !lines.hasNext) {
+      //get the whole file 
       lines = Source.fromFile(fileName).getLines()
     }
     // if reach the end of file, will go to the head again
     if (!lines.hasNext) {
-      lines = Source.fromFile(fileName).getLines()
-    }
-    var line = lines.next()
+      // lines = Source.fromFile(fileName).getLines()
+      //if reach the end of file, return. 
+      exp
+    } 
+
+
+      var line = lines.next()
+    
     while (!hasHeadFile && (line == "" || line.startsWith(" ") ||
       line.startsWith("%") || line.startsWith("@"))) {
-      //logInfo(line)
-      if (!lines.hasNext)
-        lines = Source.fromFile(fileName).getLines()
+      //logInfo(line) 
+      //skip the lines 
+      // if (!lines.hasNext)
+      //   lines = Source.fromFile(fileName).getLines()
       line = lines.next()
-    }
+    }   
+
+
+
     if (!hasHeadFile) {
       //logInfo("UUUU" + line)
       if ("arff".equalsIgnoreCase(dataHeadTypeOption.getValue())) {
         exp = ExampleParser.fromArff(line, spec)
+        
       } else {
         if ("csv".equalsIgnoreCase(dataHeadTypeOption.getValue())) {
           //for the csv format, we assume the first is the classification
           val index: Int = line.indexOf(",")
           line = line.substring(0, index) + " " + line.substring(index + 1).trim()
           exp = Example.parse(line, instanceOption.getValue, "dense")
+          
         }
       }
     } else {
       exp = Example.parse(line, instanceOption.getValue, "dense")
     }
+    
+
     exp
+
   }
 
   /**
@@ -154,14 +191,27 @@ class FileReader extends StreamReader with Logging {
    */
   override def getExamples(ssc: StreamingContext): DStream[Example] = {
     init()
-    new InputDStream[Example](ssc) {
-      override def start(): Unit = {}
 
-      override def stop(): Unit = {}
+    new InputDStream[Example](ssc) {
+
+      override def start(): Unit = {
+        println ("File reading gets started.")
+      }
+
+      override def stop(): Unit = {
+        println("Reading file stopped.")
+        // System.exit(1)
+      }
 
       override def compute(validTime: Time): Option[RDD[Example]] = {
+      
+
         val examples: Array[Example] = Array.fill[Example](chunkSizeOption.getValue)(getExampleFromFile())
-        Some(ssc.sparkContext.parallelize(examples))
+        val examplesRDD = ssc.sparkContext.parallelize(examples)
+        println("FileReader RDD count:" + examplesRDD.count())
+        Some(examplesRDD)
+        
+        
       }
 
       override def slideDuration = {
