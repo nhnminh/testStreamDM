@@ -34,7 +34,7 @@ def clientthread_file(conn):
     if not line: pass
     else:
       idx += 1
-      if idx%100000==0: print '\tinstace number %d' % idx
+      if idx%100000==0: print '\tinstance number %d' % idx
       try:
         #print line
         conn.sendall(line+'\n')
@@ -81,10 +81,10 @@ if __name__=='__main__':
   try:
     s.bind((HOST, PORT))
   except socket.error as msg:
-    print 'Bind failed. Error Code: '+str(msg[0]) + ' Message ' + msg[1]
+    print 'Binding failed. Error Code: '+str(msg[0]) + ' Message ' + msg[1]
     sys.exit()
 
-  print 'Socket bind complete'
+  print 'Socket binding complete'
 
   s.listen(10)
   print 'Socket now listening'

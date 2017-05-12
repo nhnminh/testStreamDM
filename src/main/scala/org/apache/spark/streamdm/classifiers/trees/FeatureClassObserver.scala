@@ -149,7 +149,7 @@ class NominalFeatureClassObserver(val numClasses: Int, val fIndex: Int, val numF
    * and the weight of the example observed
    *
    * @param cIndex the index of class
-   * @param fValue the value of the feature
+   * @param fValue the value of the feature (such as 1,2,sunny,rainy,high,low,...)
    * @param weight the weight of the example
    */
   override def observeClass(cIndex: Double, fValue: Double, weight: Double): Unit = {
@@ -317,10 +317,14 @@ class GaussianNumericFeatureClassObserver(val numClasses: Int, val fIndex: Int, 
    */
   override def bestSplit(criterion: SplitCriterion, pre: Array[Double],
     fValue: Double, isBinarySplit: Boolean): FeatureSplit = {
+    // println("pre-Distribution:  " + Utils.arraytoString(pre))
     var fSplit: FeatureSplit = null
     val points: Array[Double] = splitPoints()
+    // println("Split Points: " + Utils.arraytoString(points))
     for (splitValue: Double <- points) {
       val post: Array[Array[Double]] = binarySplit(splitValue)
+      // println("Post: ")
+      // post.foreach{x => println(Utils.arraytoString(x))}
       val merit = criterion.merit(normal(pre), normal(post))
       if (fSplit == null || fSplit.merit < merit)
         fSplit = new FeatureSplit(new NumericBinaryTest(fIndex, splitValue, false), merit, post)

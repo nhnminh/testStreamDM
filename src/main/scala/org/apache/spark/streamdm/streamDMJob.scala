@@ -33,9 +33,14 @@ object streamDMJob {
 
     //configuration and initialization of model
     val conf = new SparkConf().setAppName("streamDM")
-    conf.setMaster("local[2]")
+    //--> to run locally
+    conf.setMaster("local[2]")   
 
-    val ssc = new StreamingContext(conf, Seconds(10))
+
+    // conf.setMaster("yarn")   //to run on clusters
+
+    val ssc = new StreamingContext(conf, Seconds(1))
+
 
     //run task
     val string = if (args.length > 0) args.mkString(" ") 

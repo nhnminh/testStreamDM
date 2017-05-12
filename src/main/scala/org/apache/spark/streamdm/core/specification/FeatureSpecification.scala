@@ -43,6 +43,7 @@ trait FeatureSpecification {
    * if a feature is numeric, return -1, else return the nominal values size
    */
   def range(): Int
+  def getValue (): Array[String]
 }
 
 /**
@@ -63,6 +64,11 @@ class NumericFeatureSpecification extends FeatureSpecification with Serializable
    */
   override def isNumeric(): Boolean = !isNominal()
   override def range(): Int = -1
+  override def getValue(): Array[String]={
+    val returnVal = Array[String]()
+    returnVal
+  }
+
 }
 
 /**
@@ -107,4 +113,7 @@ class NominalFeatureSpecification(nominalValues: Array[String]) extends FeatureS
    * return the nominal values size
    */
   override def range(): Int = values.length
+  override def getValue(): Array[String] ={
+    values
+  }
 }

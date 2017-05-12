@@ -34,7 +34,7 @@ abstract class Evaluator extends Configurable with Serializable{
    * @param input the input stream containing (Example,Double) tuples
    * @return a stream of String with the processed evaluation
    */
-  def addResult(input: DStream[(Example, Double)]):  DStream[String]
+  def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int , valueOfClass: Array[String]):  DStream[String]
 
   /**
    * Get the evaluation result.

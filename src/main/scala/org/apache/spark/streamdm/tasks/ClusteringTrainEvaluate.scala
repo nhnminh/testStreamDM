@@ -74,6 +74,6 @@ class ClusteringTrainEvaluate extends Task {
     val clpairs = clusterer.assign(instances)
     
     //Print statistics
-    writer.output(evaluator.addResult(clpairs))
+    writer.output(evaluator.addResult(clpairs,0,0,Array[String]()))
   }
 }

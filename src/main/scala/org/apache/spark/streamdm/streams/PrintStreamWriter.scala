@@ -37,7 +37,9 @@ class PrintStreamWriter extends StreamWriter{
    */
   def output(stream: DStream[String]) = {
     stream.foreachRDD(rdd => {
-      rdd.foreach(x => {println(x)})
+
+      rdd.take(10).foreach(x => {println(x)})
+
     })
   }
 }
