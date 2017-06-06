@@ -36,6 +36,7 @@ abstract class Node(var classDistribution: Array[Double]) extends Serializable {
   // stores class distribution of a block of RDD
   val blockClassDistribution: Array[Double] = new Array[Double](classDistribution.length)
 
+
   /**
    * Filter the data to the related leaf node
    *
@@ -46,6 +47,8 @@ abstract class Node(var classDistribution: Array[Double]) extends Serializable {
    */
   def filterToLeaf(example: Example, parent: SplitNode, index: Int): FoundNode
 
+
+  def deepCopy (): Node
   /**
    * Return the class distribution
    * @return an Array containing the class distribution
@@ -142,6 +145,36 @@ class SplitNode(classDistribution: Array[Double], val conditionalTest: Condition
 
     this(Utils.addArrays(that.classDistribution, that.blockClassDistribution),
       that.conditionalTest)
+//    that.children.toArray.foreach{
+//    x => {
+//      if(x.isInstanceOf[SplitNode]){
+//        val newChild = new SplitNode(x)
+//      }
+//      if (x.isInstanceOf[LearningNodeNBAdaptive]){
+//        val newChild = new LearningNodeNBAdaptive(x)
+//      }
+//
+//      children.appends(newChild)
+//    }
+//    }
+
+  }
+
+  /**
+    * Copy themselves to another new node.
+    * @param that
+    * @return
+    */
+  override def deepCopy(): Node {
+    var newNode = new SplitNode(that)
+
+    val newChildren: ArrayBuffer[Node] = new ArrayBuffer[Node]()
+    that.children.toArray.foreach{
+      x => {
+          val newChildNode = x.deepCopy()
+          newChildren.append(newChildNode)
+      }
+    }
   }
 
 
@@ -306,6 +339,7 @@ class ActiveLearningNode(classDistribution: Array[Double])
     this(Utils.addArrays(that.classDistribution, that.blockClassDistribution),
       that.instanceSpecification)
     this.addonWeight = that.addonWeight
+
   }
   /**
    * init featureObservers array
@@ -556,9 +590,22 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
           this.blockClassDistribution(i) += that.blockClassDistribution(i)
       } else {
         println("Node merge with Split!")
-        this.addonWeight += nbaNode.blockAddonWeight
+
+//        println("That | blockAddonWeight: " + nbaNode.blockAddonWeight)
+
+         this.addonWeight += nbaNode.blockAddonWeight
+
+//        //newly added: blockClassDistribution is computed here, instead of having another NON_SPLIT step
+//        for (i <- 0 until blockClassDistribution.length)
+//          this.blockClassDistribution(i) += that.blockClassDistribution(i)
+//        //Add straight away the blockClassDistribution into addonWeight, because we have no "Block" anymore.
+//        println("That | blockAddonWeight: " + nbaNode.blockClassDistribution.sum)
+//        this.addonWeight += nbaNode.blockClassDistribution.sum
+        println("This | addOnWeight: " + this.addonWeight)
         mcCorrectWeight += nbaNode.mcBlockCorrectWeight
         nbCorrectWeight += nbaNode.nbBlockCorrectWeight
+
+        // compute the classDistribution
         for (i <- 0 until classDistribution.length)
           this.classDistribution(i) += that.blockClassDistribution(i)
       }

@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"Learn",
+				"LearningNodeNBAdaptive"
+			],
+			[
+				"LearningNo",
+				"LearningNodeNB"
+			],
+			[
+				"add",
+				"addonWeight"
+			],
+			[
+				"block",
+				"blockAddonWeight"
+			],
+			[
 				"cu",
 				"cumulativeAccuracy"
 			],
@@ -120,10 +136,6 @@
 				"isInstanceOf"
 			],
 			[
-				"add",
-				"addOnWeight"
-			],
-			[
 				"active",
 				"activeNode"
 			],
@@ -215,6 +227,126 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/main/scala/org/apache/spark/streamdm/streamDMJob.scala",
+			"settings":
+			{
+				"buffer_size": 1521,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/org/apache/spark/streamdm/evaluation/BasicClassificationEvaluator.scala",
+			"settings":
+			{
+				"buffer_size": 7535,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/org/apache/spark/streamdm/tasks/EvaluatePrequential.scala",
+			"settings":
+			{
+				"buffer_size": 5425,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/HoeffdingTree.scala",
+			"settings":
+			{
+				"buffer_size": 23439,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/FeatureClassObserver.scala",
+			"settings":
+			{
+				"buffer_size": 15862,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/Node.scala",
+			"settings":
+			{
+				"buffer_size": 18705,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/org/apache/spark/streamdm/streams/PrintStreamWriter.scala",
+			"settings":
+			{
+				"buffer_size": 1348,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/main/scala/org/apache/spark/streamdm/streams/FileReader.scala",
+			"settings":
+			{
+				"buffer_size": 6715,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "scripts/run/run.sh",
+			"settings":
+			{
+				"buffer_size": 624,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/run/accuracy.py",
+			"settings":
+			{
+				"buffer_size": 530,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/accuracy.py",
+			"settings":
+			{
+				"buffer_size": 1357,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_10000_NBA_splitMore.res",
+			"settings":
+			{
+				"buffer_size": 11438,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_10000_NBA_splitMore_test.res",
+			"settings":
+			{
+				"buffer_size": 19548,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/spark.sh",
+			"settings":
+			{
+				"buffer_size": 318,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/majcl4_t.log",
+			"settings":
+			{
+				"buffer_size": 2581825,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -260,12 +392,16 @@
 	},
 	"file_history":
 	[
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4_t.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA_splitMore.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl5_t_1000_NBA.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/streamDM (Spark Streaming).sublime-project",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/Evaluator.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/accuracy.py",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/Utils.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/evaluation/ClusteringEvaluator.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl5_t_checkGaussianApproximation.res",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4_t.log",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl5_t.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/spark.sh",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4_t.res",
@@ -383,10 +519,7 @@
 		"/Users/minhnguyen/Downloads/BusHeatMap.html",
 		"/Applications/XAMPP/xamppfiles/htdocs/its/index.php",
 		"/Applications/XAMPP/xamppfiles/htdocs/its/page.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/its/test.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/its/site.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/its/site.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/learn/ex1.php"
+		"/Applications/XAMPP/xamppfiles/htdocs/its/test.css"
 	],
 	"find":
 	{
@@ -405,6 +538,29 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"accuracy",
+			"Deactive",
+			"best",
+			"deactive",
+			"Accuracy",
+			"HoeffdingTreeModel: {",
+			"accurac",
+			"HoeffdingTreeModel: {",
+			"LearningNode",
+			"ActiveLear",
+			"this",
+			"tmodel",
+			"HoeffdingTreeModel: {",
+			"HoeffdingTree",
+			"Counter",
+			"this ",
+			"instanceof",
+			"blockAddOn",
+			"addOnwe",
+			"ClassDistr",
+			"After merging",
+			"After",
+			"accuracy",
 			"correct",
 			"accuracy",
 			"Cumulative",
@@ -509,30 +665,7 @@
 			"delay",
 			"stop",
 			"headParser",
-			"Some",
-			"numClasses",
-			"specifica",
-			"error",
-			"println",
-			"class1,",
-			"error",
-			"class1",
-			"Error",
-			"decisionNode",
-			"decision",
-			"inactive",
-			"createLearning",
-			"creat",
-			"decision",
-			"decisionNodeCount",
-			"activeNodeCount",
-			"learningNodeType",
-			"createLearningNode",
-			"root",
-			"height",
-			"treeHeight",
-			"depth",
-			"growthAllowed"
+			"Some"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -552,6 +685,418 @@
 		{
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/main/scala/org/apache/spark/streamdm/streamDMJob.scala",
+					"settings":
+					{
+						"buffer_size": 1521,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1116,
+								1116
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 84.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/main/scala/org/apache/spark/streamdm/evaluation/BasicClassificationEvaluator.scala",
+					"settings":
+					{
+						"buffer_size": 7535,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1028,
+								1056
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/main/scala/org/apache/spark/streamdm/tasks/EvaluatePrequential.scala",
+					"settings":
+					{
+						"buffer_size": 5425,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3758,
+								3758
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1686.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/HoeffdingTree.scala",
+					"settings":
+					{
+						"buffer_size": 23439,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3033.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/FeatureClassObserver.scala",
+					"settings":
+					{
+						"buffer_size": 15862,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/Node.scala",
+					"settings":
+					{
+						"buffer_size": 18705,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2334.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/main/scala/org/apache/spark/streamdm/streams/PrintStreamWriter.scala",
+					"settings":
+					{
+						"buffer_size": 1348,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								292,
+								292
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 126.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "src/main/scala/org/apache/spark/streamdm/streams/FileReader.scala",
+					"settings":
+					{
+						"buffer_size": 6715,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Scala/Scala.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3125.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "scripts/run/run.sh",
+					"settings":
+					{
+						"buffer_size": 624,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								540,
+								540
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 705.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "scripts/run/accuracy.py",
+					"settings":
+					{
+						"buffer_size": 530,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								439,
+								439
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "scripts/accuracy.py",
+					"settings":
+					{
+						"buffer_size": 1357,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								421,
+								421
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "scripts/result/hdt_10000_NBA_splitMore.res",
+					"settings":
+					{
+						"buffer_size": 11438,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								835,
+								835
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "scripts/result/hdt_10000_NBA_splitMore_test.res",
+					"settings":
+					{
+						"buffer_size": 19548,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1359,
+								1359
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 25.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "scripts/spark.sh",
+					"settings":
+					{
+						"buffer_size": 318,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								318,
+								318
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "scripts/result/majcl4_t.log",
+					"settings":
+					{
+						"buffer_size": 2581825,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								162122,
+								162122
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 767522.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -588,7 +1133,7 @@
 		"cols":
 		[
 			0.0,
-			0.804537605526,
+			0.968632371393,
 			1.0
 		],
 		"rows":
@@ -627,6 +1172,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 287.0,
+	"side_bar_width": 326.0,
 	"status_bar_visible": true
 }

@@ -1,3 +1,6 @@
 # sbt specific
 target/
 project/project/
+data/covtypeNorm.arff
+data/randomtreedata.arff
+ensime-langserver.log

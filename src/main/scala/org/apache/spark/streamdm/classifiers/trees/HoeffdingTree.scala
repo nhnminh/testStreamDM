@@ -19,12 +19,12 @@ package org.apache.spark.streamdm.classifiers.trees
 
 import scala.collection.mutable.ArrayBuffer
 import scala.collection.mutable.HashSet
-import scala.math.{ log => math_log, sqrt }
+import scala.math.{sqrt, log => math_log}
 import scala.collection.mutable.Queue
 import org.apache.spark.Logging
 import com.github.javacliparser._
 import org.apache.spark.streaming.dstream._
-import org.apache.spark.streamdm.utils.Utils.{ argmax }
+import org.apache.spark.streamdm.utils.Utils.argmax
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streamdm.classifiers._
 import org.apache.spark.streamdm.core.specification.ExampleSpecification
@@ -130,7 +130,7 @@ class HoeffdingTree extends Classifier {
   }
 
   /* Gets the current model used for the Learner.
-   * 
+   *
    * @return the Model object used for training
    */
   override def getModel: HoeffdingTreeModel = model
@@ -152,38 +152,50 @@ class HoeffdingTree extends Classifier {
 
     input.foreachRDD {
       rdd =>
-        // var newModel = new HoeffdingTreeModel(model)
-        // val keepModel = new HoeffdingTreeModel(model)
-        // newModel.init()
-        // println("Model before emptyLeaves: " + model.description())
-        // newModel.emptyLeaves()
-        
-        // println("New Model: " + newModel.description())
-        
         val tmodel = rdd.aggregate(new HoeffdingTreeModel(model))(
-            
-            (mod, example) => {mod.update(example)  }, 
 
-            (mod1, mod2) => { mod1.merge(mod2, false) }
-            
+            (mod, example) => {mod.update(example)  }, //map
+
+            (mod1, mod2) => { mod1.merge(mod2, false ) } //reduce
+
           )
-        
+
         println("tmodel: " + tmodel.description())
         println("Before merge: " + model.description())
-       
+
         /*
         *     To have this work as a Majority Classifier, put the flag to be false.
-        */ 
-        // println("Model: "+ model.description())
+        */
+
         model = model.merge(tmodel, true)
-       
+
         println("After merge: " + model.description())
         model.checkforSum()
 
 
- 
-      
+
+
     }
+
+
+//
+//    input.foreachRDD{
+//      rdd =>
+//      {
+//        rdd.take(1000).foreach{
+//          x =>
+//          {
+//            val tmodel = new HoeffdingTreeModel(model)
+////            println("tmodel initial: " + tmodel.description())
+//            tmodel.update(x)
+//            println("tmodel update: " + tmodel.description())
+//            println("Model before merge: "+ model.description())
+//            model.merge(tmodel, true)
+////            println("model after merge: " + model.description())
+//          }
+//        }
+//      }
+//    }
 
   }
 
@@ -257,7 +269,21 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
     this.deactiveNodeCount = model.deactiveNodeCount
     this.decisionNodeCount = model.decisionNodeCount
     baseNumExamples = model.baseNumExamples + model.blockNumExamples
-    this.root = model.root
+//    this.root = model.root.map(_.clone)
+
+//    this.root = model.root
+  if (model.root.isInstanceOf[SplitNode]){
+      println("Copy root SplitNode")
+//      this.root = this.root.asInstanceOf[SplitNode]
+      this.root = new SplitNode(model.root)
+//    this.root = model.root
+    }
+  if (model.root.isInstanceOf[LearningNodeNBAdaptive]){
+      println("Copy root LNA")
+//      this.root = model.root
+    this.root = new LearningNodeNBAdaptive(model.root)
+    }
+    
     this.lastExample = model.lastExample
   }
 
@@ -344,7 +370,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
               deactiveLearningNode(activeNode, parent, pIndex)
             } else {
               // println("HoeffdingTree: Split!")
-              logInfo("before Split:" + root.description())
+//              logInfo("before Split:" + root.description())
               // println("HoeffdingTreeModel: beforeSplit" + root.description())
               //replace the ActiveLearningNode with a SplitNode and create children
               val splitNode: SplitNode = new SplitNode(activeNode.classDistribution, best.conditionalTest)
@@ -355,7 +381,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
               }
               // repalce the node
               addSplitNode(splitNode, parent, pIndex)
-              logInfo("after Split:" + root.description())
+//              logInfo("after Split:" + root.description())
               // println("HoeffdingTreeModel: afterSplit" + root.description())
             }
 
@@ -413,8 +439,10 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
     this.lastExample = that.lastExample
     // merge root with another root
     // println("TrySplit: " + trySplit)
-    println("This root: "  +root.description())
-    println("That root: " + that.root.description())
+//    println("This root: "  +root.description())
+//    println("That root: " + that.root.description())
+//    println("This root SplitNode: " + root.isInstanceOf[SplitNode])
+//    println("That root SplitNode: " + that.root.isInstanceOf[SplitNode])
     root.merge(that.root, trySplit)
     // println("Why???")
     if (trySplit) {
@@ -426,6 +454,10 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
             logInfo("attemptToSplit")
             // println("HoeffdingTreeModel: attemptToSplit")
             attemptToSplit(activeNode, foundNode.parent, foundNode.index)
+          }
+            // nhnminh: to fix the error of scala.matchError
+          case activeNode: InactiveLearningNode => {
+            logInfo("InactiveLearningNode Found!")
           }
         }
       } else {
@@ -534,12 +566,17 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
    * @return Unit
    */
   def deactiveLearningNode(activeNode: ActiveLearningNode, parent: SplitNode, pIndex: Int): Unit = {
+//    println("Deactive Learning Node")
+//    logInfo("Deactive Learning Node")
     val deactiveNode = new InactiveLearningNode(activeNode.classDistribution)
+//    println("Inactive Node created")
     if (parent == null) {
       root = deactiveNode
     } else {
+//      println("No problem 1")
       parent.setChild(pIndex, deactiveNode)
     }
+//    println("No problem 2")
     activeNodeCount -= 1
     inactiveNodeCount += 1
 

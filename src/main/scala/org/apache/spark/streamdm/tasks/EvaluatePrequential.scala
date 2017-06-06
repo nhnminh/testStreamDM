@@ -93,6 +93,7 @@
       val size = predPairs.count()
       size.foreachRDD(rdd => 
         rdd.take(10).foreach(x => {
+          // count the number of instances as the stopping condition
           counter.add(x.toInt)
           println("==============================")
           println("Counter: " + counter.value)

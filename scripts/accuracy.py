@@ -29,15 +29,19 @@ def main(argv):
     counter = 0
     for line in infile:
         accuracy = ''
+        runtime = ''
         # compute the average accuracy
         if 'Accuracy' in line:
-            accuracy = line[10:14]
+            accuracy = line[10:15]
             sum += float(accuracy[:len(accuracy)-1])
             counter += 1
-        outfile.write(accuracy )
+            accuracy += "\n"
+        outfile.write(accuracy)
     outfile.write("\n")
+    print "Runtime ", runtime
     average = sum/counter
-    outfile.write("Average: " +str(average))    
+    outfile.write("Average: " +str(average) +"\n")
+    outfile.write("Running Time: " + str(runtime))
     print "Average accuracy: " , sum/counter
 
 
