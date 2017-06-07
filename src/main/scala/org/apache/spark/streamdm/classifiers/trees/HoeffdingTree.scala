@@ -150,52 +150,52 @@ class HoeffdingTree extends Classifier {
 
 
 
-    input.foreachRDD {
-      rdd =>
-        val tmodel = rdd.aggregate(new HoeffdingTreeModel(model))(
-
-            (mod, example) => {mod.update(example)  }, //map
-
-            (mod1, mod2) => { mod1.merge(mod2, false ) } //reduce
-
-          )
-
-        println("tmodel: " + tmodel.description())
-        println("Before merge: " + model.description())
-
-        /*
-        *     To have this work as a Majority Classifier, put the flag to be false.
-        */
-
-        model = model.merge(tmodel, true)
-
-        println("After merge: " + model.description())
-        model.checkforSum()
-
-
-
-
-    }
-
-
-//
-//    input.foreachRDD{
+//    input.foreachRDD {
 //      rdd =>
-//      {
-//        rdd.take(1000).foreach{
-//          x =>
-//          {
-//            val tmodel = new HoeffdingTreeModel(model)
-////            println("tmodel initial: " + tmodel.description())
-//            tmodel.update(x)
-//            println("tmodel update: " + tmodel.description())
-//            println("Model before merge: "+ model.description())
-//            model.merge(tmodel, true)
-////            println("model after merge: " + model.description())
-//          }
-//        }
-//      }
+//        val tmodel = rdd.aggregate(new HoeffdingTreeModel(model))(
+//
+//            (mod, example) => {mod.update(example)  }, //map
+//
+//            (mod1, mod2) => { mod1.merge(mod2, false ) } //reduce
+//
+//          )
+//
+//        println("tmodel: " + tmodel.description())
+//        println("Before merge: " + model.description())
+//
+//        /*
+//        *     To have this work as a Majority Classifier, put the flag to be false.
+//        */
+//
+//        model = model.merge(tmodel, true)
+//
+//        println("After merge: " + model.description())
+//        model.checkforSum()
+//
+//
+//
+//
 //    }
+
+
+
+    input.foreachRDD{
+      rdd =>
+      {
+        rdd.collect().foreach{
+          x =>
+          {
+            val tmodel = new HoeffdingTreeModel(model)
+//            println("tmodel initial: " + tmodel.description())
+            tmodel.update(x)
+            println("tmodel update: " + tmodel.description())
+            println("Model before merge: "+ model.description())
+            model.merge(tmodel, true)
+            println("model after merge: " + model.description())
+          }
+        }
+      }
+    }
 
   }
 
@@ -271,18 +271,9 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
     baseNumExamples = model.baseNumExamples + model.blockNumExamples
 //    this.root = model.root.map(_.clone)
 
-//    this.root = model.root
-  if (model.root.isInstanceOf[SplitNode]){
-      println("Copy root SplitNode")
-//      this.root = this.root.asInstanceOf[SplitNode]
-      this.root = new SplitNode(model.root)
-//    this.root = model.root
-    }
-  if (model.root.isInstanceOf[LearningNodeNBAdaptive]){
-      println("Copy root LNA")
-//      this.root = model.root
-    this.root = new LearningNodeNBAdaptive(model.root)
-    }
+    this.root = model.root.deepCopy()
+
+
     
     this.lastExample = model.lastExample
   }

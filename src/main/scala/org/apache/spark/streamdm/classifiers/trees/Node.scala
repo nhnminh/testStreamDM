@@ -161,22 +161,29 @@ class SplitNode(classDistribution: Array[Double], val conditionalTest: Condition
   }
 
   /**
-    * Copy themselves to another new node.
-    * @param that
-    * @return
+    * Copy themselves to another new node
+    * @return a newly created Node with identical structure as the original node
     */
-  override def deepCopy(): Node {
-    var newNode = new SplitNode(that)
+  override def deepCopy(): Node = {
+    var newNode = new SplitNode(this)
 
-    val newChildren: ArrayBuffer[Node] = new ArrayBuffer[Node]()
-    that.children.toArray.foreach{
+    this.children.toArray.foreach{
       x => {
           val newChildNode = x.deepCopy()
-          newChildren.append(newChildNode)
+          newNode.appendNode(newChildNode)
       }
     }
+    newNode
   }
 
+  /**
+    * For appending a node into list of children.
+    * @param child
+    */
+
+  def appendNode(child: Node): Unit = {
+    this.children.append(child)
+  }
 
   /**
    * Filter the data to the related leaf node
@@ -313,6 +320,8 @@ abstract class LearningNode(classDistribution: Array[Double]) extends Node(class
   override def filterToLeaf(example: Example, parent: SplitNode, index: Int): FoundNode =
     new FoundNode(this, parent, index)
 
+
+
 }
 
 /**
@@ -341,6 +350,17 @@ class ActiveLearningNode(classDistribution: Array[Double])
     this.addonWeight = that.addonWeight
 
   }
+
+  /**
+    * deepCopy for ActiveLearningNode
+    * @return newNode - a newly created Active Learning Node
+    */
+  override def deepCopy(): Node ={
+    var newNode = new ActiveLearningNode(this)
+    newNode.init()
+    newNode
+  }
+
   /**
    * init featureObservers array
    */
@@ -465,6 +485,15 @@ class InactiveLearningNode(classDistribution: Array[Double])
   }
 
   /**
+    * DeepCopy for InactiveLearningNode
+    * @return newNode
+    */
+  override def deepCopy(): Node = {
+    val newNode = new InactiveLearningNode(this)
+    newNode
+  }
+
+  /**
    * Learn and update the node. No action is taken for InactiveLearningNode
    *
    * @param ht HoeffdingTreeModel
@@ -498,6 +527,12 @@ class LearningNodeNB(classDistribution: Array[Double], instanceSpecification: In
     this(Utils.addArrays(that.classDistribution, that.blockClassDistribution),
       that.instanceSpecification)
     //init()
+  }
+
+  override def deepCopy() : Node = {
+    var newNode = new LearningNodeNB(this)
+    newNode.init()
+    newNode
   }
 
   /**
@@ -554,6 +589,16 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
   }
 
   /**
+    *
+    * @return newNode - a newly created LearningNodeNBAdaptive
+    */
+
+  override def deepCopy(): Node = {
+    var newNode = new LearningNodeNBAdaptive(this)
+    newNode
+  }
+
+  /**
    * Learn and update the node.
    *
    * @param ht a Hoeffding tree model
@@ -593,14 +638,14 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
 
 //        println("That | blockAddonWeight: " + nbaNode.blockAddonWeight)
 
-         this.addonWeight += nbaNode.blockAddonWeight
+//         this.addonWeight += nbaNode.blockAddonWeight
 
-//        //newly added: blockClassDistribution is computed here, instead of having another NON_SPLIT step
-//        for (i <- 0 until blockClassDistribution.length)
-//          this.blockClassDistribution(i) += that.blockClassDistribution(i)
-//        //Add straight away the blockClassDistribution into addonWeight, because we have no "Block" anymore.
-//        println("That | blockAddonWeight: " + nbaNode.blockClassDistribution.sum)
-//        this.addonWeight += nbaNode.blockClassDistribution.sum
+        //newly added: blockClassDistribution is computed here, instead of having another NON_SPLIT step
+        for (i <- 0 until blockClassDistribution.length)
+          this.blockClassDistribution(i) += that.blockClassDistribution(i)
+        //Add straight away the blockClassDistribution into addonWeight, because we have no "Block" anymore.
+        println("That | blockAddonWeight: " + nbaNode.blockClassDistribution.sum)
+        this.addonWeight += nbaNode.blockClassDistribution.sum
         println("This | addOnWeight: " + this.addonWeight)
         mcCorrectWeight += nbaNode.mcBlockCorrectWeight
         nbCorrectWeight += nbaNode.nbBlockCorrectWeight
