@@ -34,6 +34,7 @@ abstract class Node(var classDistribution: Array[Double]) extends Serializable {
 
   var dep: Int = 0
   // stores class distribution of a block of RDD
+  // @nhnminh: 12-06-2017: change from val to var
   val blockClassDistribution: Array[Double] = new Array[Double](classDistribution.length)
 
 
@@ -580,8 +581,14 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
   var nbBlockCorrectWeight: Double = 0
 
   def this(that: LearningNodeNBAdaptive) {
-    this(Utils.addArrays(that.classDistribution, that.blockClassDistribution),
-      that.instanceSpecification)
+
+    // old-fashioned copying
+//    this(Utils.addArrays(that.classDistribution, that.blockClassDistribution),that.instanceSpecification)
+    this (that.classDistribution, that.instanceSpecification)
+//    Utils.duplicateArrays(blockClassDistribution,that.blockClassDistribution)
+
+
+
     addonWeight = that.addonWeight
     mcCorrectWeight = that.mcCorrectWeight
     nbCorrectWeight = that.nbCorrectWeight
@@ -595,6 +602,8 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
 
   override def deepCopy(): Node = {
     var newNode = new LearningNodeNBAdaptive(this)
+    println("Current model: " + Utils.arraytoString(this.classDistribution) + Utils.arraytoString(this.blockClassDistribution))
+    println("Copied model: " + Utils.arraytoString(newNode.classDistribution) + Utils.arraytoString(newNode.blockClassDistribution))
     newNode
   }
 
@@ -616,7 +625,7 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
   /**
    * Merge two nodes
    *
-   * @param node the node which will be merged
+   * @param that the node which will be merged
    * @param trySplit flag indicating whether the node will be split
    * @return new node
    */

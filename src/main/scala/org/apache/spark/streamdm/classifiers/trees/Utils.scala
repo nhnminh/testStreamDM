@@ -32,6 +32,13 @@ object Utils {
     merge
   }
 
+  def duplicateArrays(arrayDuplicated: Array[Double], arraySpecimen: Array[Double]): Unit ={
+    for (i <- 0 until arrayDuplicated.length) {
+      arrayDuplicated(i) = arraySpecimen(i)
+    }
+
+  }
+
   /*
    * Return a string for a matrix
    * 
