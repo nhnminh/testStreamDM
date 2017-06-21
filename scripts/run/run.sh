@@ -9,7 +9,7 @@ echo "Receiving data...."
 
 start=`date +%s`
 # ./spark.sh "EvaluatePrequential -l trees.HoeffdingTree -s (FileReader -f ../data/covtypeNorm.arff)" 1>hdt2.res 2>hdt2.log 
-./spark.sh "EvaluatePrequential -l (trees.HoeffdingTree -l 2 -t 0.05 ) -s (FileReader -f ../data/randomtreedata.arff -k 10000)" 1> result/hdt_10000_NBA.res 2> result/majcl4_t.log
+./spark.sh "EvaluatePrequential -l (trees.HoeffdingTree -l 2 -t 0.05 -g 2 -b ) -s (FileReader -f ../data/randomtreedata_100.arff -k 10)" 1> result/hdt_100_NBA_small_nominal.res 2> result/majcl4_t.log
 end=`date +%s`
 
 echo runtime = $((end-start)) "seconds"

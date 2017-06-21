@@ -333,6 +333,8 @@ class ActiveLearningNode(classDistribution: Array[Double])
 
   var addonWeight: Double = 0
 
+  var lastseenAddOnWeight: Double = 0 //addOnWeight since the last split
+
   var blockAddonWeight: Double = 0
 
   var instanceSpecification: InstanceSpecification = null
@@ -425,6 +427,15 @@ class ActiveLearningNode(classDistribution: Array[Double])
     addonWeight
   }
 
+  def lastSeenAddOnWeight(): Double = {
+    lastseenAddOnWeight
+  }
+
+  def setLastSeenAddOnWeight(justSeenAddOnWeight: Double): Unit = {
+    this.lastseenAddOnWeight = justSeenAddOnWeight
+  }
+
+
   /**
    * Merge two nodes
    *
@@ -433,6 +444,7 @@ class ActiveLearningNode(classDistribution: Array[Double])
    * @return new node
    */
   override def merge(that: Node, trySplit: Boolean): Node = {
+    // println("ActiveLearningNode merge!")
     // println("ActiveLearningNode merge!")
     // println("CheckActive: " + that.isInstanceOf[ActiveLearningNode])
     if (that.isInstanceOf[ActiveLearningNode]) {
@@ -563,7 +575,7 @@ class LearningNodeNB(classDistribution: Array[Double], instanceSpecification: In
  * Adaptive Naive Bayes learning node.
  * @nhnminh: This learning node maintains two way of prediction: 
  * - MajorityClass, represented by mcCorrectWeight
- * - nbCorrectWeight, represeneted by nbCorrectWeight
+ * - nbCorrectWeight, represented by nbCorrectWeight
  * Those counters will be incremented respectively depending on which one provides a correct prediction.
  * If one of two counters is dominant, the Vote (Prediction) will be executed by that winner.
  * For example: mcCorrectWeight = 500, nbCorrectWeight = 550. The prediction will be made by NaiveBayesClassifier.
@@ -583,8 +595,8 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
   def this(that: LearningNodeNBAdaptive) {
 
     // old-fashioned copying
-//    this(Utils.addArrays(that.classDistribution, that.blockClassDistribution),that.instanceSpecification)
-    this (that.classDistribution, that.instanceSpecification)
+    this(Utils.addArrays(that.classDistribution, that.blockClassDistribution),that.instanceSpecification)
+//    this (that.classDistribution, that.instanceSpecification)
 //    Utils.duplicateArrays(blockClassDistribution,that.blockClassDistribution)
 
 
@@ -602,8 +614,8 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
 
   override def deepCopy(): Node = {
     var newNode = new LearningNodeNBAdaptive(this)
-    println("Current model: " + Utils.arraytoString(this.classDistribution) + Utils.arraytoString(this.blockClassDistribution))
-    println("Copied model: " + Utils.arraytoString(newNode.classDistribution) + Utils.arraytoString(newNode.blockClassDistribution))
+//    println("Current model: " + Utils.arraytoString(this.classDistribution) + Utils.arraytoString(this.blockClassDistribution))
+//    println("Copied model: " + Utils.arraytoString(newNode.classDistribution) + Utils.arraytoString(newNode.blockClassDistribution))
     newNode
   }
 
@@ -630,20 +642,20 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
    * @return new node
    */
   override def merge(that: Node, trySplit: Boolean): Node = {
-    println("LearningNodeNBAdaptive Merge")
+//    println("LearningNodeNBAdaptive Merge")
     if (that.isInstanceOf[LearningNodeNBAdaptive]) {
       val nbaNode = that.asInstanceOf[LearningNodeNBAdaptive]
       //merge weights and class distribution
-      println("NodeMerge: trySplit = " + trySplit)
+//      println("NodeMerge: trySplit = " + trySplit)
       if (!trySplit) {
-        println("Node merge only")
+//        println("Node merge only")
         this.blockAddonWeight += nbaNode.blockClassDistribution.sum
         mcBlockCorrectWeight += nbaNode.mcBlockCorrectWeight
         nbBlockCorrectWeight += nbaNode.nbBlockCorrectWeight
         for (i <- 0 until blockClassDistribution.length)
           this.blockClassDistribution(i) += that.blockClassDistribution(i)
       } else {
-        println("Node merge with Split!")
+//        println("Node merge with Split!")
 
 //        println("That | blockAddonWeight: " + nbaNode.blockAddonWeight)
 
@@ -653,9 +665,9 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
         for (i <- 0 until blockClassDistribution.length)
           this.blockClassDistribution(i) += that.blockClassDistribution(i)
         //Add straight away the blockClassDistribution into addonWeight, because we have no "Block" anymore.
-        println("That | blockAddonWeight: " + nbaNode.blockClassDistribution.sum)
+//        println("That | blockAddonWeight: " + nbaNode.blockClassDistribution.sum)
         this.addonWeight += nbaNode.blockClassDistribution.sum
-        println("This | addOnWeight: " + this.addonWeight)
+//        println("This | addOnWeight: " + this.addonWeight)
         mcCorrectWeight += nbaNode.mcBlockCorrectWeight
         nbCorrectWeight += nbaNode.nbBlockCorrectWeight
 

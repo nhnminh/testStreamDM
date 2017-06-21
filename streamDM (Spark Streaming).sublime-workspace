@@ -255,7 +255,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/HoeffdingTree.scala",
 			"settings":
 			{
-				"buffer_size": 23439,
+				"buffer_size": 23819,
 				"line_ending": "Unix"
 			}
 		},
@@ -271,7 +271,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/Node.scala",
 			"settings":
 			{
-				"buffer_size": 18705,
+				"buffer_size": 20776,
 				"line_ending": "Unix"
 			}
 		},
@@ -311,7 +311,7 @@
 			"file": "scripts/accuracy.py",
 			"settings":
 			{
-				"buffer_size": 1357,
+				"buffer_size": 1489,
 				"line_ending": "Unix"
 			}
 		},
@@ -319,7 +319,7 @@
 			"file": "scripts/result/hdt_10000_NBA_splitMore.res",
 			"settings":
 			{
-				"buffer_size": 11438,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -327,7 +327,7 @@
 			"file": "scripts/result/hdt_10000_NBA_splitMore_test.res",
 			"settings":
 			{
-				"buffer_size": 19548,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
@@ -343,7 +343,34 @@
 			"file": "scripts/result/majcl4_t.log",
 			"settings":
 			{
-				"buffer_size": 2581825,
+				"buffer_size": 30874018,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_100_NBA.res",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "0.375\n0.390\n0.396\n0.402\n0.403\n0.405\n0.458\n0.488\n0.520\n0.547\n0.565\n0.587\n0.605\n0.620\n0.632\n0.643\n0.652\n0.661\n0.669\n0.672\n0.679\n0.686\n0.686\n0.693\n0.697\n0.702\n0.706\n0.710\n0.710\n0.714\n0.717\n0.722\n0.724\n0.727\n0.730\n0.733\n0.736\n0.739\n0.742\n0.744\n0.747\n0.749\n0.751\n0.751\n0.753\n0.754\n0.756\n0.757\n0.759\n0.760\n0.761\n0.762\n0.764\n0.766\n0.767\n0.768\n0.769\n0.770\n0.772\n0.773\n0.774\n0.775\n0.777\n0.778\n0.779\n0.780\n0.781\n0.782\n0.783\n0.783\n0.784\n0.784\n0.785\n0.786\n0.787\n0.788\n0.789\n0.789\n0.790\n0.791\n0.791\n0.791\n0.792\n0.793\n0.793\n0.794\n0.794\n0.795\n0.795\n0.796\n0.796\n0.797\n0.797\n0.798\n0.798\n0.799\n0.799\n0.799\n0.799\n0.800\n\nAverage: 0.7132\nRunning Time: 202",
+			"file": "scripts/result/hdt_1000_NBA.accuracy",
+			"file_size": 634,
+			"file_write_time": 1496061883000000,
+			"settings":
+			{
+				"buffer_size": 634,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_10000_NBA.res",
+			"settings":
+			{
+				"buffer_size": 2102488053,
 				"line_ending": "Unix"
 			}
 		}
@@ -538,6 +565,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"accu",
+			"HoeffdingTreeModel: {7",
+			"HoeffdingTreeModel: {",
+			"counter",
 			"accuracy",
 			"Deactive",
 			"best",
@@ -661,11 +692,7 @@
 			"distribution",
 			"createLearningNode",
 			"classDistribution",
-			"train",
-			"delay",
-			"stop",
-			"headParser",
-			"Some"
+			"train"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -683,6 +710,7 @@
 	"groups":
 	[
 		{
+			"selected": 17,
 			"sheets":
 			[
 				{
@@ -725,8 +753,8 @@
 						"selection":
 						[
 							[
-								1028,
-								1056
+								65,
+								65
 							]
 						],
 						"settings":
@@ -774,7 +802,7 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/HoeffdingTree.scala",
 					"settings":
 					{
-						"buffer_size": 23439,
+						"buffer_size": 23819,
 						"regions":
 						{
 						},
@@ -792,7 +820,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3033.0,
+						"translation.y": 541.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -830,7 +858,7 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/Node.scala",
 					"settings":
 					{
-						"buffer_size": 18705,
+						"buffer_size": 20776,
 						"regions":
 						{
 						},
@@ -921,8 +949,8 @@
 						"selection":
 						[
 							[
-								540,
-								540
+								0,
+								0
 							]
 						],
 						"settings":
@@ -968,15 +996,15 @@
 					"file": "scripts/accuracy.py",
 					"settings":
 					{
-						"buffer_size": 1357,
+						"buffer_size": 1489,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								421,
-								421
+								0,
+								0
 							]
 						],
 						"settings":
@@ -986,7 +1014,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 202.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -996,15 +1024,15 @@
 					"file": "scripts/result/hdt_10000_NBA_splitMore.res",
 					"settings":
 					{
-						"buffer_size": 11438,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								835,
-								835
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1022,15 +1050,15 @@
 					"file": "scripts/result/hdt_10000_NBA_splitMore_test.res",
 					"settings":
 					{
-						"buffer_size": 19548,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1359,
-								1359
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1076,15 +1104,15 @@
 					"file": "scripts/result/majcl4_t.log",
 					"settings":
 					{
-						"buffer_size": 2581825,
+						"buffer_size": 30874018,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								162122,
-								162122
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1093,6 +1121,86 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 767522.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "scripts/result/hdt_100_NBA.res",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 130642960.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "scripts/result/hdt_1000_NBA.accuracy",
+					"settings":
+					{
+						"buffer_size": 634,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								634,
+								634
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "scripts/result/hdt_10000_NBA.res",
+					"settings":
+					{
+						"buffer_size": 2102488053,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2102487863,
+								2102487863
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1420836880.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

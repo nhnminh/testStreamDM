@@ -100,8 +100,8 @@
           println("Chunk: " + x)
          
         //if counter exceeds N instances, streamingContext will be stopped gracefully
-        if (counter.value > 100000){
-          println("Over 100.000 instances")
+        if (counter.value > 100){
+          println("Over 100 instances")
           println("Running time = " + (System.nanoTime - t1)/1e9d)
           ssc.stop(stopSparkContext = false, stopGracefully = false)
           

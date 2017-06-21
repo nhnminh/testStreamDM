@@ -157,6 +157,18 @@ class NominalFeatureClassObserver(val numClasses: Int, val fIndex: Int, val numF
     blockWeight += weight
   }
 
+  def getMaxFeatureValue(): Int = {
+
+    var maxFeatureValue = 0
+    for(i <-0 until numClasses; j<-0 until numFeatureValues){
+      if (blockClassFeatureStatistics(i)(j) != 0){
+        maxFeatureValue = j
+      }
+    }
+
+    maxFeatureValue
+  }
+
   /**
    * Gets the probability for an attribute value given a class
    *
@@ -181,22 +193,63 @@ class NominalFeatureClassObserver(val numClasses: Int, val fIndex: Int, val numF
    * @param isBinarySplit true to use binary splits
    * @return suggestion of best feature split
    */
+  // old function
+//  override def bestSplit(criterion: SplitCriterion, pre: Array[Double],
+//    fValue: Double, isBinarySplit: Boolean): FeatureSplit = {
+//    var fSplit: FeatureSplit = null
+//    for (i <- 0 until pre.length) {
+//      val post: Array[Array[Double]] = binarySplit(i)
+//      val merit = criterion.merit(normal(pre), normal(post))
+//      if (fSplit == null || fSplit.merit < merit) {
+//        fSplit = new FeatureSplit(new NominalBinaryTest(fIndex, i), merit, post)
+//      }
+//    }
+//    if (!isBinarySplit) {
+//      val post = multiwaySplit()
+//      val merit = criterion.merit(pre, post)
+//      if (fSplit.merit < merit)
+//        fSplit = new FeatureSplit(new NominalMultiwayTest(fIndex, numFeatureValues), merit, post)
+//    }
+//    fSplit
+//  }
+
+  //new function, work as in MOA
+
   override def bestSplit(criterion: SplitCriterion, pre: Array[Double],
-    fValue: Double, isBinarySplit: Boolean): FeatureSplit = {
+                         fValue: Double, isBinarySplit: Boolean): FeatureSplit = {
     var fSplit: FeatureSplit = null
-    for (i <- 0 until pre.length) {
+
+//    println("Pre : " + Utils.arraytoString(pre))
+//
+//    println("NumFeatureVals: " + numFeatureValues)
+//
+//    val maxFeatureVal = getMaxFeatureValue()
+//    println("Max Feature Value = " + maxFeatureVal)
+//
+//    blockClassFeatureStatistics.foreach( x => println(Utils.arraytoString(x)))
+
+    // this is to find the Split with highest merit. The way it works is similar to "Find largest number".
+    println("NumFeatureValues: " + numFeatureValues)
+    for (i <- 0 until numFeatureValues) {
       val post: Array[Array[Double]] = binarySplit(i)
       val merit = criterion.merit(normal(pre), normal(post))
+      println("merit binary: " + merit)
       if (fSplit == null || fSplit.merit < merit) {
+
         fSplit = new FeatureSplit(new NominalBinaryTest(fIndex, i), merit, post)
       }
     }
+    println("Highest merit: =" + fSplit.merit  )
+    println("========")
+
     if (!isBinarySplit) {
       val post = multiwaySplit()
       val merit = criterion.merit(pre, post)
-      if (fSplit.merit < merit)
+      println("merit Multiway:" + merit)
+      if(fSplit.merit < merit)
         fSplit = new FeatureSplit(new NominalMultiwayTest(fIndex, numFeatureValues), merit, post)
     }
+
     fSplit
   }
   /**

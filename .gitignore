@@ -4,3 +4,4 @@ project/project/
 data/covtypeNorm.arff
 data/randomtreedata.arff
 ensime-langserver.log
+/ensime-langserver.log
