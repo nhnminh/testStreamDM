@@ -78,11 +78,14 @@ class InfoGainSplitCriterion extends SplitCriterion with Serializable {
    */
   override def merit(pre: Array[Double], post: Array[Array[Double]]): Double = {
     val num = numGTFrac(post, minBranch)
+//    println("NumGTFrac: " + num)
     if (numGTFrac(post, minBranch) < 2) Double.NegativeInfinity
     else {
       val merit = entropy(pre) - entropy(post)
       merit
     }
+
+
   }
 
   /**
@@ -100,8 +103,14 @@ class InfoGainSplitCriterion extends SplitCriterion with Serializable {
    * @return the entropy
    */
   def entropy(pre: Array[Double]): Double = {
+//    val part1 = log2(pre.sum)
+//    val part2 = - pre.filter(_ > 0).map(x => x * log2(x)).sum / pre.sum
+//    println("Entropy: part1= " + part1 + ", part2= " + part2 + ", sum = " + pre.sum + ", leq: " + (pre.sum <= 0))
     if (pre == null || pre.sum <= 0 || hasNegative(pre)) 0.0
-    log2(pre.sum) - pre.filter(_ > 0).map(x => x * log2(x)).sum / pre.sum
+    else {
+      log2(pre.sum) - pre.filter(_ > 0).map(x => x * log2(x)).sum / pre.sum
+    }
+
   }
 
   /**
@@ -111,7 +120,7 @@ class InfoGainSplitCriterion extends SplitCriterion with Serializable {
    * @return the entropy
    */
   def entropy(post: Array[Array[Double]]): Double = {
-    if (post == null || post.length == 0 || post(0).length == 0) 0
+    if (post == null || post.length == 0 || post(0).length == 0)  0.0
     else {
       post.map { row => (row.sum * entropy(row)) }.sum / post.map(_.sum).sum
     }
@@ -121,7 +130,7 @@ class InfoGainSplitCriterion extends SplitCriterion with Serializable {
   /**
    * Returns number of subsets which have values greater than minFrac
    *
-   * @param post he matrix as an Array of Array
+   * @param post the matrix as an Array of Array
    * @param minFrac the min threshold
    * @return number of subsets
    */
@@ -130,6 +139,7 @@ class InfoGainSplitCriterion extends SplitCriterion with Serializable {
       0
     } else {
       val sums = post.map { _.sum }
+//      println("SUms: " + Utils.arraytoString(sums))
       sums.filter(_ > sums.sum * minFrac).length
     }
   }

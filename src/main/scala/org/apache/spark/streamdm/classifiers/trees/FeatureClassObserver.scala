@@ -229,26 +229,32 @@ class NominalFeatureClassObserver(val numClasses: Int, val fIndex: Int, val numF
 //    blockClassFeatureStatistics.foreach( x => println(Utils.arraytoString(x)))
 
     // this is to find the Split with highest merit. The way it works is similar to "Find largest number".
-    println("NumFeatureValues: " + numFeatureValues)
+//    println("NumFeatureValues: " + numFeatureValues)
+
+    if (!isBinarySplit) {
+//      println("Pre: ")
+//      classFeatureStatistics.foreach(x=> println(Utils.arraytoString(x)))
+      val post = multiwaySplit()
+//      println("Post: ")
+//      post.foreach(x=> println(Utils.arraytoString(x)))
+      val merit = criterion.merit(pre, post)
+//      println("merit Multiway:" + merit)
+      fSplit = new FeatureSplit(new NominalMultiwayTest(fIndex, numFeatureValues), merit, post)
+    }
+
     for (i <- 0 until numFeatureValues) {
       val post: Array[Array[Double]] = binarySplit(i)
       val merit = criterion.merit(normal(pre), normal(post))
-      println("merit binary: " + merit)
+//      println("merit binary: " + merit)
       if (fSplit == null || fSplit.merit < merit) {
 
         fSplit = new FeatureSplit(new NominalBinaryTest(fIndex, i), merit, post)
       }
     }
-    println("Highest merit: =" + fSplit.merit  )
-    println("========")
+//    println("Highest merit: =" + fSplit.merit  )
+//    println("========")
 
-    if (!isBinarySplit) {
-      val post = multiwaySplit()
-      val merit = criterion.merit(pre, post)
-      println("merit Multiway:" + merit)
-      if(fSplit.merit < merit)
-        fSplit = new FeatureSplit(new NominalMultiwayTest(fIndex, numFeatureValues), merit, post)
-    }
+
 
     fSplit
   }
@@ -373,15 +379,20 @@ class GaussianNumericFeatureClassObserver(val numClasses: Int, val fIndex: Int, 
     // println("pre-Distribution:  " + Utils.arraytoString(pre))
     var fSplit: FeatureSplit = null
     val points: Array[Double] = splitPoints()
-    // println("Split Points: " + Utils.arraytoString(points))
+//     println("Split Points: " + Utils.arraytoString(points))
     for (splitValue: Double <- points) {
       val post: Array[Array[Double]] = binarySplit(splitValue)
+//      println("postDist: ")
+//      post.foreach(x=> println(Utils.arraytoString(x)))
       // println("Post: ")
       // post.foreach{x => println(Utils.arraytoString(x))}
       val merit = criterion.merit(normal(pre), normal(post))
+//      println("meritNumeric: " + merit)
       if (fSplit == null || fSplit.merit < merit)
         fSplit = new FeatureSplit(new NumericBinaryTest(fIndex, splitValue, false), merit, post)
     }
+//    println("Highest merit numeric: " + fSplit.merit)
+//    println("===============")
     fSplit
   }
 
@@ -394,12 +405,18 @@ class GaussianNumericFeatureClassObserver(val numClasses: Int, val fIndex: Int, 
     val rst: Array[Array[Double]] = Array.fill(2)(new Array(numClasses))
     estimators.zipWithIndex.foreach {
       case (es, i) => {
+        //less than minValue
         if (splitValue < minValuePerClass(i)) {
           rst(1)(i) += es.totalWeight()
-        } else if (splitValue >= maxValuePerClass(i)) {
+        }
+          // greater than maxValue
+        else if (splitValue >= maxValuePerClass(i)) {
           rst(0)(i) += es.totalWeight()
-        } else {
+        }
+        // between (max,min)
+        else {
           val weights: Array[Double] = es.tripleWeights(splitValue)
+//          println("Weights: " + Utils.arraytoString(weights))
           rst(0)(i) += weights(0) + weights(1)
           rst(1)(i) += weights(2)
         }
@@ -417,11 +434,16 @@ class GaussianNumericFeatureClassObserver(val numClasses: Int, val fIndex: Int, 
     if (minValue < Double.PositiveInfinity) {
       val range = maxValue - minValue
       for (i <- 0 until numBins) {
-        val splitValue = range * (i + 1) / (numBins) + minValue
+        //old equation: /(numBins) + minValue
+//        val splitValue = range * (i + 1) / (numBins) + minValue
+        //this equation is as in MOA
+        val splitValue = range * (i + 1) / ((numBins) + 1) + minValue
         if (splitValue > minValue && splitValue < maxValue)
           points.add(splitValue)
       }
     }
+//    println("Min value: " + minValue)
+//    println("Max value: " + maxValue)
     points.toArray
   }
 
