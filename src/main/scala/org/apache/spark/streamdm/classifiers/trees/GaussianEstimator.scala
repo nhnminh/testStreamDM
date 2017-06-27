@@ -167,12 +167,18 @@ class GaussianEstimator(var weightSum: Double = 0.0, var mean: Double = 0.0,
    */
   def tripleWeights(splitValue: Double): Array[Double] = {
     //equal weights sum
+//    println("Weightsum: " + weightSum)
     val eqWeight = probabilityDensity(splitValue) * weightSum
+//    println("eqWeight: "+ eqWeight)
     //less than weights sum
     val lsWeight = {
+//      println("   Std: " + stdDev())
       if (stdDev() > 0) {
 //        Statistics.normalProbability((splitValue - getMean()) / stdDev())
         // equation as MOA
+//        println("   normalProba: "+ Statistics.normalProbability((splitValue - getMean()) / stdDev()))
+//        println("     mean : " + getMean())
+//        println("     inside: "+ ((splitValue - getMean()) / stdDev()) )
           Statistics.normalProbability((splitValue - getMean()) / stdDev()) * weightSum - eqWeight
 
       } else {

@@ -228,6 +228,7 @@ override def train(input: DStream[Example]): Unit = {
     input.map { x => (x, model.predict(x)) }
 
 
+
   }
 }
 
@@ -505,6 +506,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
       if (leafNode == null) {
         leafNode = foundNode.parent
       }
+//      println("Predict: " + )
       argmax(leafNode.classVotes(this, example))
     } else {
       0.0
@@ -608,14 +610,26 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
     decisionNodeCount += 1
   }
 
-  /* Computes Heoffding Bound withe activeNode's class distribution
+  /* Computes Heoffding Bound withe activeNode's class distribution. The original HoeffdingTree is computed with
+   * the weight = classDistribution.sum + blockClassDistribution.sum.
+   * The current version uses only classDistribution.sum as the weight.
+   * @modified: nhnguyen @ 20170623
+   *
    * @param activeNode 
    * @return double value
    */
   def computeHeoffdingBound(activeNode: ActiveLearningNode): Double = {
     val rangeMerit = splitCriterion.rangeMerit(activeNode.classDistribution)
+//    println("***+++***+++***+++")
+//    println("HoeffdingBound section: ")
+//    println("==== rangeMerit: " + rangeMerit)
+//    println("==== splitConfidence: " + this.splitConfedence)
+//    println("==== weight: " + activeNode.weight())
+
+
     val heoffdingBound = sqrt(rangeMerit * rangeMerit * math_log(1.0 / this.splitConfedence)
       / (activeNode.weight() * 2))
+//    println("***+++***+++***+++")
     heoffdingBound
 
   }

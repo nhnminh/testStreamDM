@@ -418,9 +418,9 @@ class ActiveLearningNode(classDistribution: Array[Double])
     this.classDistribution.filter(_ > 0).length <= 1 &&
       this.blockClassDistribution.filter(_ > 0).length <= 1
   }
-
-  def weight(): Double = { classDistribution.sum + blockClassDistribution.sum }
-
+// old
+//  def weight(): Double = { classDistribution.sum + blockClassDistribution.sum }
+  def weight(): Double = { classDistribution.sum }
   def blockWeight(): Double = blockClassDistribution.sum
 
   def addOnWeight(): Double = {

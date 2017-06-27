@@ -185,10 +185,17 @@ object Statistics {
    */
   def normalProbability(a: Double): Double = {
     val x: Double = a * SQRTH
+//    println("   x: " + x)
     val z: Double = abs(x)
+//    println("   z: " + z)
     var y: Double = 0.0
-    if (z < SQRTH) y = 0.5 + 0.5 * errorFunction(x)
+
+    if (z < SQRTH) {
+//      println("   errorFunction:"+ errorFunction(x))
+      y = 0.5 + 0.5 * errorFunction(x)
+    }
     else {
+//      println("   errorFunctionComplemented: " + errorFunctionComplemented(z))
       y = 0.5 * errorFunctionComplemented(z)
       if (x > 0) y = 1.0 - y
     }
@@ -385,6 +392,8 @@ object Statistics {
     if (abs(x) > 1.0) 1.0 - errorFunctionComplemented(x)
     else {
       z = x * x
+//      println("    polevl: " + polevl(z, T, 4))
+//      println("    p1evl: " + p1evl(z, U, 5))
       y = x * polevl(z, T, 4) / p1evl(z, U, 5)
       y
     }
@@ -468,7 +477,9 @@ object Statistics {
       if (z < -MAXLOG) {
         if (a < 0) 2.0
         else 0.0
-      } else {
+      }
+      // in MOA, there is no else, here.
+//      else {
         z = exp(z)
 
         if (x < 8.0) {
@@ -486,8 +497,10 @@ object Statistics {
         if (y == 0.0) {
           if (a < 0) 2.0
           else 0.0
-        } else y
-      }
+        }
+        // in MOA, no else.
+         y
+//      }
     }
   }
 
@@ -543,8 +556,12 @@ object Statistics {
 
   def polevl(x: Double, coef: Array[Double], N: Int): Double = {
     var ans = coef(0)
-    for (i <- 1 until N)
+//    println("     coef 0: " + ans)
+    for (i <- 1 until N+1){
       ans = ans * x + coef(i)
+//      println("      ans: " + ans)
+    }
+
     ans
   }
 
