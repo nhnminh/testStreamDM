@@ -251,8 +251,8 @@ class NominalFeatureClassObserver(val numClasses: Int, val fIndex: Int, val numF
         fSplit = new FeatureSplit(new NominalBinaryTest(fIndex, i), merit, post)
       }
     }
-    println("Highest merit: =" + fSplit.merit  )
-    println("========")
+//    println("Highest merit: =" + fSplit.merit  )
+//    println("========")
 
 
 
@@ -391,8 +391,8 @@ class GaussianNumericFeatureClassObserver(val numClasses: Int, val fIndex: Int, 
       if (fSplit == null || fSplit.merit < merit)
         fSplit = new FeatureSplit(new NumericBinaryTest(fIndex, splitValue, false), merit, post)
     }
-    println("Highest merit numeric: " + fSplit.merit)
-    println("===============")
+//    println("Highest merit numeric: " + fSplit.merit)
+//    println("===============")
     fSplit
   }
 

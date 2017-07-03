@@ -127,7 +127,7 @@
 
       if (evaluator.isInstanceOf[BasicClassificationEvaluator]){
         eachRDDAccuracy.foreachRDD(rdd => 
-        rdd.take(10).foreach{ 
+        rdd.collect().foreach{
           x => {
             val values = x.split(",")
             values.zipWithIndex.foreach{

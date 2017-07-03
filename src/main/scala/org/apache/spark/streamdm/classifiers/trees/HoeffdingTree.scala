@@ -408,11 +408,11 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
       bestSuggestions.length > 0
     } else {
       val hoeffdingBound = computeHeoffdingBound(activeNode)
-       println("hoeffdingBound = " + hoeffdingBound)
+//       println("hoeffdingBound = " + hoeffdingBound)
       val length = bestSuggestions.length
-      println("Best : " + bestSuggestions.last.toString())
-      println("Second : " + bestSuggestions(length-2).toString())
-      println("Difference: " + (bestSuggestions.last.merit - bestSuggestions(length - 2).merit))
+//      println("Best : " + bestSuggestions.last.toString())
+//      println("Second : " + bestSuggestions(length-2).toString())
+//      println("Difference: " + (bestSuggestions.last.merit - bestSuggestions(length - 2).merit))
       if (hoeffdingBound < tieThreshold ||
         bestSuggestions.last.merit - bestSuggestions(length - 2).merit > hoeffdingBound) {
         //if differece in merit/information_gain of the Best and the Second Best larger than HoeffdingBound, 
@@ -500,15 +500,20 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
 
   /* predict the class of example */
   def predict(example: Example): Double = {
+    var prediction = 0.0
     if (root != null) {
       val foundNode = root.filterToLeaf(example, null, -1)
       var leafNode = foundNode.node
       if (leafNode == null) {
         leafNode = foundNode.parent
       }
-//      println("Predict: " + )
-      argmax(leafNode.classVotes(this, example))
+
+      prediction = argmax(leafNode.classVotes(this, example))
+      println("       ClassDistr: "+ Utils.arraytoString(leafNode.classVotes(this,example)))
+      println("       Predict: " + prediction)
+      prediction
     } else {
+      println("       Predict: " + 0)
       0.0
     }
   }
