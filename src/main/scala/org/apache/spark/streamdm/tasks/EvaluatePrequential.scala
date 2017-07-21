@@ -90,7 +90,7 @@
    
       //Predict
       val predPairs = learner.predict(instances)
-      val size = predPairs.count()
+      val size = instances.count()
       size.foreachRDD(rdd => 
         rdd.take(10).foreach(x => {
           // count the number of instances as the stopping condition
