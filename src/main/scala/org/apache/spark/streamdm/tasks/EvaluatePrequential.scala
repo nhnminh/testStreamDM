@@ -18,12 +18,14 @@
  package org.apache.spark.streamdm.tasks
 
  import com.github.javacliparser.{StringOption, ClassOption, FlagOption}
+ import org.apache.spark.Logging
  import org.apache.spark.streamdm.core._
  import org.apache.spark.streamdm.classifiers._
  import org.apache.spark.streamdm.streams._
  import org.apache.spark.streaming.StreamingContext
  import org.apache.spark.streamdm.evaluation._
  import org.apache.spark.streaming.dstream.DStream
+
 
  import java.util.Calendar
 
@@ -87,27 +89,46 @@
       
       learner.init(exampleSpecification) 
       val instances = reader.getExamples(ssc)
-   
+//     val size = instances.count()
+     val limitNumber = 100000
+//     size.foreachRDD(rdd =>
+//       rdd.collect().foreach(x => {
+//         // count the number of instances as the stopping condition
+//         counter.add(x.toInt)
+////         println("==============================")
+////         println("Counter: " + counter.value)
+////         println("Chunk: " + x)
+//
+//         //if counter exceeds N instances, streamingContext will be stopped gracefully
+//         val limitNumber = 500000
+//         if (counter.value > limitNumber){
+//           println("Over " +  limitNumber + " instances")
+//           println("Running time = " + (System.nanoTime - t1)/1e9d)
+//           ssc.stop(stopSparkContext = false, stopGracefully = false)
+//
+//         }
+//
+//       }) )
+
+     /**
+       * Predict and train instance-by-instance.
+       */
+
+
+//     instances.foreachRDD{
+//       rdd => {
+//         rdd.collect().foreach{
+//           x => {
+//             val predictionPair = learner.predict(x)
+//             learner.train(x)
+//           }
+//         }
+//       }
+//
+//     }
+
       //Predict
       val predPairs = learner.predict(instances)
-      val size = instances.count()
-      size.foreachRDD(rdd => 
-        rdd.take(10).foreach(x => {
-          // count the number of instances as the stopping condition
-          counter.add(x.toInt)
-          println("==============================")
-          println("Counter: " + counter.value)
-          println("Chunk: " + x)
-         
-        //if counter exceeds N instances, streamingContext will be stopped gracefully
-        if (counter.value > 100){
-          println("Over 100 instances")
-          println("Running time = " + (System.nanoTime - t1)/1e9d)
-          ssc.stop(stopSparkContext = false, stopGracefully = false)
-          
-        }
-
-      }) )
 
       //Train
       learner.train(instances)
@@ -115,11 +136,11 @@
 
 
       // writer.output(evaluator.addResult(predPairs,showConfusionMatrix, numClasses, valueOfClass))
-      
+
 
 /*
- *  EVALUATE - 
- *  1. Classifier: Basic Classifier Evaluation is used, which accumulate the number of correct prediction till the end.
+ *  EVALUATE -
+ *  1. Classifier: Basic Classifier Evaluation is used, which accumulates the number of correct prediction till the end.
  *  2. Clustering: ...
  */
       
@@ -127,7 +148,7 @@
 
       if (evaluator.isInstanceOf[BasicClassificationEvaluator]){
         eachRDDAccuracy.foreachRDD(rdd => 
-        rdd.collect().foreach{
+        rdd.take(10).foreach{
           x => {
             val values = x.split(",")
             values.zipWithIndex.foreach{
@@ -138,7 +159,15 @@
               }
             }
             println("Accuracy: %.3f, Correct: %.3f, Total: %.3f".format(correct.value.toDouble/total.value.toDouble, correct.value.toDouble, total.value.toDouble))
-      
+
+
+           if (total.value > limitNumber){
+             println("Over " +  limitNumber + " instances")
+             println("Running time = " + (System.nanoTime - t1)/1e9d)
+//             logInfo("Over " + limitNumber + " instances. Stop gracefully!")
+             ssc.stop(stopSparkContext = false, stopGracefully = false)
+
+           }
         }})  
       }
 

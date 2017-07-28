@@ -37,9 +37,9 @@ object streamDMJob {
     conf.setMaster("local[2]")
 
 
-    // conf.setMaster("yarn")   //to run on clusters
+//     conf.setMaster("yarn")   //to run on clusters
 
-    val ssc = new StreamingContext(conf, Seconds(1))
+    val ssc = new StreamingContext(conf, Seconds(8))
 
 
     //run task

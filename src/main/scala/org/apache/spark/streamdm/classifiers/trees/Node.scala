@@ -692,12 +692,12 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
    */
   override def classVotes(ht: HoeffdingTreeModel, example: Example): Array[Double] = {
     if (mcCorrectWeight > nbCorrectWeight) {
-       println("Predict like MajorityClass")
+//       println("Predict like MajorityClass")
       super.classVotes(ht, example)
       
     }
     else {
-       println("Predict like NaiveBayes")
+//       println("Predict like NaiveBayes")
       val  prediction = NaiveBayes.predict(example, classDistribution, featureObservers)
 //      println("Predict bayes: " + prediction)
       prediction

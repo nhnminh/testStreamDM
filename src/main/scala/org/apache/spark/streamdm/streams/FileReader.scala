@@ -52,7 +52,7 @@ class FileReader extends StreamReader with Logging {
     "Chunk Size", 10000, 1, Integer.MAX_VALUE)
 
   val slideDurationOption: IntOption = new IntOption("slideDuration", 'd',
-    "Slide Duration in milliseconds", 2000, 1, Integer.MAX_VALUE)
+    "Slide Duration in milliseconds", 100, 1, Integer.MAX_VALUE)
 
   val instanceOption: StringOption = new StringOption("instanceType", 't',
     "Type of the instance to use", "dense")
@@ -61,7 +61,7 @@ class FileReader extends StreamReader with Logging {
     "Limit of number of instance", 1000000,1, Integer.MAX_VALUE)
 
   val fileNameOption: StringOption = new StringOption("fileName", 'f',
-    "File Name", "../data/covtypeNorm.arff")
+    "File Name", "../data/randomtreedata.arff")
     //covtypeNorm
     //../data/randomtreedata.arff
 
@@ -208,7 +208,7 @@ class FileReader extends StreamReader with Logging {
 
         val examples: Array[Example] = Array.fill[Example](chunkSizeOption.getValue)(getExampleFromFile())
         val examplesRDD = ssc.sparkContext.parallelize(examples)
-        println("FileReader RDD count:" + examplesRDD.count())
+//        println("FileReader RDD count:" + examplesRDD.count())
         Some(examplesRDD)
         
         
