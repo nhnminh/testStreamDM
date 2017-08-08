@@ -22,6 +22,7 @@ import scalaz._
 import Scalaz._
 import org.apache.spark.streamdm.core.Example
 import org.apache.spark.streaming.dstream.DStream
+import org.apache.spark.streamdm.tasks.AccuracyAggregator
 
 /**
  * Single label binary classification evaluator which computes the confusion
@@ -93,7 +94,7 @@ class BasicClassificationEvaluator extends Evaluator{
           
 // }
 
-override def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int, valueOfClass: Array[String]): DStream[(String)] = {
+override def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int, valueOfClass: Array[String], accAggregator: AccuracyAggregator): DStream[(String)] = {
     //print the confusion matrix for each batch
     
     // if option = 0 --> only accuracy is shown 
@@ -127,6 +128,11 @@ override def addResult(input: DStream[(Example, Double)], option: Int, numClasse
           this.numInstancesSeen += (x._1+x._2+x._3+x._4)
           // "Each Rdd Accuracy : %.3f".format((x._1+x._4)/(x._1+x._2+x._3+x._4))})
           // "Accuracy : %.3f, Correct: %.3f, Total %.3f".format(this.numInstancesCorrect/this.numInstancesSeen, this.numInstancesCorrect, this.numInstancesSeen)})
+//          accAggregator.setAccuracy(this.numInstancesCorrect, this.numInstancesSeen)
+//          println("Acc:"+ (this.numInstancesCorrect/this.numInstancesSeen))
+//          println("TestAccuracy: " + (accAggregator.getCorrectInstances()/accAggregator.getTotalInstances())
+//          + "\t Test correct: " + accAggregator.getCorrectInstances()
+//          + "\t Test total: " + accAggregator.getTotalInstances())
           "%.3f,%.3f".format(this.numInstancesCorrect, this.numInstancesSeen)})
         // (numInstancesCorrect.toInt,numInstancesSeen.toInt)})
       }
@@ -137,6 +143,11 @@ override def addResult(input: DStream[(Example, Double)], option: Int, numClasse
           this.numInstancesSeen += (x._1 + x._2)
           // "Each Rdd Accuracy : %.3f".format(x._1/(x._1+x._2))})
           // "Accuracy : %.3f, Correct: %.3f, Total %.3f".format(this.numInstancesCorrect/this.numInstancesSeen, this.numInstancesCorrect, this.numInstancesSeen)})
+//          accAggregator.setAccuracy(this.numInstancesCorrect, this.numInstancesSeen)
+//          println("Acc:"+ (this.numInstancesCorrect/this.numInstancesSeen))
+//          println("TestAccuracy: " + (accAggregator.getCorrectInstances()/accAggregator.getTotalInstances())
+//            + "\t Test correct: " + accAggregator.getCorrectInstances()
+//            + "\t Test total: " + accAggregator.getTotalInstances())
           "%.3f,%.3f".format(this.numInstancesCorrect, this.numInstancesSeen)})
         // (numInstancesCorrect.toInt,numInstancesSeen.toInt)})
         // predMC.map(x => "Not implemented")
@@ -152,7 +163,7 @@ override def addResult(input: DStream[(Example, Double)], option: Int, numClasse
    *
    * @return a Double containing the evaluation result
    */
-  override def getResult(): Double = 
+  override def getResult(): Double =
     numInstancesCorrect.toDouble/numInstancesSeen.toDouble
 }
 /**

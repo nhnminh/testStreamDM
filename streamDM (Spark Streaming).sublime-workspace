@@ -231,7 +231,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/streamDMJob.scala",
 			"settings":
 			{
-				"buffer_size": 1521,
+				"buffer_size": 1526,
 				"line_ending": "Unix"
 			}
 		},
@@ -239,7 +239,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/evaluation/BasicClassificationEvaluator.scala",
 			"settings":
 			{
-				"buffer_size": 7535,
+				"buffer_size": 8295,
 				"line_ending": "Unix"
 			}
 		},
@@ -247,7 +247,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/tasks/EvaluatePrequential.scala",
 			"settings":
 			{
-				"buffer_size": 5425,
+				"buffer_size": 7171,
 				"line_ending": "Unix"
 			}
 		},
@@ -255,7 +255,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/HoeffdingTree.scala",
 			"settings":
 			{
-				"buffer_size": 23819,
+				"buffer_size": 28161,
 				"line_ending": "Unix"
 			}
 		},
@@ -263,7 +263,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/FeatureClassObserver.scala",
 			"settings":
 			{
-				"buffer_size": 15862,
+				"buffer_size": 18793,
 				"line_ending": "Unix"
 			}
 		},
@@ -271,7 +271,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/Node.scala",
 			"settings":
 			{
-				"buffer_size": 20776,
+				"buffer_size": 21688,
 				"line_ending": "Unix"
 			}
 		},
@@ -287,7 +287,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/streams/FileReader.scala",
 			"settings":
 			{
-				"buffer_size": 6715,
+				"buffer_size": 7088,
 				"line_ending": "Windows"
 			}
 		},
@@ -295,7 +295,7 @@
 			"file": "scripts/run/run.sh",
 			"settings":
 			{
-				"buffer_size": 624,
+				"buffer_size": 2566,
 				"line_ending": "Unix"
 			}
 		},
@@ -311,7 +311,7 @@
 			"file": "scripts/accuracy.py",
 			"settings":
 			{
-				"buffer_size": 1489,
+				"buffer_size": 1520,
 				"line_ending": "Unix"
 			}
 		},
@@ -332,23 +332,47 @@
 			}
 		},
 		{
-			"file": "scripts/spark.sh",
+			"file": "scripts/result/hdt_1000_NBA_100000inst.res",
 			"settings":
 			{
-				"buffer_size": 318,
+				"buffer_size": 7501,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "scripts/result/majcl4_t.log",
+			"file": "scripts/result/hdt_1000_NBA_cov.res",
 			"settings":
 			{
-				"buffer_size": 30874018,
+				"buffer_size": 6869,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "scripts/result/hdt_100_NBA.res",
+			"file": "data/covtypeNorm.arff",
+			"settings":
+			{
+				"buffer_size": 103350912,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "data/randomtreedata.arff",
+			"settings":
+			{
+				"buffer_size": 133344633,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_MC.res",
+			"settings":
+			{
+				"buffer_size": 7502,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_MC_cov.res",
 			"settings":
 			{
 				"buffer_size": 0,
@@ -356,21 +380,146 @@
 			}
 		},
 		{
-			"contents": "0.375\n0.390\n0.396\n0.402\n0.403\n0.405\n0.458\n0.488\n0.520\n0.547\n0.565\n0.587\n0.605\n0.620\n0.632\n0.643\n0.652\n0.661\n0.669\n0.672\n0.679\n0.686\n0.686\n0.693\n0.697\n0.702\n0.706\n0.710\n0.710\n0.714\n0.717\n0.722\n0.724\n0.727\n0.730\n0.733\n0.736\n0.739\n0.742\n0.744\n0.747\n0.749\n0.751\n0.751\n0.753\n0.754\n0.756\n0.757\n0.759\n0.760\n0.761\n0.762\n0.764\n0.766\n0.767\n0.768\n0.769\n0.770\n0.772\n0.773\n0.774\n0.775\n0.777\n0.778\n0.779\n0.780\n0.781\n0.782\n0.783\n0.783\n0.784\n0.784\n0.785\n0.786\n0.787\n0.788\n0.789\n0.789\n0.790\n0.791\n0.791\n0.791\n0.792\n0.793\n0.793\n0.794\n0.794\n0.795\n0.795\n0.796\n0.796\n0.797\n0.797\n0.798\n0.798\n0.799\n0.799\n0.799\n0.799\n0.800\n\nAverage: 0.7132\nRunning Time: 202",
-			"file": "scripts/result/hdt_1000_NBA.accuracy",
-			"file_size": 634,
-			"file_write_time": 1496061883000000,
+			"file": "scripts/result/majcl4_t.log",
 			"settings":
 			{
-				"buffer_size": 634,
+				"buffer_size": 3632999,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "scripts/result/hdt_10000_NBA.res",
+			"file": "scripts/result/hdt_1000_MC_cov_p_store.res",
 			"settings":
 			{
-				"buffer_size": 2102488053,
+				"buffer_size": 58848,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_NBA_cov_p.res",
+			"settings":
+			{
+				"buffer_size": 22716,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_NBA_p.res",
+			"settings":
+			{
+				"buffer_size": 413931,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_NBA_elec.res",
+			"settings":
+			{
+				"buffer_size": 3620,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "data/electNormNew.arff",
+			"settings":
+			{
+				"buffer_size": 2994413,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_MC_cov_p_store_1.res",
+			"settings":
+			{
+				"buffer_size": 29410,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_NBA.res",
+			"settings":
+			{
+				"buffer_size": 7502,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_NBA_elec_p.res",
+			"settings":
+			{
+				"buffer_size": 2828,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_MC_elec_p.res",
+			"settings":
+			{
+				"buffer_size": 2978,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_NBA_complex_p_1.res",
+			"settings":
+			{
+				"buffer_size": 26650,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "replaceText.py",
+			"settings":
+			{
+				"buffer_size": 403,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_NBA_complex_p_2.res",
+			"settings":
+			{
+				"buffer_size": 26869,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_MC_cov_p_4threads.res",
+			"settings":
+			{
+				"buffer_size": 17289,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_MC_cov_p_8threads_1.res",
+			"settings":
+			{
+				"buffer_size": 20998,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_MC_cov_p_16threads_1.res",
+			"settings":
+			{
+				"buffer_size": 25886,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_MC_p.res",
+			"settings":
+			{
+				"buffer_size": 55390,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/hdt_1000_MC_complex_p.res",
+			"settings":
+			{
+				"buffer_size": 32339,
 				"line_ending": "Unix"
 			}
 		}
@@ -419,8 +568,17 @@
 	},
 	"file_history":
 	[
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/replaceText.py",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/electNormNew.arff",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/spark.sh",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4_t.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/runserver.sh",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA.accuracy",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA_8threads.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA_2threads_1mil.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_100_NBA_small.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_100_NBA.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA_splitMore.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl5_t_1000_NBA.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/streamDM (Spark Streaming).sublime-project",
@@ -430,7 +588,6 @@
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/evaluation/ClusteringEvaluator.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl5_t_checkGaussianApproximation.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl5_t.res",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/spark.sh",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4_t.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/SGDLearner.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4Null_t.res",
@@ -449,7 +606,6 @@
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt8.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt10.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt9.res",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/runserver.sh",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hd9.log",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/hdt2.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/bodyfat.arff",
@@ -539,14 +695,7 @@
 		"/Users/minhnguyen/Downloads/Bus Map/BusHeatMap-HCR-HVT.html",
 		"/Applications/XAMPP/xamppfiles/htdocs/its/sitebs.html",
 		"/Applications/XAMPP/xamppfiles/htdocs/its/pagebs.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/its/heatmap.html",
-		"/Users/minhnguyen/Downloads/Bus Map/bus heat map - Ho con rua/BusHeatMapofFeb1-at18hour.html",
-		"/Users/minhnguyen/Downloads/Bus Map/bus heat map - Hoang Van Thu/BusHeatMapofFeb1-at18hour.html",
-		"/Users/minhnguyen/Downloads/Bus Map/bus heat map - Hoang Van Thu/newbusmap.html",
-		"/Users/minhnguyen/Downloads/BusHeatMap.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/its/index.php",
-		"/Applications/XAMPP/xamppfiles/htdocs/its/page.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/its/test.css"
+		"/Applications/XAMPP/xamppfiles/htdocs/its/heatmap.html"
 	],
 	"find":
 	{
@@ -565,6 +714,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"stop",
+			"count",
+			"ERROR",
+			"accuracy",
+			"counter",
 			"accu",
 			"HoeffdingTreeModel: {7",
 			"HoeffdingTreeModel: {",
@@ -687,12 +841,7 @@
 			"splitCriterion",
 			"create",
 			"blockClassDistribution",
-			"best",
-			"result",
-			"distribution",
-			"createLearningNode",
-			"classDistribution",
-			"train"
+			"best"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -710,7 +859,7 @@
 	"groups":
 	[
 		{
-			"selected": 17,
+			"selected": 36,
 			"sheets":
 			[
 				{
@@ -718,15 +867,15 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/streamDMJob.scala",
 					"settings":
 					{
-						"buffer_size": 1521,
+						"buffer_size": 1526,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1116,
-								1116
+								0,
+								0
 							]
 						],
 						"settings":
@@ -736,7 +885,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 84.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -746,15 +895,15 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/evaluation/BasicClassificationEvaluator.scala",
 					"settings":
 					{
-						"buffer_size": 7535,
+						"buffer_size": 8295,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								65,
-								65
+								0,
+								0
 							]
 						],
 						"settings":
@@ -774,15 +923,15 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/tasks/EvaluatePrequential.scala",
 					"settings":
 					{
-						"buffer_size": 5425,
+						"buffer_size": 7171,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3758,
-								3758
+								0,
+								0
 							]
 						],
 						"settings":
@@ -802,7 +951,7 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/HoeffdingTree.scala",
 					"settings":
 					{
-						"buffer_size": 23819,
+						"buffer_size": 28161,
 						"regions":
 						{
 						},
@@ -830,7 +979,7 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/FeatureClassObserver.scala",
 					"settings":
 					{
-						"buffer_size": 15862,
+						"buffer_size": 18793,
 						"regions":
 						{
 						},
@@ -858,7 +1007,7 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/Node.scala",
 					"settings":
 					{
-						"buffer_size": 20776,
+						"buffer_size": 21688,
 						"regions":
 						{
 						},
@@ -914,7 +1063,7 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/streams/FileReader.scala",
 					"settings":
 					{
-						"buffer_size": 6715,
+						"buffer_size": 7088,
 						"regions":
 						{
 						},
@@ -942,7 +1091,7 @@
 					"file": "scripts/run/run.sh",
 					"settings":
 					{
-						"buffer_size": 624,
+						"buffer_size": 2566,
 						"regions":
 						{
 						},
@@ -957,7 +1106,7 @@
 						{
 							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
 						},
-						"translation.x": 705.0,
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
@@ -996,15 +1145,15 @@
 					"file": "scripts/accuracy.py",
 					"settings":
 					{
-						"buffer_size": 1489,
+						"buffer_size": 1520,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								656,
+								656
 							]
 						],
 						"settings":
@@ -1014,7 +1163,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 202.0,
+						"translation.y": 229.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1075,23 +1224,103 @@
 				},
 				{
 					"buffer": 13,
-					"file": "scripts/spark.sh",
+					"file": "scripts/result/hdt_1000_NBA_100000inst.res",
 					"settings":
 					{
-						"buffer_size": 318,
+						"buffer_size": 7501,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								318,
-								318
+								7403,
+								7403
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 3822.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "scripts/result/hdt_1000_NBA_cov.res",
+					"settings":
+					{
+						"buffer_size": 6869,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								193,
+								193
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2868.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "data/covtypeNorm.arff",
+					"settings":
+					{
+						"buffer_size": 103350912,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								433,
+								433
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 936.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "data/randomtreedata.arff",
+					"settings":
+					{
+						"buffer_size": 133344633,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								469,
+								469
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1100,19 +1329,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 14,
-					"file": "scripts/result/majcl4_t.log",
+					"buffer": 17,
+					"file": "scripts/result/hdt_1000_MC.res",
 					"settings":
 					{
-						"buffer_size": 30874018,
+						"buffer_size": 7502,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								7090,
+								7090
 							]
 						],
 						"settings":
@@ -1120,14 +1349,14 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 767522.0,
+						"translation.y": 3822.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 15,
-					"file": "scripts/result/hdt_100_NBA.res",
+					"buffer": 18,
+					"file": "scripts/result/hdt_1000_MC_cov.res",
 					"settings":
 					{
 						"buffer_size": 0,
@@ -1143,30 +1372,80 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 130642960.0,
+						"translation.y": 3120.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 16,
-					"file": "scripts/result/hdt_1000_NBA.accuracy",
+					"buffer": 19,
+					"file": "scripts/result/majcl4_t.log",
 					"settings":
 					{
-						"buffer_size": 634,
+						"buffer_size": 3632999,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								634,
-								634
+								3205,
+								3205
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 5621.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "scripts/result/hdt_1000_MC_cov_p_store.res",
+					"settings":
+					{
+						"buffer_size": 58848,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								58382,
+								58382
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 22512.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"file": "scripts/result/hdt_1000_NBA_cov_p.res",
+					"settings":
+					{
+						"buffer_size": 22716,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14452,
+								14452
 							]
 						],
 						"settings":
@@ -1180,19 +1459,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 17,
-					"file": "scripts/result/hdt_10000_NBA.res",
+					"buffer": 22,
+					"file": "scripts/result/hdt_1000_NBA_p.res",
 					"settings":
 					{
-						"buffer_size": 2102488053,
+						"buffer_size": 413931,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2102487863,
-								2102487863
+								413931,
+								413931
 							]
 						],
 						"settings":
@@ -1200,7 +1479,371 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1420836880.0,
+						"translation.y": 208171.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "scripts/result/hdt_1000_NBA_elec.res",
+					"settings":
+					{
+						"buffer_size": 3620,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3346,
+								3346
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "data/electNormNew.arff",
+					"settings":
+					{
+						"buffer_size": 2994413,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6246,
+								6246
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 15866.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "scripts/result/hdt_1000_MC_cov_p_store_1.res",
+					"settings":
+					{
+						"buffer_size": 29410,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5896,
+								5896
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 8236.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "scripts/result/hdt_1000_NBA.res",
+					"settings":
+					{
+						"buffer_size": 7502,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7363,
+								7363
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "scripts/result/hdt_1000_NBA_elec_p.res",
+					"settings":
+					{
+						"buffer_size": 2828,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2700,
+								2700
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 28,
+					"file": "scripts/result/hdt_1000_MC_elec_p.res",
+					"settings":
+					{
+						"buffer_size": 2978,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2978,
+								2978
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 793.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 29,
+					"file": "scripts/result/hdt_1000_NBA_complex_p_1.res",
+					"settings":
+					{
+						"buffer_size": 26650,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26334,
+								26334
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 13627.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 30,
+					"file": "replaceText.py",
+					"settings":
+					{
+						"buffer_size": 403,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								35,
+								35
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 31,
+					"file": "scripts/result/hdt_1000_NBA_complex_p_2.res",
+					"settings":
+					{
+						"buffer_size": 26869,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26246,
+								26246
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 13771.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 32,
+					"file": "scripts/result/hdt_1000_MC_cov_p_4threads.res",
+					"settings":
+					{
+						"buffer_size": 17289,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17238,
+								17238
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 8803.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 33,
+					"file": "scripts/result/hdt_1000_MC_cov_p_8threads_1.res",
+					"settings":
+					{
+						"buffer_size": 20998,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 11750.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 34,
+					"file": "scripts/result/hdt_1000_MC_cov_p_16threads_1.res",
+					"settings":
+					{
+						"buffer_size": 25886,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								20274,
+								20278
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 16226.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 35,
+					"file": "scripts/result/hdt_1000_MC_p.res",
+					"settings":
+					{
+						"buffer_size": 55390,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								55323,
+								55323
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 31123.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 36,
+					"file": "scripts/result/hdt_1000_MC_complex_p.res",
+					"settings":
+					{
+						"buffer_size": 32339,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								21373,
+								21373
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 16813.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1280,6 +1923,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 326.0,
+	"side_bar_width": 284.0,
 	"status_bar_visible": true
 }

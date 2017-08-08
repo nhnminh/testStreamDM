@@ -94,7 +94,13 @@ class InfoGainSplitCriterion extends SplitCriterion with Serializable {
    * @param pre the class distribution before the split
    * @return value of the range of splitting merit
    */
-  override def rangeMerit(pre: Array[Double]): Double = log2(max(pre.length, 2))
+  override def rangeMerit(pre: Array[Double]): Double = {
+//    println("   RANGEMERIT: " + pre.filter(_>0).length)
+//    println("   Pre: " + Utils.arraytoString(pre.filter(_>0)))
+    val removeTrailingZeros = pre.reverse.dropWhile(_==0).reverse
+
+    log2(max(removeTrailingZeros.length, 2))
+  }
 
   /**
    * Returns the entropy of a distribution

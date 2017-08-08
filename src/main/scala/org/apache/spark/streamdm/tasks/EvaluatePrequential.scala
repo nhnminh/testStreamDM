@@ -17,7 +17,7 @@
 
  package org.apache.spark.streamdm.tasks
 
- import com.github.javacliparser.{StringOption, ClassOption, FlagOption}
+ import com.github.javacliparser.{StringOption, ClassOption, FlagOption, IntOption}
  import org.apache.spark.Logging
  import org.apache.spark.streamdm.core._
  import org.apache.spark.streamdm.classifiers._
@@ -28,6 +28,30 @@
 
 
  import java.util.Calendar
+
+
+ /**
+   * This is class to collect the TruePOsitive and TotalSeenInstances
+   */
+ class AccuracyAggregator extends Serializable{
+   var numInstancesCorrect: Double = 0
+   var numInstancesTotal: Double = 0
+
+   def setAccuracy(correct: Double, total: Double): Unit ={
+     this.numInstancesCorrect += correct
+     this.numInstancesTotal += total
+   }
+
+   def getCorrectInstances(): Double ={
+     this.numInstancesCorrect
+   }
+
+   def getTotalInstances(): Double ={
+     this.numInstancesTotal
+   }
+
+ }
+
 
 /**
  * Task for evaluating a classifier on a stream by testing then training with
@@ -41,7 +65,7 @@
  *  <li> Writer (<b>-w</b>), a writer object of type <tt>StreamWriter</tt>
  * </ul>
  */
- class EvaluatePrequential extends Task {
+ class EvaluatePrequential extends Task with Logging {
 
   val learnerOption:ClassOption = new ClassOption("learner", 'l',
     "Learner to use", classOf[Classifier], "trees.HoeffdingTree")
@@ -56,7 +80,11 @@
     "Stream writer to use", classOf[StreamWriter], "PrintStreamWriter")
 
   val showConfusionMatrixOption:FlagOption = new FlagOption("showConfusionMatrix", 'c',
-    "Show full Confusion Matrix") 
+    "Show full Confusion Matrix")
+
+  val limitNumberOfInstance: IntOption = new IntOption("limitNumberOfInstance", 'i',
+    "The maximum number of instances",
+    581000, 1, Int.MaxValue)
   
 
   /**
@@ -78,7 +106,9 @@
 
     val writer:StreamWriter = this.resultsWriterOption.getValue()
 
-    val counter = ssc.sparkContext.accumulator(0,"counter")
+    val accuracyAggregator = new AccuracyAggregator()
+
+//    val counter = ssc.sparkContext.accumulator(0,"counter")
     val correct = ssc.sparkContext.accumulator(0,"correct")
     val total = ssc.sparkContext.accumulator(0,"total")
     val exampleSpecification = reader.getExampleSpecification()
@@ -90,7 +120,8 @@
       learner.init(exampleSpecification) 
       val instances = reader.getExamples(ssc)
 //     val size = instances.count()
-     val limitNumber = 100000
+
+     val limitNumber = this.limitNumberOfInstance.getValue()
 //     size.foreachRDD(rdd =>
 //       rdd.collect().foreach(x => {
 //         // count the number of instances as the stopping condition
@@ -143,12 +174,13 @@
  *  1. Classifier: Basic Classifier Evaluation is used, which accumulates the number of correct prediction till the end.
  *  2. Clustering: ...
  */
-      
-      val eachRDDAccuracy = evaluator.addResult(predPairs,showConfusionMatrix, numClasses, valueOfClass)
+
+      val eachRDDAccuracy = evaluator.addResult(predPairs,showConfusionMatrix, numClasses, valueOfClass, accuracyAggregator)
 
       if (evaluator.isInstanceOf[BasicClassificationEvaluator]){
-        eachRDDAccuracy.foreachRDD(rdd => 
-        rdd.take(10).foreach{
+        println("accuracyByGetResult: "+ evaluator.getResult())
+        eachRDDAccuracy.foreachRDD(rdd =>
+        rdd.take(1).foreach{
           x => {
             val values = x.split(",")
             values.zipWithIndex.foreach{
@@ -159,24 +191,27 @@
               }
             }
             println("Accuracy: %.3f, Correct: %.3f, Total: %.3f".format(correct.value.toDouble/total.value.toDouble, correct.value.toDouble, total.value.toDouble))
+            println("Running time = " + (System.nanoTime - t1)/1e9d)
+            println("================================================================\n")
 
+//           if (total.value > limitNumber){
+//             println("Over " +  limitNumber + " instances")
 
-           if (total.value > limitNumber){
-             println("Over " +  limitNumber + " instances")
-             println("Running time = " + (System.nanoTime - t1)/1e9d)
 //             logInfo("Over " + limitNumber + " instances. Stop gracefully!")
-             ssc.stop(stopSparkContext = false, stopGracefully = false)
-
-           }
-        }})  
+//             ssc.stop(stopSparkContext = false, stopGracefully = false)
+//
+//           }
+        }})
       }
 
       else {
-        writer.output(evaluator.addResult(predPairs,showConfusionMatrix, numClasses, valueOfClass))
+        writer.output(evaluator.addResult(predPairs,showConfusionMatrix, numClasses, valueOfClass, accuracyAggregator))
       }
-      
+
+
 
     }
 
     
   }
+

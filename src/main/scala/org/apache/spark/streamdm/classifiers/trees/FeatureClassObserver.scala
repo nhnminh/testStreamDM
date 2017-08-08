@@ -19,7 +19,7 @@ package org.apache.spark.streamdm.classifiers.trees
 
 import scala.collection.mutable.TreeSet
 import scala.math.{ min, max }
-
+import org.apache.spark.Logging
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streamdm.core.specification._
 import org.apache.spark.streamdm.utils.Utils.{ normal, transpose, splitTranspose }
@@ -28,7 +28,7 @@ import org.apache.spark.streamdm.utils.Utils.{ normal, transpose, splitTranspose
  * The observer monitors the class distribution of a given feature.
  * Used in Naive Bayes and decision trees to monitor data statistics on leaves.
  */
-trait FeatureClassObserver extends Serializable {
+trait FeatureClassObserver extends Serializable  with Logging{
 
   /**
    * Updates statistics of this observer given a feature value, a class index
@@ -378,22 +378,36 @@ class GaussianNumericFeatureClassObserver(val numClasses: Int, val fIndex: Int, 
     fValue: Double, isBinarySplit: Boolean): FeatureSplit = {
     // println("pre-Distribution:  " + Utils.arraytoString(pre))
     var fSplit: FeatureSplit = null
+
     val points: Array[Double] = splitPoints()
-//     println("Split Points: " + Utils.arraytoString(points))
-    for (splitValue: Double <- points) {
-      val post: Array[Array[Double]] = binarySplit(splitValue)
-//      println("postDist: ")
-//      post.foreach(x=> println(Utils.arraytoString(x)))
-//       println("Post: ")
-//       post.foreach{x => println(Utils.arraytoString(x))}
-      val merit = criterion.merit(normal(pre), normal(post))
-//      println("   meritNumeric: " + merit)
-      if (fSplit == null || fSplit.merit < merit)
-        fSplit = new FeatureSplit(new NumericBinaryTest(fIndex, splitValue, false), merit, post)
+    /**
+      * avoid empty fSplit return when splitPoints is null.
+      */
+
+    if (points.length == 0 ){
+      logInfo("Warning! No split point detected!")
+      val post: Array[Array[Double]] = null
+      fSplit = new FeatureSplit(new NumericBinaryTest(fIndex, 0, false), Double.NegativeInfinity, post)
     }
-//    println("Highest merit numeric: " + fSplit.merit)
-//    println("===============")
+    else{
+//      println("Split Points: " + Utils.arraytoString(points))
+      for (splitValue: Double <- points) {
+        val post: Array[Array[Double]] = binarySplit(splitValue)
+        //      println("postDist: ")
+        //      post.foreach(x=> println(Utils.arraytoString(x)))
+        //       println("Post: ")
+        //       post.foreach{x => println(Utils.arraytoString(x))}
+        val merit = criterion.merit(normal(pre), normal(post))
+        //      println("   meritNumeric: " + merit)
+        if (fSplit == null || fSplit.merit < merit)
+          fSplit = new FeatureSplit(new NumericBinaryTest(fIndex, splitValue, false), merit, post)
+      }
+//      println("    Highest merit numeric: " + fSplit.merit)
+//      println("===============")
+
+    }
     fSplit
+
   }
 
   /**
@@ -431,6 +445,8 @@ class GaussianNumericFeatureClassObserver(val numClasses: Int, val fIndex: Int, 
     val points = new TreeSet[Double]()
     minValuePerClass.foreach { x => minValue = min(minValue, x) }
     maxValuePerClass.foreach { x => maxValue = max(maxValue, x) }
+//    println("Min value: " + minValue)
+//    println("Max value: " + maxValue)
     if (minValue < Double.PositiveInfinity) {
       val range = maxValue - minValue
       for (i <- 0 until numBins) {
@@ -442,8 +458,7 @@ class GaussianNumericFeatureClassObserver(val numClasses: Int, val fIndex: Int, 
           points.add(splitValue)
       }
     }
-//    println("Min value: " + minValue)
-//    println("Max value: " + maxValue)
+
     points.toArray
   }
 

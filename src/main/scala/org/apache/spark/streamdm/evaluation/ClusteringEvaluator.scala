@@ -21,6 +21,7 @@ import math._
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.rdd.RDD
+import org.apache.spark.streamdm.tasks.AccuracyAggregator
 
 /**
  * Clustering evaluator which computes, for each RDD of Example-Double tuples,
@@ -35,7 +36,7 @@ class ClusteringCohesionEvaluator extends Evaluator {
    * @param input the input stream containing (Example,Double) tuples
    * @return a stream of String with the processed evaluation
    */
-  override def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int, valueOfClass: Array[String]): DStream[String] =
+  override def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int, valueOfClass: Array[String], accAggregator: AccuracyAggregator): DStream[String] =
     input.transform(rdd => {
       val inv=rdd.map{case (e,c)=>(c,e)}
       val centr = ClusteringEvaluationUtil.computeAllCentroids(rdd).
@@ -64,7 +65,7 @@ class ClusteringSeparationEvaluator extends Evaluator {
    * @param input the input stream containing (Example,Double) tuples
    * @return a stream of String with the processed evaluation
    */
-  override def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int, valueOfClass: Array[String]): DStream[String] =
+  override def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int, valueOfClass: Array[String], accAgg: AccuracyAggregator): DStream[String] =
     input.transform(rdd => {
       val inv=rdd.map{case (e,c) => (c,e)}
       val centr = ClusteringEvaluationUtil.computeAllCentroids(rdd)

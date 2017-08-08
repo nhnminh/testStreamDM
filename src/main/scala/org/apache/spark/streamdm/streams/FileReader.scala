@@ -18,6 +18,7 @@
 package org.apache.spark.streamdm.streams
 
 import java.io.File
+import java.util.Calendar
 import scala.io.Source
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
@@ -49,7 +50,7 @@ import org.apache.spark.streamdm.streams.generators.Generator
 class FileReader extends StreamReader with Logging {
 
   val chunkSizeOption: IntOption = new IntOption("chunkSize", 'k',
-    "Chunk Size", 10000, 1, Integer.MAX_VALUE)
+    "Chunk Size", 5000, 1, Integer.MAX_VALUE)
 
   val slideDurationOption: IntOption = new IntOption("slideDuration", 'd',
     "Slide Duration in milliseconds", 100, 1, Integer.MAX_VALUE)
@@ -75,6 +76,8 @@ class FileReader extends StreamReader with Logging {
   var hasHeadFile: Boolean = false
   var lines: Iterator[String] = null
   var spec: ExampleSpecification = null
+  var counter: Int = 0
+  val t1 = System.nanoTime
 
     /**
     * 
@@ -86,6 +89,7 @@ class FileReader extends StreamReader with Logging {
   //   times
   // }
   def init() {
+
     if (!isInited) {
       fileName = fileNameOption.getValue
       println(fileName)
@@ -194,12 +198,15 @@ class FileReader extends StreamReader with Logging {
 
     new InputDStream[Example](ssc) {
 
+
       override def start(): Unit = {
+
         println ("File reading gets started.")
       }
 
       override def stop(): Unit = {
         println("Reading file stopped.")
+
         // System.exit(1)
       }
 
@@ -209,6 +216,14 @@ class FileReader extends StreamReader with Logging {
         val examples: Array[Example] = Array.fill[Example](chunkSizeOption.getValue)(getExampleFromFile())
         val examplesRDD = ssc.sparkContext.parallelize(examples)
 //        println("FileReader RDD count:" + examplesRDD.count())
+        counter = counter + 1
+        val limit = instanceLimitOption.getValue/ chunkSizeOption.getValue
+        if(counter > limit){
+          println("Over limit instances. STOP!" )
+
+           ssc.stop(stopSparkContext = false, stopGracefully = false)
+          Some(examplesRDD)
+        }
         Some(examplesRDD)
         
         

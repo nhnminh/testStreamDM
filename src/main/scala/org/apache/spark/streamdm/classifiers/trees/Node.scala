@@ -455,12 +455,17 @@ class ActiveLearningNode(classDistribution: Array[Double])
         for (i <- 0 until blockClassDistribution.length)
           this.blockClassDistribution(i) += that.blockClassDistribution(i)
       } else {
+//new
+        for (i <- 0 until blockClassDistribution.length)
+          this.blockClassDistribution(i) += that.blockClassDistribution(i)
 
-        this.addonWeight += node.blockAddonWeight
+        //
+        this.addonWeight += node.blockClassDistribution.sum
         for (i <- 0 until classDistribution.length)
           this.classDistribution(i) += that.blockClassDistribution(i)
+//          this.classDistribution(i) += that.classDistribution(i)
       }
-      println("After merging 2 nodes, ClassDistr: " + Utils.arraytoString(classDistribution))
+//      println("After merging 2 nodes, ClassDistr: " + Utils.arraytoString(classDistribution))
       //merge feature class observers
       for (i <- 0 until featureObservers.length)
         featureObservers(i) = featureObservers(i).merge(node.featureObservers(i), trySplit)
@@ -476,12 +481,19 @@ class ActiveLearningNode(classDistribution: Array[Double])
    */
   def getBestSplitSuggestions(splitCriterion: SplitCriterion, ht: HoeffdingTreeModel): Array[FeatureSplit] = {
     val bestSplits = new ArrayBuffer[FeatureSplit]()
+//    println("featureObservers: "  )
+//    featureObservers.zipWithIndex.foreach(x=>
+//    println(x._1 + " " + x._2))
+//    featureObservers.zipWithIndex.foreach(x=>
+//      println( " Index: " + x._2 +" : "+ x._1.bestSplit(splitCriterion, classDistribution, x._2, ht.binaryOnly) ))
     featureObservers.zipWithIndex.foreach(x =>
       bestSplits.append(x._1.bestSplit(splitCriterion, classDistribution, x._2, ht.binaryOnly)))
+
     if (!ht.noPrePrune) {
       bestSplits.append(new FeatureSplit(null, splitCriterion.merit(classDistribution,
         Array.fill(1)(classDistribution)), new Array[Array[Double]](0))) 
     }
+
     bestSplits.toArray
   }
 
@@ -626,12 +638,13 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
    * @param example an input example
    */
   override def learn(ht: HoeffdingTreeModel, example: Example): Unit = {
-    super.learn(ht, example)
+// change the order of super.learn(ht, example) --> move it downwards.
     if (argmax(classDistribution) == example.labelAt(0))
       mcBlockCorrectWeight += example.weight
     if (argmax(NaiveBayes.predict(example, classDistribution, featureObservers)) ==
       example.labelAt(0))
       nbBlockCorrectWeight += example.weight
+    super.learn(ht, example)
   }
 
   /**

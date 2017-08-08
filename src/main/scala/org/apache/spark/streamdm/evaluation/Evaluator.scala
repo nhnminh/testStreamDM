@@ -22,6 +22,7 @@ import java.io.Serializable
 import com.github.javacliparser.Configurable
 import org.apache.spark.streamdm.core.Example
 import org.apache.spark.streaming.dstream.DStream
+import org.apache.spark.streamdm.tasks.AccuracyAggregator
 
 /**
  * Abstract class which defines the operations needed to evaluate learners.
@@ -34,7 +35,7 @@ abstract class Evaluator extends Configurable with Serializable{
    * @param input the input stream containing (Example,Double) tuples
    * @return a stream of String with the processed evaluation
    */
-  def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int , valueOfClass: Array[String]):  DStream[String]
+  def addResult(input: DStream[(Example, Double)], option: Int, numClasses: Int , valueOfClass: Array[String], accAggregator: AccuracyAggregator):  DStream[String]
 
   /**
    * Get the evaluation result.

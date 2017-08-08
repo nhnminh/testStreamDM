@@ -18,12 +18,12 @@
 package org.apache.spark.streamdm.tasks
 
 import com.github.javacliparser.ClassOption
-
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streamdm.clusterers._
 import org.apache.spark.streamdm.streams._
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streamdm.evaluation.Evaluator
+
 
 /**
  * Task for evaluating a clustering on a stream by first applying the clustering
@@ -66,7 +66,7 @@ class ClusteringTrainEvaluate extends Task {
     val writer:StreamWriter = this.resultsWriterOption.getValue()
 
     val instances = reader.getExamples(ssc)
-
+    val accuracyAggregator = new AccuracyAggregator()
     //Train
     clusterer.train(instances)
 
@@ -74,6 +74,6 @@ class ClusteringTrainEvaluate extends Task {
     val clpairs = clusterer.assign(instances)
     
     //Print statistics
-    writer.output(evaluator.addResult(clpairs,0,0,Array[String]()))
+    writer.output(evaluator.addResult(clpairs,0,0,Array[String](), accuracyAggregator))
   }
 }
