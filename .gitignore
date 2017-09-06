@@ -5,3 +5,14 @@ data/covtypeNorm.arff
 data/randomtreedata.arff
 ensime-langserver.log
 /ensime-langserver.log
+scripts/result/majcl4_t.log
+ .idea/
+data/ELEC.arff.zip
+data/KDD99.arff.zip
+data/electNormNew.arff
+data/kdd99.arff
+data/randomtreedataComplex.arff
+data/rdt600k.arff
+data/taskResultFile.moa
+scripts/result
+scripts/result/majcl4_t.log
