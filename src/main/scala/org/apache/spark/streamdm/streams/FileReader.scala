@@ -50,7 +50,7 @@ import org.apache.spark.streamdm.streams.generators.Generator
 class FileReader extends StreamReader with Logging {
 
   val chunkSizeOption: IntOption = new IntOption("chunkSize", 'k',
-    "Chunk Size", 5000, 1, Integer.MAX_VALUE)
+    "Chunk Size", 1000, 1, Integer.MAX_VALUE)
 
   val slideDurationOption: IntOption = new IntOption("slideDuration", 'd',
     "Slide Duration in milliseconds", 100, 1, Integer.MAX_VALUE)
@@ -59,10 +59,10 @@ class FileReader extends StreamReader with Logging {
     "Type of the instance to use", "dense")
 
   val instanceLimitOption: IntOption = new IntOption("instanceLimit", 'i',
-    "Limit of number of instance", 1000000,1, Integer.MAX_VALUE)
+    "Limit of number of instance", 0,0, Integer.MAX_VALUE)
 
   val fileNameOption: StringOption = new StringOption("fileName", 'f',
-    "File Name", "../data/randomtreedata.arff")
+    "File Name", "../data/electNormNew.arff")
     //covtypeNorm
     //../data/randomtreedata.arff
 
@@ -75,9 +75,13 @@ class FileReader extends StreamReader with Logging {
   var isInited: Boolean = false
   var hasHeadFile: Boolean = false
   var lines: Iterator[String] = null
+  var allLines: Array[String] = null
   var spec: ExampleSpecification = null
   var counter: Int = 0
-  val t1 = System.nanoTime
+  var lineIndex: Int = 0
+  var fileSize: Int = 0
+  var limit: Int = 0
+  var limitInstance: Int = 0
 
     /**
     * 
@@ -112,6 +116,17 @@ class FileReader extends StreamReader with Logging {
         logInfo(spec.out(0).asInstanceOf[NominalFeatureSpecification](index))
       }
 
+      if(allLines == null ){
+        allLines = Source.fromFile(fileName).getLines().toArray
+        fileSize = allLines.length
+      }
+      if(instanceLimitOption.getValue == 0 || instanceLimitOption.getValue > fileSize)
+        limitInstance = fileSize
+      else
+        limitInstance = instanceLimitOption.getValue
+
+      limit = fileSize/chunkSizeOption.getValue
+
       isInited = true
     }
   }
@@ -138,54 +153,44 @@ class FileReader extends StreamReader with Logging {
     // val instanceLimit = instanceLimitOption.getValue
     
     var exp: Example = null
-    // start to read file from its beginning.
-    if (lines == null || !lines.hasNext) {
-      //get the whole file 
-      lines = Source.fromFile(fileName).getLines()
-    }
-    // if reach the end of file, will go to the head again
-    if (!lines.hasNext) {
-      // lines = Source.fromFile(fileName).getLines()
-      //if reach the end of file, return. 
-      exp
-    } 
 
+    var line: String = ""
+    if(lineIndex < fileSize - 2)
+      line = allLines(lineIndex)
+    else
+      line = allLines(fileSize-1)
 
-      var line = lines.next()
-    
-    while (!hasHeadFile && (line == "" || line.startsWith(" ") ||
-      line.startsWith("%") || line.startsWith("@"))) {
-      //logInfo(line) 
-      //skip the lines 
-      // if (!lines.hasNext)
-      //   lines = Source.fromFile(fileName).getLines()
-      line = lines.next()
-    }   
-
-
-
-    if (!hasHeadFile) {
-      //logInfo("UUUU" + line)
-      if ("arff".equalsIgnoreCase(dataHeadTypeOption.getValue())) {
-        exp = ExampleParser.fromArff(line, spec)
-        
-      } else {
-        if ("csv".equalsIgnoreCase(dataHeadTypeOption.getValue())) {
-          //for the csv format, we assume the first is the classification
-          val index: Int = line.indexOf(",")
-          line = line.substring(0, index) + " " + line.substring(index + 1).trim()
-          exp = Example.parse(line, instanceOption.getValue, "dense")
-          
-        }
+      //process
+      while (!hasHeadFile && (line == "" || line.startsWith(" ") ||
+        line.startsWith("%") || line.startsWith("@"))) {
+        lineIndex = lineIndex + 1
+        line = allLines(lineIndex)
       }
-    } else {
-      exp = Example.parse(line, instanceOption.getValue, "dense")
+
+
+
+      if (!hasHeadFile) {
+        //logInfo("UUUU" + line)
+        if ("arff".equalsIgnoreCase(dataHeadTypeOption.getValue())) {
+          exp = ExampleParser.fromArff(line, spec)
+
+        } else {
+          if ("csv".equalsIgnoreCase(dataHeadTypeOption.getValue())) {
+            //for the csv format, we assume the first is the classification
+            val index: Int = line.indexOf(",")
+            line = line.substring(0, index) + " " + line.substring(index + 1).trim()
+            exp = Example.parse(line, instanceOption.getValue, "dense")
+
+          }
+        }
+      } else {
+        exp = Example.parse(line, instanceOption.getValue, "dense")
+      }
+
+      lineIndex = lineIndex + 1
+      exp
+
     }
-    
-
-    exp
-
-  }
 
   /**
    * Obtains a stream of examples.
@@ -206,27 +211,28 @@ class FileReader extends StreamReader with Logging {
 
       override def stop(): Unit = {
         println("Reading file stopped.")
-
-        // System.exit(1)
       }
 
       override def compute(validTime: Time): Option[RDD[Example]] = {
-      
 
-        val examples: Array[Example] = Array.fill[Example](chunkSizeOption.getValue)(getExampleFromFile())
-        val examplesRDD = ssc.sparkContext.parallelize(examples)
-//        println("FileReader RDD count:" + examplesRDD.count())
-        counter = counter + 1
-        val limit = instanceLimitOption.getValue/ chunkSizeOption.getValue
-        if(counter > limit){
-          println("Over limit instances. STOP!" )
-
-           ssc.stop(stopSparkContext = false, stopGracefully = false)
-          Some(examplesRDD)
+        var arraySize: Int = 0
+        if(counter < limit ){
+          arraySize = chunkSizeOption.getValue
         }
+        else if (counter == limit ){
+          arraySize = limitInstance % chunkSizeOption.getValue
+        }
+        else
+        {
+            ssc.stop(stopSparkContext = false, stopGracefully = false)
+        }
+        val examples: Array[Example] = Array.fill[Example](arraySize)(getExampleFromFile())
+
+        val examplesRDD = ssc.sparkContext.parallelize(examples)
+        counter = counter + 1
         Some(examplesRDD)
-        
-        
+
+
       }
 
       override def slideDuration = {

@@ -111,7 +111,7 @@ abstract class Node(var classDistribution: Array[Double]) extends Serializable {
    * @return String containing the description
    */
   def description(): String = {
-    "  " * dep + "Leaf" + " weight = " +
+    "  " * dep + "depth: "+ dep +" | Leaf" + " weight = " +
       Utils.arraytoString(classDistribution) + Utils.arraytoString(blockClassDistribution) + "\n" 
   }
 
@@ -455,20 +455,30 @@ class ActiveLearningNode(classDistribution: Array[Double])
         for (i <- 0 until blockClassDistribution.length)
           this.blockClassDistribution(i) += that.blockClassDistribution(i)
       } else {
-//new
-        for (i <- 0 until blockClassDistribution.length)
-          this.blockClassDistribution(i) += that.blockClassDistribution(i)
-
+        ////new
+        //        for (i <- 0 until blockClassDistribution.length)
+        //          this.blockClassDistribution(i) += that.blockClassDistribution(i)
         //
-        this.addonWeight += node.blockClassDistribution.sum
+
+        //        this.addonWeight += node.blockClassDistribution.sum
+//        this.addonWeight += node.blockAddonWeight
+        /**
+          * If addOnWeigh += blockAddWeight, this will keep increasing if that node is not splitted.
+          */
+        this.addonWeight = node.blockAddonWeight
         for (i <- 0 until classDistribution.length)
           this.classDistribution(i) += that.blockClassDistribution(i)
-//          this.classDistribution(i) += that.classDistribution(i)
+
       }
-//      println("After merging 2 nodes, ClassDistr: " + Utils.arraytoString(classDistribution))
       //merge feature class observers
       for (i <- 0 until featureObservers.length)
         featureObservers(i) = featureObservers(i).merge(node.featureObservers(i), trySplit)
+      /**
+        *  after merging for split, clean the blockClassDistribution.
+        *  We let the addOnWeight as the only variable to keep the new arrivals information.
+        */
+//      for (i <- 0 until blockClassDistribution.length)
+//                this.blockClassDistribution(i) = 0
     }
     this
   }
@@ -497,7 +507,8 @@ class ActiveLearningNode(classDistribution: Array[Double])
     bestSplits.toArray
   }
 
-  override def toString(): String = "level[" + dep + "]ActiveLearningNode:" + weight
+//  override def toString(): String = "level[" + dep + "]ActiveLearningNode:" + weight
+    override def toString(): String = "level[" + dep + "]ActiveLearningNode:" + Utils.arraytoString(classDistribution)
 }
 /**
  * Inactive learning node for Hoeffding trees
@@ -675,11 +686,12 @@ class LearningNodeNBAdaptive(classDistribution: Array[Double],
 //         this.addonWeight += nbaNode.blockAddonWeight
 
         //newly added: blockClassDistribution is computed here, instead of having another NON_SPLIT step
-        for (i <- 0 until blockClassDistribution.length)
-          this.blockClassDistribution(i) += that.blockClassDistribution(i)
-        //Add straight away the blockClassDistribution into addonWeight, because we have no "Block" anymore.
+//        for (i <- 0 until blockClassDistribution.length)
+//          this.blockClassDistribution(i) += that.blockClassDistribution(i)
+//        //Add straight away the blockClassDistribution into addonWeight, because we have no "Block" anymore.
 //        println("That | blockAddonWeight: " + nbaNode.blockClassDistribution.sum)
-        this.addonWeight += nbaNode.blockClassDistribution.sum
+        this.addonWeight = nbaNode.blockAddonWeight
+//        this.addonWeight += nbaNode.blockClassDistribution.sum
 //        println("This | addOnWeight: " + this.addonWeight)
         mcCorrectWeight += nbaNode.mcBlockCorrectWeight
         nbCorrectWeight += nbaNode.nbBlockCorrectWeight

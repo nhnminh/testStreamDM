@@ -8,6 +8,10 @@ echo "Receiving data...."
 
 
 start=`date +%s`
+###test
+
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200) -s (FileReader -f ../data/randomtreesampledata.arff -k 1000 -d 10)" 1> result.res 2> log.log
+
 
 ### randomtreedata -----
 #./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200 ) -s (FileReader -f ../data/randomtreedata.arff -k 10000 -i 1000000 -d 1000)" 1> result/hdt_1000_MC.res 2> result/majcl4_t.log
@@ -20,21 +24,34 @@ start=`date +%s`
 
 
 ###covTypeNorm + parallel ---
-./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200 ) -s (FileReader -f ../data/covtypeNorm.arff -k 10000 -i 581000 -d 10)" 1> result/hdt_1000_MC_cov_p.res 2> result/majcl4_t.log
-#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 2 -t 0.05 -g 200 ) -s (FileReader -f ../data/covtypeNorm.arff -k 10000 -i 581000 -d 100)" 1> result/hdt_1000_NBA_cov_p.res 2> result/majcl4_t.log
+#./spark.sh "200 EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 10  -a -h 40) -s (FileReader -f ../data/covtypeNorm.arff -k 10000 -i 590000 -d 10)" 1> result/hdt_1000_MC_cov_splitAll.res 2> result/majcl4_t.log
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200  ) -s (FileReader -f ../data/covtypeNorm.arff -k 10000 -i 581000 -d 10)" 1> result/hdt_1000_MC_cov_splitNTimes.res 2> result/majcl4_t.log
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 2 -t 0.05 -g 200 -a ) -s (FileReader -f ../data/covtypeNorm.arff -k 10000 -i 581000 -d 100)" 1> result/hdt_1000_NBA_cov_p_splitAll.res 2> result/majcl4_t.log
 
 ###randomtreedata + parallel ---
-#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200 ) -s (FileReader -f ../data/randomtreedata.arff -k 10000 -i 1000000 -d 10)" 1> result/hdt_1000_MC_p.res 2> result/majcl4_t.log
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 10 -a -h 20 ) -s (FileReader -f ../data/randomtreedata.arff -k 10000 -i 1000000 -d 10)" 1> result/hdt_1000_MC_p_splitAll.res 2> result/majcl4_t.log
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 2 -t 0.05 -g 200  ) -s (FileReader -f ../data/randomtreedata.arff -k 10000 -i 1000000 -d 10)" 1> result/hdt_1000_NBA_p_splitNTimes.res 2> result/majcl4_t.log
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200  ) -s (FileReader -f ../data/randomtreedata.arff -k 10000 -i 1000000 -d 10)" 1> result/hdt_1000_MC_p_splitNTimes1.res 2> result/majcl4_t.log
 #./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 2 -t 0.05 -g 200 ) -s (FileReader -f ../data/randomtreedata.arff -k 10000 -i 1000000 -d 100)" 1> result/hdt_1000_NBA_p.res 2> result/majcl4_t.log
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 2 -t 0.05 -g 200 -a) -s (FileReader -f ../data/randomtreedata.arff -k 10000 -i 1000000 -d 100)" 1> result/hdt_1000_NBA_p_splitAll.res 2> result/majcl4_t.log
 
 ### elecNormNew
 
-#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200 ) -s (FileReader -f ../data/electNormNew.arff -k 4000 -i 45000 -d 10)" 1> result/hdt_1000_MC_elec_p.res 2> result/majcl4_t.log
+#./spark.sh "140 EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200 -h 40) -s (FileReader -f ../data/electNormNew.arff -k 4000   -d 10)" 1> result/hdt_1000_MC_elec_p_splitNTimes.res 2> result/majcl4_t.log
 #./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 2 -t 0.05 -g 200 ) -s (FileReader -f ../data/electNormNew.arff -k 4000 -i 45000 -d 10)" 1> result/hdt_1000_NBA_elec_p.res 2> result/majcl4_t.log
+#./spark.sh "100 EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 20 -a -h 40) -s (FileReader -f ../data/electNormNew.arff -k 4000 -i 45000 -d 10)" 1> result/hdt_1000_MC_elec_p_splitAll.res 2> result/majcl4_t.log
 
 ###randomtreedataComplex + parallel
-#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200 ) -s (FileReader -f ../data/randomtreedataComplex.arff -k 10000 -i 1000000 -d 100)" 1> result/hdt_1000_MC_complex_p.res 2> result/majcl4_t.log
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200 ) -s (FileReader -f ../data/randomtreedataComplex.arff -k 10000 -i 1000000 -d 100)" 1> result/hdt_1000_MC_complex_p_splitNTimes.res 2> result/majcl4_t.log
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 20 -a -h 20) -s (FileReader -f ../data/randomtreedataComplex.arff -k 10000 -i 1000000 -d 100)" 1> result/hdt_1000_MC_complex_p_splitAll_2.res 2> result/majcl4_t.log
 
+### KDD99
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 20 -a -h 100000) -s (FileReader -f ../data/kdd99.arff -k 10000 -i 4898000 -d 100)" 1> result/hdt_1000_MC_kdd_p_splitAll.res 2> result/majcl4_t.log
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 500 -h 100000) -s (FileReader -f ../data/kdd99.arff -k 10000 -i 4898000 -d 100)" 1> result/hdt_1000_MC_kdd_p_splitNTimes.res 2> result/majcl4_t.log
+
+
+### rdtComplex 600k
+#./spark.sh "EvaluatePrequential  -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200 ) -s (FileReader -f ../data/rdt600k.arff -k 10000 -i 700000 -d 100)" 1> result/hdt_1000_MC_complex_p_splitNTimes.res 2> result/majcl4_t.log
 
 end=`date +%s`
 echo runtime = $((end-start)) "seconds"

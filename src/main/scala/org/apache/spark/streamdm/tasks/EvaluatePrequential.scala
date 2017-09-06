@@ -178,7 +178,6 @@
       val eachRDDAccuracy = evaluator.addResult(predPairs,showConfusionMatrix, numClasses, valueOfClass, accuracyAggregator)
 
       if (evaluator.isInstanceOf[BasicClassificationEvaluator]){
-        println("accuracyByGetResult: "+ evaluator.getResult())
         eachRDDAccuracy.foreachRDD(rdd =>
         rdd.take(1).foreach{
           x => {

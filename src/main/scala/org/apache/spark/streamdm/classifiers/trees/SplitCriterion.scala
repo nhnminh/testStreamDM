@@ -98,8 +98,9 @@ class InfoGainSplitCriterion extends SplitCriterion with Serializable {
 //    println("   RANGEMERIT: " + pre.filter(_>0).length)
 //    println("   Pre: " + Utils.arraytoString(pre.filter(_>0)))
     val removeTrailingZeros = pre.reverse.dropWhile(_==0).reverse
-
+//
     log2(max(removeTrailingZeros.length, 2))
+//    log2(max(pre.length, 2))
   }
 
   /**
