@@ -22,6 +22,7 @@ import com.github.javacliparser.{ClassOption, IntOption}
 import org.apache.spark.streamdm.classifiers.Classifier
 import org.apache.spark.streamdm.classifiers.model._
 import org.apache.spark.streamdm.core._
+import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streaming.dstream._
 import org.apache.spark.streamdm.utils.Utils
 import org.apache.spark.streamdm.core.specification.ExampleSpecification
@@ -76,9 +77,9 @@ class Bagging extends Classifier {
      * @param input a stream of instances
      * @return the updated Model
      */
-  override def train(input: DStream[Example]): Unit = {
+  override def train(input: DStream[Example], ssc:StreamingContext): Unit = {
     for (i <- 0 until ensembleSizeOption.getValue) {
-      classifiers(i).train(input.map(onlineSampling))
+      classifiers(i).train(input.map(onlineSampling),ssc)
     }
     //Online Sampling with replacement
     def onlineSampling(example: Example): Example = {

@@ -21,6 +21,7 @@ import org.apache.spark.streamdm.clusterers.clusters._
 import org.apache.spark.streamdm.clusterers.utils._
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streaming.dstream._
+import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.rdd._
 import com.github.javacliparser._
 import org.apache.spark.streamdm.core.specification.ExampleSpecification
@@ -73,7 +74,7 @@ class Clustream extends Clusterer {
    *
    * @param input a stream of instances
    */
-  def train(input: DStream[Example]): Unit = {
+  def train(input: DStream[Example], ssc:StreamingContext): Unit = {
     input.foreachRDD(rdd => {
       val numInstances: Long = initialBuffer.length + 1
       if (numInstances<initOption.getValue) {

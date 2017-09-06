@@ -21,7 +21,7 @@ import scala.collection.mutable.ArrayBuffer
 import scala.math.{ max }
 
 import org.apache.spark.Logging
-
+import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streamdm.core.specification._
 import org.apache.spark.streamdm.classifiers.bayes._
@@ -489,13 +489,17 @@ class ActiveLearningNode(classDistribution: Array[Double])
    * @param ht a Hoeffding tree model
    * @return an array of FeatureSplit
    */
-  def getBestSplitSuggestions(splitCriterion: SplitCriterion, ht: HoeffdingTreeModel): Array[FeatureSplit] = {
+  def getBestSplitSuggestions(splitCriterion: SplitCriterion, ht: HoeffdingTreeModel, ssc:StreamingContext): Array[FeatureSplit] = {
     val bestSplits = new ArrayBuffer[FeatureSplit]()
 //    println("featureObservers: "  )
 //    featureObservers.zipWithIndex.foreach(x=>
 //    println(x._1 + " " + x._2))
 //    featureObservers.zipWithIndex.foreach(x=>
 //      println( " Index: " + x._2 +" : "+ x._1.bestSplit(splitCriterion, classDistribution, x._2, ht.binaryOnly) ))
+    if (featureObservers.length >0){
+      val featureObserversRDD = ssc.sparkContext.parallelize(featureObservers)
+    }
+
     featureObservers.zipWithIndex.foreach(x =>
       bestSplits.append(x._1.bestSplit(splitCriterion, classDistribution, x._2, ht.binaryOnly)))
 

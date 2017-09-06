@@ -68,7 +68,7 @@ class ClusteringTrainEvaluate extends Task {
     val instances = reader.getExamples(ssc)
     val accuracyAggregator = new AccuracyAggregator()
     //Train
-    clusterer.train(instances)
+    clusterer.train(instances,ssc)
 
     //Assign
     val clpairs = clusterer.assign(instances)

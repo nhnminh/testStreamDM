@@ -76,7 +76,7 @@ class StreamKM extends Clusterer {
    *  Maintain the BucketManager for coreset extraction, given an input DStream of Example.
    * @param input a stream of instances
    */
-  def train(input: DStream[Example]): Unit = {
+  def train(input: DStream[Example], ssc:StreamingContext): Unit = {
     input.foreachRDD(rdd => {
       rdd.foreach(ex => {
         bucketmanager = bucketmanager.update(ex)

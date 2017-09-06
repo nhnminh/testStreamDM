@@ -21,6 +21,7 @@ import com.github.javacliparser.ClassOption
 import org.apache.spark.streamdm.classifiers.model._
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streaming.dstream._
+import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streamdm.utils.Utils
 import org.apache.spark.streamdm.core.specification.ExampleSpecification
 
@@ -72,9 +73,9 @@ class MultiClassLearner extends Classifier {
      * @param input a stream of instances
      * @return the updated Model
      */
-  override def train(input: DStream[Example]): Unit = {
+  override def train(input: DStream[Example], ssc:StreamingContext): Unit = {
     for (labelClass <- 0 until sizeEnsemble) {
-      classifiers(labelClass).train(input.map(convertInstance))
+      classifiers(labelClass).train(input.map(convertInstance),ssc)
 
       def convertInstance(example: Example): Example = {
         new Example(example.in, new DenseInstance(Array(if (example.labelAt(0) == labelClass) 1 else 0)))

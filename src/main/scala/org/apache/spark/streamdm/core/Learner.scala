@@ -16,7 +16,7 @@
  */
 
 package org.apache.spark.streamdm.core
-
+import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streaming.dstream._
 import com.github.javacliparser.Configurable
@@ -46,7 +46,7 @@ trait Learner extends Configurable  with Serializable {
    * 
    * @param input a stream of Examples
    */
-  def train(input: DStream[Example]): Unit
+  def train(input: DStream[Example], ssc: StreamingContext): Unit
 
   /**
    * Gets the current Model used for the Learner.

@@ -20,6 +20,7 @@ package org.apache.spark.streamdm.classifiers.bayes
 import scala.math.{ log, log10 }
 import com.github.javacliparser.IntOption
 import org.apache.spark.streaming.dstream._
+import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streamdm.classifiers.Classifier
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streamdm.classifiers.trees._
@@ -75,7 +76,7 @@ class MultinomialNaiveBayes extends Classifier {
    * 
    * @param input a stream of Examples
    */
-  override def train(input: DStream[Example]): Unit = {
+  override def train(input: DStream[Example], ssc:StreamingContext): Unit = {
     input.foreachRDD {
       rdd =>
         val tmodel = rdd.aggregate(

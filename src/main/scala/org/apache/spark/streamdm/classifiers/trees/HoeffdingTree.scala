@@ -24,6 +24,7 @@ import scala.collection.mutable.Queue
 import org.apache.spark.Logging
 import com.github.javacliparser._
 import org.apache.spark.streaming.dstream._
+import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streamdm.utils.Utils.argmax
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streamdm.classifiers._
@@ -154,7 +155,7 @@ class HoeffdingTree extends Classifier {
    */
 
 
-  override def train(input: DStream[Example]): Unit = {
+  override def train(input: DStream[Example], ssc:StreamingContext): Unit = {
 
     input.foreachRDD {
       rdd =>
@@ -162,7 +163,7 @@ class HoeffdingTree extends Classifier {
 
           (mod, example) => {mod.update(example)}, //map
 
-          (mod1, mod2) => {mod1.merge(mod2, false)} //reduce
+          (mod1, mod2) => {mod1.merge(mod2, false, ssc)} //reduce
 
         )
 
@@ -173,7 +174,7 @@ class HoeffdingTree extends Classifier {
         *     To have this work as a Majority Classifier, put the flag to be false.
         */
 
-        model = model.merge(tmodel, true)
+        model = model.merge(tmodel, true, ssc)
 //        model = tmodel
 
 //        println("After merge: " + model.description())
@@ -378,7 +379,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
    * @param pIndex learnNode's index of the parent
    * @return Unit 
    */
-  def attemptToSplit(learnNode: LearningNode, parent: SplitNode, pIndex: Int): Unit = {
+  def attemptToSplit(learnNode: LearningNode, parent: SplitNode, pIndex: Int, ssc:StreamingContext): Unit = {
     // println("ActiveLearningNode: " + learnNode.isInstanceOf[ActiveLearningNode])
     // println("growthAllowed: " + growthAllowed)
     // println("ActiveLearningNode: " + learnNode.isInstanceOf[ActiveLearningNode])
@@ -410,7 +411,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
         if (!isPure) {
 //                   println("is Pure: " + isPure)
           // one best suggestion for each feature
-          var bestSuggestions: Array[FeatureSplit] = activeNode.getBestSplitSuggestions(splitCriterion, this)
+          var bestSuggestions: Array[FeatureSplit] = activeNode.getBestSplitSuggestions(splitCriterion, this, ssc)
 
           //sort the suggestion based on the merit
           bestSuggestions = bestSuggestions.sorted
@@ -540,7 +541,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
     * @param trySplit: (false: only update statistics, true: attempt to split).
     * @return this
     */
-  def merge(that: HoeffdingTreeModel, trySplit: Boolean): HoeffdingTreeModel = {
+  def merge(that: HoeffdingTreeModel, trySplit: Boolean, ssc:StreamingContext): HoeffdingTreeModel = {
 
     val coeff = 0.1
     //val nTimes = (this.blockNumExamples+that.blockNumExamples)/graceNum
@@ -582,7 +583,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
 
                   //              println("Split: " + times)
                   //              println("CurrentNode:" + activeNode.toString())
-                  attemptToSplit(activeNode, foundNode.parent, foundNode.index)
+                  attemptToSplit(activeNode, foundNode.parent, foundNode.index, ssc)
 
                 }
 
@@ -623,7 +624,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
                 if(activeNode.addOnWeight() > graceNum){
 //                                  println("\t Node: " + activeNode.description())
 //                                  println("\t\t addOnWeight: "  + activeNode.addOnWeight())
-                  attemptToSplit(activeNode, foundNode.parent, foundNode.index)
+                  attemptToSplit(activeNode, foundNode.parent, foundNode.index, ssc)
                   toSplit = toSplit + 1
                 }
 

@@ -21,6 +21,7 @@ import org.apache.spark.streamdm._
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streamdm.classifiers.model._
 import org.apache.spark.streaming.dstream._
+import org.apache.spark.streaming.StreamingContext
 import com.github.javacliparser.{ClassOption, FloatOption, IntOption}
 import org.apache.spark.streamdm.core.specification.ExampleSpecification
 
@@ -78,7 +79,7 @@ class SGDLearner extends Classifier {
    *
    * @param input a stream of instances
    */
-  override def train(input: DStream[Example]): Unit = {
+  override def train(input: DStream[Example], ssc:StreamingContext): Unit = {
     input.foreachRDD(rdd=> {
       val chModels = rdd.aggregate(
         //initialize with the previous model

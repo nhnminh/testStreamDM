@@ -162,7 +162,7 @@
       val predPairs = learner.predict(instances)
 
       //Train
-      learner.train(instances)
+      learner.train(instances, ssc)
 
 
 
