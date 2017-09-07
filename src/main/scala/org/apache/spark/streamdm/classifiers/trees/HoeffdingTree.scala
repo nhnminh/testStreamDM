@@ -177,7 +177,7 @@ class HoeffdingTree extends Classifier {
 //        model = tmodel
 
 //        println("After merge: " + model.description())
-        model.checkforSum()
+//        model.checkforSum()
         println("Time elapsed: " + (System.nanoTime - t1)/1e9d)
 
 
@@ -445,8 +445,8 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
             val tree_size_leaves = activeNodeCount + inactiveNodeCount
             logInfo("{" + tree_size_nodes + "," + tree_size_leaves + "," + activeNodeCount + "," + treeHeight() + "}")
 //            println("\t After one split: " + root.description())
-            println("   \nHoeffdingTreeModel: " + "{" + tree_size_nodes + "," + tree_size_leaves + "," + activeNodeCount + "," + treeHeight() + "}")
-            println(" --------------------------------------------")
+//            println("   \nHoeffdingTreeModel: " + "{" + tree_size_nodes + "," + tree_size_leaves + "," + activeNodeCount + "," + treeHeight() + "}")
+//            println(" --------------------------------------------")
 
 
           }
@@ -570,7 +570,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
       if(this.treeHeight() < maxDepth){
         if (!splitAll) {
           var times = 0
-          println("Size of listExamples: " + listExamples.size)
+//          println("Size of listExamples: " + listExamples.size)
 
           listExamples.toArray.foreach{
             x=> {
@@ -596,7 +596,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
             }
 
           }
-          println("NumberOfSplitAttempt: "+ times)
+//          println("NumberOfSplitAttempt: "+ times)
 
 
 
@@ -631,9 +631,9 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
               case other: Node => {}
             }
           }
-          println("Total Leaves: " + numLeaves)
-          println("Leaves to split: " + toSplit)
-          println("TotalAddOnWeight: " + totalAddOnWeight)
+//          println("Total Leaves: " + numLeaves)
+//          println("Leaves to split: " + toSplit)
+//          println("TotalAddOnWeight: " + totalAddOnWeight)
         }
         //      logInfo("{tree size (nodes),tree size (leaves),active learning leaves,tree depth}")
         // println("HoeffdingTreeModel: {tree size (nodes),tree size (leaves),active learning leaves,tree depth}")

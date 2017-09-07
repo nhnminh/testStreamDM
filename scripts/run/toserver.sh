@@ -3,9 +3,13 @@ sbt assembly
 echo "[successful] Done packaging files..."
 scp target/scala-2.10/streamDM-spark-streaming-assembly-0.2.jar nhnguyen@lame11.enst.fr:/cal/homes/nhnguyen/streamdm
 echo "[successful] Done copying *.jar files..."
-cd $STREAM_DM/scripts
-scp spark_cluster.sh nhnguyen@lame11.enst.fr:/cal/homes/nhnguyen/streamdm
-echo "[successful] Done copying spark_cluster.sh file..."
-cd $STREAM_DM/scripts/run
-scp runserver.sh nhnguyen@lame11.enst.fr:/cal/homes/nhnguyen/streamdm
-echo "[successful] Done copying runserver.sh file..."
+#cd $STREAM_DM/scripts
+#scp spark_cluster.sh nhnguyen@lame11.enst.fr:/cal/homes/nhnguyen/streamdm
+#echo "[successful] Done copying spark_cluster.sh file..."
+#cd $STREAM_DM/scripts/run
+#scp runserver.sh nhnguyen@lame11.enst.fr:/cal/homes/nhnguyen/streamdm
+#echo "[successful] Done copying runserver.sh file..."
+
+#scp rdt300k.arff nhnguyen@lame11.enst.fr:/cal/homes/nhnguyen/data
+#scp -r nhnguyen@lame11.enst.fr:/cal/homes/nhnguyen/workspace workspace
+#scp nhnguyen@lame11.enst.fr:/cal/homes/nhnguyen/NGUYEN_HoangNhatMinh_TP1_SD203.zip NGUYEN_HoangNhatMinh_TP1_SD203.zip

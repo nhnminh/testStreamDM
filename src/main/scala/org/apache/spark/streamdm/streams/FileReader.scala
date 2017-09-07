@@ -50,7 +50,7 @@ import org.apache.spark.streamdm.streams.generators.Generator
 class FileReader extends StreamReader with Logging {
 
   val chunkSizeOption: IntOption = new IntOption("chunkSize", 'k',
-    "Chunk Size", 1000, 1, Integer.MAX_VALUE)
+    "Chunk Size", 10000, 1, Integer.MAX_VALUE)
 
   val slideDurationOption: IntOption = new IntOption("slideDuration", 'd',
     "Slide Duration in milliseconds", 100, 1, Integer.MAX_VALUE)
@@ -62,7 +62,7 @@ class FileReader extends StreamReader with Logging {
     "Limit of number of instance", 0,0, Integer.MAX_VALUE)
 
   val fileNameOption: StringOption = new StringOption("fileName", 'f',
-    "File Name", "../data/electNormNew.arff")
+    "File Name", "../data/rdt300k.arff")
     //covtypeNorm
     //../data/randomtreedata.arff
 

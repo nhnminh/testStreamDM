@@ -39,7 +39,7 @@ object streamDMJob {
     // conf.setMaster("yarn")   //to run on clusters
 
     var newArgs = args.clone()
-    var batchInterval: Int = 1000
+    var batchInterval: Int = 2000
     if(args.length > 0){
       if(Try(args(0).toInt).isSuccess){
         if(args(0).toInt > 0 && args(0).toInt < Int.MaxValue){

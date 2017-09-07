@@ -174,38 +174,38 @@
  *  1. Classifier: Basic Classifier Evaluation is used, which accumulates the number of correct prediction till the end.
  *  2. Clustering: ...
  */
-
-      val eachRDDAccuracy = evaluator.addResult(predPairs,showConfusionMatrix, numClasses, valueOfClass, accuracyAggregator)
-
-      if (evaluator.isInstanceOf[BasicClassificationEvaluator]){
-        eachRDDAccuracy.foreachRDD(rdd =>
-        rdd.take(1).foreach{
-          x => {
-            val values = x.split(",")
-            values.zipWithIndex.foreach{
-              t => {
-                var t1 = t._1.toDouble.toInt
-                if(t._2==0){correct.add(t1)}
-                else{total.add(t1)}
-              }
-            }
-            println("Accuracy: %.3f, Correct: %.3f, Total: %.3f".format(correct.value.toDouble/total.value.toDouble, correct.value.toDouble, total.value.toDouble))
-            println("Running time = " + (System.nanoTime - t1)/1e9d)
-            println("================================================================\n")
-
-//           if (total.value > limitNumber){
-//             println("Over " +  limitNumber + " instances")
-
-//             logInfo("Over " + limitNumber + " instances. Stop gracefully!")
-//             ssc.stop(stopSparkContext = false, stopGracefully = false)
 //
-//           }
-        }})
-      }
-
-      else {
-        writer.output(evaluator.addResult(predPairs,showConfusionMatrix, numClasses, valueOfClass, accuracyAggregator))
-      }
+//      val eachRDDAccuracy = evaluator.addResult(predPairs,showConfusionMatrix, numClasses, valueOfClass, accuracyAggregator)
+//
+//      if (evaluator.isInstanceOf[BasicClassificationEvaluator]){
+//        eachRDDAccuracy.foreachRDD(rdd =>
+//        rdd.take(1).foreach{
+//          x => {
+//            val values = x.split(",")
+//            values.zipWithIndex.foreach{
+//              t => {
+//                var t1 = t._1.toDouble.toInt
+//                if(t._2==0){correct.add(t1)}
+//                else{total.add(t1)}
+//              }
+//            }
+//            println("Accuracy: %.3f, Correct: %.3f, Total: %.3f".format(correct.value.toDouble/total.value.toDouble, correct.value.toDouble, total.value.toDouble))
+//            println("Running time = " + (System.nanoTime - t1)/1e9d)
+//            println("================================================================\n")
+//
+////           if (total.value > limitNumber){
+////             println("Over " +  limitNumber + " instances")
+//
+////             logInfo("Over " + limitNumber + " instances. Stop gracefully!")
+////             ssc.stop(stopSparkContext = false, stopGracefully = false)
+////
+////           }
+//        }})
+//      }
+//
+//      else {
+//        writer.output(evaluator.addResult(predPairs,showConfusionMatrix, numClasses, valueOfClass, accuracyAggregator))
+//      }
 
 
 
