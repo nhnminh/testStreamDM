@@ -163,7 +163,7 @@ class HoeffdingTree extends Classifier {
 
           (mod, example) => {mod.update(example)}, //map
 
-          (mod1, mod2) => {mod1.merge(mod2, false, ssc)} //reduce
+          (mod1, mod2) => {mod1.mergeOnly(mod2)} //reduce
 
         )
 
@@ -174,7 +174,7 @@ class HoeffdingTree extends Classifier {
         *     To have this work as a Majority Classifier, put the flag to be false.
         */
 
-        model = model.merge(tmodel, true, ssc)
+        model = model.mergeAndSplit(tmodel, ssc)
 //        model = tmodel
 
 //        println("After merge: " + model.description())
@@ -535,39 +535,41 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
   }
 
 
+  def mergeOnly(that: HoeffdingTreeModel): HoeffdingTreeModel = {
+//    this.blockNumExamples += that.blockNumExamples
+    this.lastExample = that.lastExample
+    this.listExamples.appendAll(that.listExamples)
+    // merge root with another root
+    root.merge(that.root, false)
+    // println("TrySplit: " + trySplit)
+    //    println("This root: "  +root.description())
+    //    println("That root: " + that.root.description())
+    //    println("This root SplitNode: " + root.isInstanceOf[SplitNode])
+    //    println("That root SplitNode: " + that.root.isInstanceOf[SplitNode])
+
+    //    println("Before split: " + root.description())
+    this
+
+  }
+
   /**
     * Merge function: merge with another model's FeatureObservers and root, and try to split
     * @param that : other HoeffdingTree Model
     * @param trySplit: (false: only update statistics, true: attempt to split).
     * @return this
     */
-  def merge(that: HoeffdingTreeModel, trySplit: Boolean, ssc:StreamingContext): HoeffdingTreeModel = {
+  def mergeAndSplit(that: HoeffdingTreeModel, ssc:StreamingContext): HoeffdingTreeModel = {
 
-    val coeff = 0.1
-    //val nTimes = (this.blockNumExamples+that.blockNumExamples)/graceNum
-//    val nTimes = 1
-//    this.blockNumExamples += that.blockNumExamples
-//    println("BlockExamples: " + this.blockNumExamples)
     this.lastExample = that.lastExample
     this.listExamples.appendAll(that.listExamples)
     // merge root with another root
-    root.merge(that.root, trySplit)
-    // println("TrySplit: " + trySplit)
-//    println("This root: "  +root.description())
-//    println("That root: " + that.root.description())
-//    println("This root SplitNode: " + root.isInstanceOf[SplitNode])
-//    println("That root SplitNode: " + that.root.isInstanceOf[SplitNode])
-
-//    println("Before split: " + root.description())
-
+    root.merge(that.root, true)
     /**
       *  Merge, then split. We have two choices:
       *  - Split N times, with N = batchSize/gracePeriod
       *  - Split at all leaves. Search for all leaves and split.
       */
 
-
-    if (trySplit) {
       if(this.treeHeight() < maxDepth){
         if (!splitAll) {
           var times = 0
@@ -652,11 +654,6 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
         listExamples = new ArrayBuffer[Example]()
 //        println("Model: " + this.root.description())
       }
-
-    }
-
-
-
     this
   }
 

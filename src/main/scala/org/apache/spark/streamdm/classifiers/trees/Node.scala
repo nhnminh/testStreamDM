@@ -325,6 +325,37 @@ abstract class LearningNode(classDistribution: Array[Double]) extends Node(class
 
 }
 
+class BestSplitsWrapper() extends Serializable{
+
+  var bestSplits: ArrayBuffer[FeatureSplit] = null
+  def this(that: BestSplitsWrapper){
+    this()
+    this.bestSplits = that.bestSplits
+  }
+
+  def init(): Unit ={
+    this.bestSplits = new ArrayBuffer[FeatureSplit]()
+  }
+
+  def merge(that: BestSplitsWrapper): BestSplitsWrapper ={
+    this.bestSplits ++= that.bestSplits
+    this
+  }
+
+  def update(fObs: FeatureClassObserver, splitCriterion: SplitCriterion, classDistribution: Array[Double],
+             isBinarySplit: Boolean): BestSplitsWrapper ={
+    this.bestSplits.append(fObs.bestSplit(splitCriterion, classDistribution, 0, isBinarySplit))
+    this
+  }
+
+  def getBestSplits(): ArrayBuffer[FeatureSplit] ={
+    this.bestSplits
+  }
+
+
+}
+
+
 /**
  * Basic majority class active learning node for Hoeffding tree
  */
@@ -340,6 +371,10 @@ class ActiveLearningNode(classDistribution: Array[Double])
   var instanceSpecification: InstanceSpecification = null
 
   var featureObservers: Array[FeatureClassObserver] = null
+
+//  var bestSplits: ArrayBuffer[FeatureSplit] = null
+
+  var  bestSplitWrapper: BestSplitsWrapper = null
 
   def this(classDistribution: Array[Double], instanceSpecification: InstanceSpecification) {
     this(classDistribution)
@@ -368,6 +403,9 @@ class ActiveLearningNode(classDistribution: Array[Double])
    * init featureObservers array
    */
   def init(): Unit = {
+
+    bestSplitWrapper = new BestSplitsWrapper()
+    bestSplitWrapper.init()
     if (featureObservers == null) {
       featureObservers = new Array(instanceSpecification.size())
       for (i <- 0 until instanceSpecification.size()) {
@@ -375,6 +413,7 @@ class ActiveLearningNode(classDistribution: Array[Double])
         featureObservers(i) = FeatureClassObserver.createFeatureClassObserver(
           classDistribution.length, i, featureSpec)
       }
+
     }
   }
 
@@ -496,19 +535,44 @@ class ActiveLearningNode(classDistribution: Array[Double])
 //    println(x._1 + " " + x._2))
 //    featureObservers.zipWithIndex.foreach(x=>
 //      println( " Index: " + x._2 +" : "+ x._1.bestSplit(splitCriterion, classDistribution, x._2, ht.binaryOnly) ))
-    if (featureObservers.length >0){
       val featureObserversRDD = ssc.sparkContext.parallelize(featureObservers)
-    }
+      // use RDD to partition the computation.
 
+    val newBestSplits = featureObserversRDD.aggregate(new ArrayBuffer[FeatureSplit]())(
+      (bs, featureObs) => {updateBS(bs, featureObs, splitCriterion, classDistribution, ht.binaryOnly)},
+      (bs1,bs2) => {bs1 ++= bs2}
+
+    )
+//
+//    println("Size of newBS: " + newBestSplits.size)
+
+//    val newBestSplits = featureObserversRDD.aggregate(new BestSplitsWrapper(bestSplitWrapper))(
+//      (bs, fObs) => {bs.update(fObs,splitCriterion, classDistribution, ht.binaryOnly)},
+//      (bs1,bs2) => {bs1.merge(bs2)}
+//    )
+//    println("Size of newBS: " + newBestSplits.getBestSplits().size)
+
+    ////    featureObserversRDD.zipWithIndex.collect().foreach(x =>
     featureObservers.zipWithIndex.foreach(x =>
-      bestSplits.append(x._1.bestSplit(splitCriterion, classDistribution, x._2, ht.binaryOnly)))
+        bestSplits.append(x._1.bestSplit(splitCriterion, classDistribution, x._2.toInt, ht.binaryOnly)))
+
+//    println("bestSplit: " + bestSplits.size)
 
     if (!ht.noPrePrune) {
       bestSplits.append(new FeatureSplit(null, splitCriterion.merit(classDistribution,
         Array.fill(1)(classDistribution)), new Array[Array[Double]](0))) 
     }
 
-    bestSplits.toArray
+//    bestSplits.toArray
+//    newBestSplits.getBestSplits().toArray
+    newBestSplits.toArray
+  }
+
+  def updateBS (bs: ArrayBuffer[FeatureSplit] , featureObs: FeatureClassObserver,
+                splitCriterion: SplitCriterion, classDistribution: Array[Double],
+                isBinarySplit: Boolean): ArrayBuffer[FeatureSplit] = {
+    bs.append(featureObs.bestSplit(splitCriterion, classDistribution, 0, isBinarySplit))
+    bs
   }
 
 //  override def toString(): String = "level[" + dep + "]ActiveLearningNode:" + weight

@@ -1,104 +1,104 @@
 Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
-17/09/07 00:37:15 INFO SparkContext: Running Spark version 1.5.1
-17/09/07 00:37:16 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
-17/09/07 00:37:16 INFO SecurityManager: Changing view acls to: minhnguyen
-17/09/07 00:37:16 INFO SecurityManager: Changing modify acls to: minhnguyen
-17/09/07 00:37:16 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(minhnguyen); users with modify permissions: Set(minhnguyen)
-17/09/07 00:37:17 INFO Slf4jLogger: Slf4jLogger started
-17/09/07 00:37:17 INFO Remoting: Starting remoting
-17/09/07 00:37:17 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkDriver@192.168.0.102:49323]
-17/09/07 00:37:17 INFO Utils: Successfully started service 'sparkDriver' on port 49323.
-17/09/07 00:37:17 INFO SparkEnv: Registering MapOutputTracker
-17/09/07 00:37:17 INFO SparkEnv: Registering BlockManagerMaster
-17/09/07 00:37:17 INFO DiskBlockManager: Created local directory at /private/var/folders/5d/zfph4vmx069g8444mbjrg03r0000gn/T/blockmgr-18b2e3ac-397b-401b-9fca-361c15407a58
-17/09/07 00:37:17 INFO MemoryStore: MemoryStore started with capacity 2.1 GB
-17/09/07 00:37:17 INFO HttpFileServer: HTTP File server directory is /private/var/folders/5d/zfph4vmx069g8444mbjrg03r0000gn/T/spark-0c1ebae1-b884-4f4f-a37d-59ff32ee0cce/httpd-e51a72cc-a88f-4d4d-a499-db7822fb215f
-17/09/07 00:37:17 INFO HttpServer: Starting HTTP Server
-17/09/07 00:37:17 INFO Utils: Successfully started service 'HTTP file server' on port 49324.
-17/09/07 00:37:17 INFO SparkEnv: Registering OutputCommitCoordinator
-17/09/07 00:37:17 INFO Utils: Successfully started service 'SparkUI' on port 4040.
-17/09/07 00:37:17 INFO SparkUI: Started SparkUI at http://192.168.0.102:4040
-17/09/07 00:37:17 INFO SparkContext: Added JAR file:/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/../target/scala-2.10/streamdm-spark-streaming_2.10-0.2.jar at http://192.168.0.102:49324/jars/streamdm-spark-streaming_2.10-0.2.jar with timestamp 1504737437994
-17/09/07 00:37:18 WARN MetricsSystem: Using default name DAGScheduler for source because spark.app.id is not set.
-17/09/07 00:37:18 INFO Executor: Starting executor ID driver on host localhost
-17/09/07 00:37:18 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 49325.
-17/09/07 00:37:18 INFO NettyBlockTransferService: Server created on 49325
-17/09/07 00:37:18 INFO BlockManagerMaster: Trying to register BlockManager
-17/09/07 00:37:18 INFO BlockManagerMasterEndpoint: Registering block manager localhost:49325 with 2.1 GB RAM, BlockManagerId(driver, localhost, 49325)
-17/09/07 00:37:18 INFO BlockManagerMaster: Registered BlockManager
-17/09/07 00:37:18 INFO FileReader: 1
-17/09/07 00:37:18 INFO FileReader: 0
-17/09/07 00:37:18 INFO HoeffdingTreeModel: numClasses2
-17/09/07 00:37:19 INFO ForEachDStream: metadataCleanupDelay = -1
-17/09/07 00:37:19 INFO FileReader$$anon$1: metadataCleanupDelay = -1
-17/09/07 00:37:19 INFO FileReader$$anon$1: Slide time = 10 ms
-17/09/07 00:37:19 INFO FileReader$$anon$1: Storage level = StorageLevel(false, false, false, false, 1)
-17/09/07 00:37:19 INFO FileReader$$anon$1: Checkpoint interval = null
-17/09/07 00:37:19 INFO FileReader$$anon$1: Remember duration = 10 ms
-17/09/07 00:37:19 INFO FileReader$$anon$1: Initialized and validated org.apache.spark.streamdm.streams.FileReader$$anon$1@59ff02a8
-17/09/07 00:37:19 INFO ForEachDStream: Slide time = 10 ms
-17/09/07 00:37:19 INFO ForEachDStream: Storage level = StorageLevel(false, false, false, false, 1)
-17/09/07 00:37:19 INFO ForEachDStream: Checkpoint interval = null
-17/09/07 00:37:19 INFO ForEachDStream: Remember duration = 10 ms
-17/09/07 00:37:19 INFO ForEachDStream: Initialized and validated org.apache.spark.streaming.dstream.ForEachDStream@6faa3057
-17/09/07 00:37:19 INFO ForEachDStream: metadataCleanupDelay = -1
-17/09/07 00:37:19 INFO MappedDStream: metadataCleanupDelay = -1
-17/09/07 00:37:19 INFO MappedDStream: metadataCleanupDelay = -1
-17/09/07 00:37:19 INFO ShuffledDStream: metadataCleanupDelay = -1
-17/09/07 00:37:19 INFO MappedDStream: metadataCleanupDelay = -1
-17/09/07 00:37:19 INFO MappedDStream: metadataCleanupDelay = -1
-17/09/07 00:37:19 INFO MappedDStream: metadataCleanupDelay = -1
-17/09/07 00:37:19 INFO FileReader$$anon$1: metadataCleanupDelay = -1
-17/09/07 00:37:19 INFO FileReader$$anon$1: Slide time = 10 ms
-17/09/07 00:37:19 INFO FileReader$$anon$1: Storage level = StorageLevel(false, false, false, false, 1)
-17/09/07 00:37:19 INFO FileReader$$anon$1: Checkpoint interval = null
-17/09/07 00:37:19 INFO FileReader$$anon$1: Remember duration = 10 ms
-17/09/07 00:37:19 INFO FileReader$$anon$1: Initialized and validated org.apache.spark.streamdm.streams.FileReader$$anon$1@59ff02a8
-17/09/07 00:37:19 INFO MappedDStream: Slide time = 10 ms
-17/09/07 00:37:19 INFO MappedDStream: Storage level = StorageLevel(false, false, false, false, 1)
-17/09/07 00:37:19 INFO MappedDStream: Checkpoint interval = null
-17/09/07 00:37:19 INFO MappedDStream: Remember duration = 10 ms
-17/09/07 00:37:19 INFO MappedDStream: Initialized and validated org.apache.spark.streaming.dstream.MappedDStream@67b6a0ab
-17/09/07 00:37:19 INFO MappedDStream: Slide time = 10 ms
-17/09/07 00:37:19 INFO MappedDStream: Storage level = StorageLevel(false, false, false, false, 1)
-17/09/07 00:37:19 INFO MappedDStream: Checkpoint interval = null
-17/09/07 00:37:19 INFO MappedDStream: Remember duration = 10 ms
-17/09/07 00:37:19 INFO MappedDStream: Initialized and validated org.apache.spark.streaming.dstream.MappedDStream@13deeeb0
-17/09/07 00:37:19 INFO MappedDStream: Slide time = 10 ms
-17/09/07 00:37:19 INFO MappedDStream: Storage level = StorageLevel(false, false, false, false, 1)
-17/09/07 00:37:19 INFO MappedDStream: Checkpoint interval = null
-17/09/07 00:37:19 INFO MappedDStream: Remember duration = 10 ms
-17/09/07 00:37:19 INFO MappedDStream: Initialized and validated org.apache.spark.streaming.dstream.MappedDStream@32954421
-17/09/07 00:37:19 INFO ShuffledDStream: Slide time = 10 ms
-17/09/07 00:37:19 INFO ShuffledDStream: Storage level = StorageLevel(false, false, false, false, 1)
-17/09/07 00:37:19 INFO ShuffledDStream: Checkpoint interval = null
-17/09/07 00:37:19 INFO ShuffledDStream: Remember duration = 10 ms
-17/09/07 00:37:19 INFO ShuffledDStream: Initialized and validated org.apache.spark.streaming.dstream.ShuffledDStream@c83f2ac
-17/09/07 00:37:19 INFO MappedDStream: Slide time = 10 ms
-17/09/07 00:37:19 INFO MappedDStream: Storage level = StorageLevel(false, false, false, false, 1)
-17/09/07 00:37:19 INFO MappedDStream: Checkpoint interval = null
-17/09/07 00:37:19 INFO MappedDStream: Remember duration = 10 ms
-17/09/07 00:37:19 INFO MappedDStream: Initialized and validated org.apache.spark.streaming.dstream.MappedDStream@5e62a86f
-17/09/07 00:37:19 INFO MappedDStream: Slide time = 10 ms
-17/09/07 00:37:19 INFO MappedDStream: Storage level = StorageLevel(false, false, false, false, 1)
-17/09/07 00:37:19 INFO MappedDStream: Checkpoint interval = null
-17/09/07 00:37:19 INFO MappedDStream: Remember duration = 10 ms
-17/09/07 00:37:19 INFO MappedDStream: Initialized and validated org.apache.spark.streaming.dstream.MappedDStream@3a2d767d
-17/09/07 00:37:19 INFO ForEachDStream: Slide time = 10 ms
-17/09/07 00:37:19 INFO ForEachDStream: Storage level = StorageLevel(false, false, false, false, 1)
-17/09/07 00:37:19 INFO ForEachDStream: Checkpoint interval = null
-17/09/07 00:37:19 INFO ForEachDStream: Remember duration = 10 ms
-17/09/07 00:37:19 INFO ForEachDStream: Initialized and validated org.apache.spark.streaming.dstream.ForEachDStream@22818955
-17/09/07 00:37:19 INFO RecurringTimer: Started timer for JobGenerator at time 1504737439380
-17/09/07 00:37:19 INFO JobGenerator: Started JobGenerator at 1504737439380 ms
-17/09/07 00:37:19 INFO JobScheduler: Started JobScheduler
-17/09/07 00:37:19 INFO StreamingContext: StreamingContext started
-17/09/07 00:37:19 INFO JobScheduler: Added jobs for time 1504737439380 ms
-17/09/07 00:37:19 INFO JobScheduler: Starting job streaming job 1504737439380 ms.0 from job set of time 1504737439380 ms
-17/09/07 00:37:19 INFO HoeffdingTreeModel: numClasses2
-17/09/07 00:37:19 INFO JobScheduler: Finished job streaming job 1504737439380 ms.0 from job set of time 1504737439380 ms
-17/09/07 00:37:19 INFO JobScheduler: Starting job streaming job 1504737439380 ms.1 from job set of time 1504737439380 ms
-17/09/07 00:37:19 ERROR JobScheduler: Error running job streaming job 1504737439380 ms.0
+17/09/07 11:27:37 INFO SparkContext: Running Spark version 1.5.1
+17/09/07 11:27:37 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+17/09/07 11:27:37 INFO SecurityManager: Changing view acls to: minhnguyen
+17/09/07 11:27:37 INFO SecurityManager: Changing modify acls to: minhnguyen
+17/09/07 11:27:37 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(minhnguyen); users with modify permissions: Set(minhnguyen)
+17/09/07 11:27:38 INFO Slf4jLogger: Slf4jLogger started
+17/09/07 11:27:38 INFO Remoting: Starting remoting
+17/09/07 11:27:38 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkDriver@137.194.56.59:50698]
+17/09/07 11:27:38 INFO Utils: Successfully started service 'sparkDriver' on port 50698.
+17/09/07 11:27:39 INFO SparkEnv: Registering MapOutputTracker
+17/09/07 11:27:39 INFO SparkEnv: Registering BlockManagerMaster
+17/09/07 11:27:39 INFO DiskBlockManager: Created local directory at /private/var/folders/5d/zfph4vmx069g8444mbjrg03r0000gn/T/blockmgr-403592eb-156d-4580-a561-7970b044cf4d
+17/09/07 11:27:39 INFO MemoryStore: MemoryStore started with capacity 2.1 GB
+17/09/07 11:27:39 INFO HttpFileServer: HTTP File server directory is /private/var/folders/5d/zfph4vmx069g8444mbjrg03r0000gn/T/spark-366eb6b9-a111-41b3-b3cc-9e280ea3a25e/httpd-417ba89a-95b3-4200-82ca-f3b38ac9dd55
+17/09/07 11:27:39 INFO HttpServer: Starting HTTP Server
+17/09/07 11:27:39 INFO Utils: Successfully started service 'HTTP file server' on port 50699.
+17/09/07 11:27:39 INFO SparkEnv: Registering OutputCommitCoordinator
+17/09/07 11:27:39 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+17/09/07 11:27:39 INFO SparkUI: Started SparkUI at http://137.194.56.59:4040
+17/09/07 11:27:39 INFO SparkContext: Added JAR file:/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/../target/scala-2.10/streamdm-spark-streaming_2.10-0.2.jar at http://137.194.56.59:50699/jars/streamdm-spark-streaming_2.10-0.2.jar with timestamp 1504776459371
+17/09/07 11:27:39 WARN MetricsSystem: Using default name DAGScheduler for source because spark.app.id is not set.
+17/09/07 11:27:39 INFO Executor: Starting executor ID driver on host localhost
+17/09/07 11:27:39 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 50700.
+17/09/07 11:27:39 INFO NettyBlockTransferService: Server created on 50700
+17/09/07 11:27:39 INFO BlockManagerMaster: Trying to register BlockManager
+17/09/07 11:27:39 INFO BlockManagerMasterEndpoint: Registering block manager localhost:50700 with 2.1 GB RAM, BlockManagerId(driver, localhost, 50700)
+17/09/07 11:27:39 INFO BlockManagerMaster: Registered BlockManager
+17/09/07 11:27:39 INFO FileReader: 1
+17/09/07 11:27:39 INFO FileReader: 0
+17/09/07 11:27:39 INFO HoeffdingTreeModel: numClasses2
+17/09/07 11:27:40 INFO ForEachDStream: metadataCleanupDelay = -1
+17/09/07 11:27:40 INFO FileReader$$anon$1: metadataCleanupDelay = -1
+17/09/07 11:27:40 INFO FileReader$$anon$1: Slide time = 10 ms
+17/09/07 11:27:40 INFO FileReader$$anon$1: Storage level = StorageLevel(false, false, false, false, 1)
+17/09/07 11:27:40 INFO FileReader$$anon$1: Checkpoint interval = null
+17/09/07 11:27:40 INFO FileReader$$anon$1: Remember duration = 10 ms
+17/09/07 11:27:40 INFO FileReader$$anon$1: Initialized and validated org.apache.spark.streamdm.streams.FileReader$$anon$1@4a63bfef
+17/09/07 11:27:40 INFO ForEachDStream: Slide time = 10 ms
+17/09/07 11:27:40 INFO ForEachDStream: Storage level = StorageLevel(false, false, false, false, 1)
+17/09/07 11:27:40 INFO ForEachDStream: Checkpoint interval = null
+17/09/07 11:27:40 INFO ForEachDStream: Remember duration = 10 ms
+17/09/07 11:27:40 INFO ForEachDStream: Initialized and validated org.apache.spark.streaming.dstream.ForEachDStream@5cdf92ba
+17/09/07 11:27:40 INFO ForEachDStream: metadataCleanupDelay = -1
+17/09/07 11:27:40 INFO MappedDStream: metadataCleanupDelay = -1
+17/09/07 11:27:40 INFO MappedDStream: metadataCleanupDelay = -1
+17/09/07 11:27:40 INFO ShuffledDStream: metadataCleanupDelay = -1
+17/09/07 11:27:40 INFO MappedDStream: metadataCleanupDelay = -1
+17/09/07 11:27:40 INFO MappedDStream: metadataCleanupDelay = -1
+17/09/07 11:27:40 INFO MappedDStream: metadataCleanupDelay = -1
+17/09/07 11:27:40 INFO FileReader$$anon$1: metadataCleanupDelay = -1
+17/09/07 11:27:40 INFO FileReader$$anon$1: Slide time = 10 ms
+17/09/07 11:27:40 INFO FileReader$$anon$1: Storage level = StorageLevel(false, false, false, false, 1)
+17/09/07 11:27:40 INFO FileReader$$anon$1: Checkpoint interval = null
+17/09/07 11:27:40 INFO FileReader$$anon$1: Remember duration = 10 ms
+17/09/07 11:27:40 INFO FileReader$$anon$1: Initialized and validated org.apache.spark.streamdm.streams.FileReader$$anon$1@4a63bfef
+17/09/07 11:27:40 INFO MappedDStream: Slide time = 10 ms
+17/09/07 11:27:40 INFO MappedDStream: Storage level = StorageLevel(false, false, false, false, 1)
+17/09/07 11:27:40 INFO MappedDStream: Checkpoint interval = null
+17/09/07 11:27:40 INFO MappedDStream: Remember duration = 10 ms
+17/09/07 11:27:40 INFO MappedDStream: Initialized and validated org.apache.spark.streaming.dstream.MappedDStream@1d4dab27
+17/09/07 11:27:40 INFO MappedDStream: Slide time = 10 ms
+17/09/07 11:27:40 INFO MappedDStream: Storage level = StorageLevel(false, false, false, false, 1)
+17/09/07 11:27:40 INFO MappedDStream: Checkpoint interval = null
+17/09/07 11:27:40 INFO MappedDStream: Remember duration = 10 ms
+17/09/07 11:27:40 INFO MappedDStream: Initialized and validated org.apache.spark.streaming.dstream.MappedDStream@7fda6360
+17/09/07 11:27:40 INFO MappedDStream: Slide time = 10 ms
+17/09/07 11:27:40 INFO MappedDStream: Storage level = StorageLevel(false, false, false, false, 1)
+17/09/07 11:27:40 INFO MappedDStream: Checkpoint interval = null
+17/09/07 11:27:40 INFO MappedDStream: Remember duration = 10 ms
+17/09/07 11:27:40 INFO MappedDStream: Initialized and validated org.apache.spark.streaming.dstream.MappedDStream@289127b3
+17/09/07 11:27:40 INFO ShuffledDStream: Slide time = 10 ms
+17/09/07 11:27:40 INFO ShuffledDStream: Storage level = StorageLevel(false, false, false, false, 1)
+17/09/07 11:27:40 INFO ShuffledDStream: Checkpoint interval = null
+17/09/07 11:27:40 INFO ShuffledDStream: Remember duration = 10 ms
+17/09/07 11:27:40 INFO ShuffledDStream: Initialized and validated org.apache.spark.streaming.dstream.ShuffledDStream@8fb2a59
+17/09/07 11:27:40 INFO MappedDStream: Slide time = 10 ms
+17/09/07 11:27:40 INFO MappedDStream: Storage level = StorageLevel(false, false, false, false, 1)
+17/09/07 11:27:40 INFO MappedDStream: Checkpoint interval = null
+17/09/07 11:27:40 INFO MappedDStream: Remember duration = 10 ms
+17/09/07 11:27:40 INFO MappedDStream: Initialized and validated org.apache.spark.streaming.dstream.MappedDStream@781facf2
+17/09/07 11:27:40 INFO MappedDStream: Slide time = 10 ms
+17/09/07 11:27:40 INFO MappedDStream: Storage level = StorageLevel(false, false, false, false, 1)
+17/09/07 11:27:40 INFO MappedDStream: Checkpoint interval = null
+17/09/07 11:27:40 INFO MappedDStream: Remember duration = 10 ms
+17/09/07 11:27:40 INFO MappedDStream: Initialized and validated org.apache.spark.streaming.dstream.MappedDStream@54f211f2
+17/09/07 11:27:40 INFO ForEachDStream: Slide time = 10 ms
+17/09/07 11:27:40 INFO ForEachDStream: Storage level = StorageLevel(false, false, false, false, 1)
+17/09/07 11:27:40 INFO ForEachDStream: Checkpoint interval = null
+17/09/07 11:27:40 INFO ForEachDStream: Remember duration = 10 ms
+17/09/07 11:27:40 INFO ForEachDStream: Initialized and validated org.apache.spark.streaming.dstream.ForEachDStream@75ff1860
+17/09/07 11:27:40 INFO RecurringTimer: Started timer for JobGenerator at time 1504776460460
+17/09/07 11:27:40 INFO JobGenerator: Started JobGenerator at 1504776460460 ms
+17/09/07 11:27:40 INFO JobScheduler: Started JobScheduler
+17/09/07 11:27:40 INFO StreamingContext: StreamingContext started
+17/09/07 11:27:40 INFO JobScheduler: Added jobs for time 1504776460460 ms
+17/09/07 11:27:40 INFO JobScheduler: Starting job streaming job 1504776460460 ms.0 from job set of time 1504776460460 ms
+17/09/07 11:27:40 INFO HoeffdingTreeModel: numClasses2
+17/09/07 11:27:40 INFO JobScheduler: Finished job streaming job 1504776460460 ms.0 from job set of time 1504776460460 ms
+17/09/07 11:27:40 INFO JobScheduler: Starting job streaming job 1504776460460 ms.1 from job set of time 1504776460460 ms
+17/09/07 11:27:40 ERROR JobScheduler: Error running job streaming job 1504776460460 ms.0
 org.apache.spark.SparkException: Task not serializable
 	at org.apache.spark.util.ClosureCleaner$.ensureSerializable(ClosureCleaner.scala:304)
 	at org.apache.spark.util.ClosureCleaner$.org$apache$spark$util$ClosureCleaner$$clean(ClosureCleaner.scala:294)
@@ -132,7 +132,7 @@ org.apache.spark.SparkException: Task not serializable
 	at java.lang.Thread.run(Thread.java:745)
 Caused by: java.io.NotSerializableException: org.apache.spark.streaming.StreamingContext
 Serialization stack:
-	- object not serializable (class: org.apache.spark.streaming.StreamingContext, value: org.apache.spark.streaming.StreamingContext@5b1301b6)
+	- object not serializable (class: org.apache.spark.streaming.StreamingContext, value: org.apache.spark.streaming.StreamingContext@500ff9dc)
 	- field (class: org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1, name: ssc$1, type: class org.apache.spark.streaming.StreamingContext)
 	- object (class org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1, <function1>)
 	- field (class: org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1$$anonfun$2, name: $outer, type: class org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1)
@@ -175,7 +175,7 @@ Exception in thread "main" org.apache.spark.SparkException: Task not serializabl
 	at java.lang.Thread.run(Thread.java:745)
 Caused by: java.io.NotSerializableException: org.apache.spark.streaming.StreamingContext
 Serialization stack:
-	- object not serializable (class: org.apache.spark.streaming.StreamingContext, value: org.apache.spark.streaming.StreamingContext@5b1301b6)
+	- object not serializable (class: org.apache.spark.streaming.StreamingContext, value: org.apache.spark.streaming.StreamingContext@500ff9dc)
 	- field (class: org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1, name: ssc$1, type: class org.apache.spark.streaming.StreamingContext)
 	- object (class org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1, <function1>)
 	- field (class: org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1$$anonfun$2, name: $outer, type: class org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1)
@@ -185,70 +185,70 @@ Serialization stack:
 	at org.apache.spark.serializer.JavaSerializerInstance.serialize(JavaSerializer.scala:84)
 	at org.apache.spark.util.ClosureCleaner$.ensureSerializable(ClosureCleaner.scala:301)
 	... 29 more
-17/09/07 00:37:19 INFO StreamingContext: Invoking stop(stopGracefully=false) from shutdown hook
-17/09/07 00:37:19 INFO JobGenerator: Stopping JobGenerator immediately
-17/09/07 00:37:19 INFO RecurringTimer: Stopped timer for JobGenerator after time 1504737439520
-17/09/07 00:37:19 INFO JobScheduler: Added jobs for time 1504737439520 ms
-17/09/07 00:37:19 INFO JobGenerator: Stopped JobGenerator
-17/09/07 00:37:19 INFO SparkContext: Starting job: main at NativeMethodAccessorImpl.java:-2
-17/09/07 00:37:19 INFO DAGScheduler: Registering RDD 3 (main at NativeMethodAccessorImpl.java:-2)
-17/09/07 00:37:19 INFO DAGScheduler: Got job 0 (main at NativeMethodAccessorImpl.java:-2) with 1 output partitions
-17/09/07 00:37:19 INFO DAGScheduler: Final stage: ResultStage 1(main at NativeMethodAccessorImpl.java:-2)
-17/09/07 00:37:19 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 0)
-17/09/07 00:37:19 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 0)
-17/09/07 00:37:19 INFO DAGScheduler: Submitting ShuffleMapStage 0 (MapPartitionsRDD[3] at main at NativeMethodAccessorImpl.java:-2), which has no missing parents
-17/09/07 00:37:19 INFO MemoryStore: ensureFreeSpace(11224) called with curMem=0, maxMem=2222739947
-17/09/07 00:37:19 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 11.0 KB, free 2.1 GB)
-17/09/07 00:37:19 INFO MemoryStore: ensureFreeSpace(5170) called with curMem=11224, maxMem=2222739947
-17/09/07 00:37:19 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 5.0 KB, free 2.1 GB)
-17/09/07 00:37:19 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on localhost:49325 (size: 5.0 KB, free: 2.1 GB)
-17/09/07 00:37:19 INFO SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:861
-17/09/07 00:37:19 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 0 (MapPartitionsRDD[3] at main at NativeMethodAccessorImpl.java:-2)
-17/09/07 00:37:19 INFO TaskSchedulerImpl: Adding task set 0.0 with 2 tasks
-17/09/07 00:37:19 WARN TaskSetManager: Stage 0 contains a task of very large size (252 KB). The maximum recommended task size is 100 KB.
-17/09/07 00:37:19 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, PROCESS_LOCAL, 258395 bytes)
-17/09/07 00:37:19 INFO TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1, localhost, PROCESS_LOCAL, 258395 bytes)
-17/09/07 00:37:19 INFO Executor: Running task 0.0 in stage 0.0 (TID 0)
-17/09/07 00:37:19 INFO Executor: Running task 1.0 in stage 0.0 (TID 1)
-17/09/07 00:37:19 INFO Executor: Fetching http://192.168.0.102:49324/jars/streamdm-spark-streaming_2.10-0.2.jar with timestamp 1504737437994
-17/09/07 00:37:20 INFO Utils: Fetching http://192.168.0.102:49324/jars/streamdm-spark-streaming_2.10-0.2.jar to /private/var/folders/5d/zfph4vmx069g8444mbjrg03r0000gn/T/spark-0c1ebae1-b884-4f4f-a37d-59ff32ee0cce/userFiles-cca8a0f7-aac0-4e0b-bfa6-9a638d9a472c/fetchFileTemp906902484177480735.tmp
-17/09/07 00:37:20 INFO Executor: Adding file:/private/var/folders/5d/zfph4vmx069g8444mbjrg03r0000gn/T/spark-0c1ebae1-b884-4f4f-a37d-59ff32ee0cce/userFiles-cca8a0f7-aac0-4e0b-bfa6-9a638d9a472c/streamdm-spark-streaming_2.10-0.2.jar to class loader
-17/09/07 00:37:20 INFO Executor: Finished task 1.0 in stage 0.0 (TID 1). 1158 bytes result sent to driver
-17/09/07 00:37:20 INFO Executor: Finished task 0.0 in stage 0.0 (TID 0). 1158 bytes result sent to driver
-17/09/07 00:37:20 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 386 ms on localhost (1/2)
-17/09/07 00:37:20 INFO TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 355 ms on localhost (2/2)
-17/09/07 00:37:20 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
-17/09/07 00:37:20 INFO DAGScheduler: ShuffleMapStage 0 (main at NativeMethodAccessorImpl.java:-2) finished in 0.408 s
-17/09/07 00:37:20 INFO DAGScheduler: looking for newly runnable stages
-17/09/07 00:37:20 INFO DAGScheduler: running: Set()
-17/09/07 00:37:20 INFO DAGScheduler: waiting: Set(ResultStage 1)
-17/09/07 00:37:20 INFO DAGScheduler: failed: Set()
-17/09/07 00:37:20 INFO DAGScheduler: Missing parents for ResultStage 1: List()
-17/09/07 00:37:20 INFO DAGScheduler: Submitting ResultStage 1 (MapPartitionsRDD[6] at main at NativeMethodAccessorImpl.java:-2), which is now runnable
-17/09/07 00:37:20 INFO MemoryStore: ensureFreeSpace(3376) called with curMem=16394, maxMem=2222739947
-17/09/07 00:37:20 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 3.3 KB, free 2.1 GB)
-17/09/07 00:37:20 INFO MemoryStore: ensureFreeSpace(1920) called with curMem=19770, maxMem=2222739947
-17/09/07 00:37:20 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 1920.0 B, free 2.1 GB)
-17/09/07 00:37:20 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on localhost:49325 (size: 1920.0 B, free: 2.1 GB)
-17/09/07 00:37:20 INFO SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:861
-17/09/07 00:37:20 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 1 (MapPartitionsRDD[6] at main at NativeMethodAccessorImpl.java:-2)
-17/09/07 00:37:20 INFO TaskSchedulerImpl: Adding task set 1.0 with 1 tasks
-17/09/07 00:37:20 INFO TaskSetManager: Starting task 0.0 in stage 1.0 (TID 2, localhost, PROCESS_LOCAL, 1980 bytes)
-17/09/07 00:37:20 INFO Executor: Running task 0.0 in stage 1.0 (TID 2)
-17/09/07 00:37:20 INFO ShuffleBlockFetcherIterator: Getting 2 non-empty blocks out of 2 blocks
-17/09/07 00:37:20 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 6 ms
-17/09/07 00:37:20 INFO Executor: Finished task 0.0 in stage 1.0 (TID 2). 1185 bytes result sent to driver
-17/09/07 00:37:20 INFO TaskSetManager: Finished task 0.0 in stage 1.0 (TID 2) in 42 ms on localhost (1/1)
-17/09/07 00:37:20 INFO DAGScheduler: ResultStage 1 (main at NativeMethodAccessorImpl.java:-2) finished in 0.042 s
-17/09/07 00:37:20 INFO TaskSchedulerImpl: Removed TaskSet 1.0, whose tasks have all completed, from pool 
-17/09/07 00:37:20 INFO DAGScheduler: Job 0 finished: main at NativeMethodAccessorImpl.java:-2, took 0.679684 s
-17/09/07 00:37:20 INFO JobScheduler: Finished job streaming job 1504737439380 ms.1 from job set of time 1504737439380 ms
-17/09/07 00:37:20 INFO HoeffdingTreeModel: numClasses2
-17/09/07 00:37:20 INFO JobScheduler: Total delay: 0.970 s for time 1504737439380 ms (execution: 0.823 s)
-17/09/07 00:37:20 INFO JobScheduler: Starting job streaming job 1504737439520 ms.0 from job set of time 1504737439520 ms
-17/09/07 00:37:20 INFO JobScheduler: Finished job streaming job 1504737439520 ms.0 from job set of time 1504737439520 ms
-17/09/07 00:37:20 INFO JobScheduler: Starting job streaming job 1504737439520 ms.1 from job set of time 1504737439520 ms
-17/09/07 00:37:20 ERROR JobScheduler: Error running job streaming job 1504737439520 ms.0
+17/09/07 11:27:40 INFO StreamingContext: Invoking stop(stopGracefully=false) from shutdown hook
+17/09/07 11:27:40 INFO JobGenerator: Stopping JobGenerator immediately
+17/09/07 11:27:40 INFO RecurringTimer: Stopped timer for JobGenerator after time 1504776460600
+17/09/07 11:27:40 INFO JobScheduler: Added jobs for time 1504776460600 ms
+17/09/07 11:27:40 INFO JobGenerator: Stopped JobGenerator
+17/09/07 11:27:40 INFO SparkContext: Starting job: main at NativeMethodAccessorImpl.java:-2
+17/09/07 11:27:40 INFO DAGScheduler: Registering RDD 3 (main at NativeMethodAccessorImpl.java:-2)
+17/09/07 11:27:40 INFO DAGScheduler: Got job 0 (main at NativeMethodAccessorImpl.java:-2) with 1 output partitions
+17/09/07 11:27:40 INFO DAGScheduler: Final stage: ResultStage 1(main at NativeMethodAccessorImpl.java:-2)
+17/09/07 11:27:40 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 0)
+17/09/07 11:27:40 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 0)
+17/09/07 11:27:40 INFO DAGScheduler: Submitting ShuffleMapStage 0 (MapPartitionsRDD[3] at main at NativeMethodAccessorImpl.java:-2), which has no missing parents
+17/09/07 11:27:40 INFO MemoryStore: ensureFreeSpace(11224) called with curMem=0, maxMem=2222739947
+17/09/07 11:27:40 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 11.0 KB, free 2.1 GB)
+17/09/07 11:27:40 INFO MemoryStore: ensureFreeSpace(5170) called with curMem=11224, maxMem=2222739947
+17/09/07 11:27:40 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 5.0 KB, free 2.1 GB)
+17/09/07 11:27:40 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on localhost:50700 (size: 5.0 KB, free: 2.1 GB)
+17/09/07 11:27:40 INFO SparkContext: Created broadcast 0 from broadcast at DAGScheduler.scala:861
+17/09/07 11:27:40 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 0 (MapPartitionsRDD[3] at main at NativeMethodAccessorImpl.java:-2)
+17/09/07 11:27:40 INFO TaskSchedulerImpl: Adding task set 0.0 with 2 tasks
+17/09/07 11:27:40 WARN TaskSetManager: Stage 0 contains a task of very large size (252 KB). The maximum recommended task size is 100 KB.
+17/09/07 11:27:40 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, PROCESS_LOCAL, 258395 bytes)
+17/09/07 11:27:40 INFO TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1, localhost, PROCESS_LOCAL, 258395 bytes)
+17/09/07 11:27:40 INFO Executor: Running task 1.0 in stage 0.0 (TID 1)
+17/09/07 11:27:40 INFO Executor: Running task 0.0 in stage 0.0 (TID 0)
+17/09/07 11:27:40 INFO Executor: Fetching http://137.194.56.59:50699/jars/streamdm-spark-streaming_2.10-0.2.jar with timestamp 1504776459371
+17/09/07 11:27:40 INFO Utils: Fetching http://137.194.56.59:50699/jars/streamdm-spark-streaming_2.10-0.2.jar to /private/var/folders/5d/zfph4vmx069g8444mbjrg03r0000gn/T/spark-366eb6b9-a111-41b3-b3cc-9e280ea3a25e/userFiles-c20ebe8a-4964-47db-9494-5cd73381904f/fetchFileTemp542461915741066134.tmp
+17/09/07 11:27:41 INFO Executor: Adding file:/private/var/folders/5d/zfph4vmx069g8444mbjrg03r0000gn/T/spark-366eb6b9-a111-41b3-b3cc-9e280ea3a25e/userFiles-c20ebe8a-4964-47db-9494-5cd73381904f/streamdm-spark-streaming_2.10-0.2.jar to class loader
+17/09/07 11:27:41 INFO Executor: Finished task 1.0 in stage 0.0 (TID 1). 1158 bytes result sent to driver
+17/09/07 11:27:41 INFO Executor: Finished task 0.0 in stage 0.0 (TID 0). 1158 bytes result sent to driver
+17/09/07 11:27:41 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 347 ms on localhost (1/2)
+17/09/07 11:27:41 INFO TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 314 ms on localhost (2/2)
+17/09/07 11:27:41 INFO TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+17/09/07 11:27:41 INFO DAGScheduler: ShuffleMapStage 0 (main at NativeMethodAccessorImpl.java:-2) finished in 0.365 s
+17/09/07 11:27:41 INFO DAGScheduler: looking for newly runnable stages
+17/09/07 11:27:41 INFO DAGScheduler: running: Set()
+17/09/07 11:27:41 INFO DAGScheduler: waiting: Set(ResultStage 1)
+17/09/07 11:27:41 INFO DAGScheduler: failed: Set()
+17/09/07 11:27:41 INFO DAGScheduler: Missing parents for ResultStage 1: List()
+17/09/07 11:27:41 INFO DAGScheduler: Submitting ResultStage 1 (MapPartitionsRDD[6] at main at NativeMethodAccessorImpl.java:-2), which is now runnable
+17/09/07 11:27:41 INFO MemoryStore: ensureFreeSpace(3376) called with curMem=16394, maxMem=2222739947
+17/09/07 11:27:41 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 3.3 KB, free 2.1 GB)
+17/09/07 11:27:41 INFO MemoryStore: ensureFreeSpace(1920) called with curMem=19770, maxMem=2222739947
+17/09/07 11:27:41 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 1920.0 B, free 2.1 GB)
+17/09/07 11:27:41 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on localhost:50700 (size: 1920.0 B, free: 2.1 GB)
+17/09/07 11:27:41 INFO SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:861
+17/09/07 11:27:41 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 1 (MapPartitionsRDD[6] at main at NativeMethodAccessorImpl.java:-2)
+17/09/07 11:27:41 INFO TaskSchedulerImpl: Adding task set 1.0 with 1 tasks
+17/09/07 11:27:41 INFO TaskSetManager: Starting task 0.0 in stage 1.0 (TID 2, localhost, PROCESS_LOCAL, 1980 bytes)
+17/09/07 11:27:41 INFO Executor: Running task 0.0 in stage 1.0 (TID 2)
+17/09/07 11:27:41 INFO ShuffleBlockFetcherIterator: Getting 2 non-empty blocks out of 2 blocks
+17/09/07 11:27:41 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 4 ms
+17/09/07 11:27:41 INFO Executor: Finished task 0.0 in stage 1.0 (TID 2). 1185 bytes result sent to driver
+17/09/07 11:27:41 INFO TaskSetManager: Finished task 0.0 in stage 1.0 (TID 2) in 38 ms on localhost (1/1)
+17/09/07 11:27:41 INFO DAGScheduler: ResultStage 1 (main at NativeMethodAccessorImpl.java:-2) finished in 0.038 s
+17/09/07 11:27:41 INFO TaskSchedulerImpl: Removed TaskSet 1.0, whose tasks have all completed, from pool 
+17/09/07 11:27:41 INFO DAGScheduler: Job 0 finished: main at NativeMethodAccessorImpl.java:-2, took 0.598203 s
+17/09/07 11:27:41 INFO JobScheduler: Finished job streaming job 1504776460460 ms.1 from job set of time 1504776460460 ms
+17/09/07 11:27:41 INFO HoeffdingTreeModel: numClasses2
+17/09/07 11:27:41 INFO JobScheduler: Total delay: 0.813 s for time 1504776460460 ms (execution: 0.686 s)
+17/09/07 11:27:41 INFO JobScheduler: Starting job streaming job 1504776460600 ms.0 from job set of time 1504776460600 ms
+17/09/07 11:27:41 INFO JobScheduler: Finished job streaming job 1504776460600 ms.0 from job set of time 1504776460600 ms
+17/09/07 11:27:41 INFO JobScheduler: Starting job streaming job 1504776460600 ms.1 from job set of time 1504776460600 ms
+17/09/07 11:27:41 ERROR JobScheduler: Error running job streaming job 1504776460600 ms.0
 org.apache.spark.SparkException: Task not serializable
 	at org.apache.spark.util.ClosureCleaner$.ensureSerializable(ClosureCleaner.scala:304)
 	at org.apache.spark.util.ClosureCleaner$.org$apache$spark$util$ClosureCleaner$$clean(ClosureCleaner.scala:294)
@@ -282,7 +282,7 @@ org.apache.spark.SparkException: Task not serializable
 	at java.lang.Thread.run(Thread.java:745)
 Caused by: java.io.NotSerializableException: org.apache.spark.streaming.StreamingContext
 Serialization stack:
-	- object not serializable (class: org.apache.spark.streaming.StreamingContext, value: org.apache.spark.streaming.StreamingContext@5b1301b6)
+	- object not serializable (class: org.apache.spark.streaming.StreamingContext, value: org.apache.spark.streaming.StreamingContext@500ff9dc)
 	- field (class: org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1, name: ssc$1, type: class org.apache.spark.streaming.StreamingContext)
 	- object (class org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1, <function1>)
 	- field (class: org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1$$anonfun$2, name: $outer, type: class org.apache.spark.streamdm.classifiers.trees.HoeffdingTree$$anonfun$train$1)
@@ -292,68 +292,68 @@ Serialization stack:
 	at org.apache.spark.serializer.JavaSerializerInstance.serialize(JavaSerializer.scala:84)
 	at org.apache.spark.util.ClosureCleaner$.ensureSerializable(ClosureCleaner.scala:301)
 	... 29 more
-17/09/07 00:37:20 INFO SparkContext: Starting job: main at NativeMethodAccessorImpl.java:-2
-17/09/07 00:37:20 INFO DAGScheduler: Registering RDD 10 (main at NativeMethodAccessorImpl.java:-2)
-17/09/07 00:37:20 INFO DAGScheduler: Got job 1 (main at NativeMethodAccessorImpl.java:-2) with 1 output partitions
-17/09/07 00:37:20 INFO DAGScheduler: Final stage: ResultStage 3(main at NativeMethodAccessorImpl.java:-2)
-17/09/07 00:37:20 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 2)
-17/09/07 00:37:20 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 2)
-17/09/07 00:37:20 INFO DAGScheduler: Submitting ShuffleMapStage 2 (MapPartitionsRDD[10] at main at NativeMethodAccessorImpl.java:-2), which has no missing parents
-17/09/07 00:37:20 INFO MemoryStore: ensureFreeSpace(11224) called with curMem=21690, maxMem=2222739947
-17/09/07 00:37:20 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 11.0 KB, free 2.1 GB)
-17/09/07 00:37:20 INFO MemoryStore: ensureFreeSpace(5167) called with curMem=32914, maxMem=2222739947
-17/09/07 00:37:20 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 5.0 KB, free 2.1 GB)
-17/09/07 00:37:20 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on localhost:49325 (size: 5.0 KB, free: 2.1 GB)
-17/09/07 00:37:20 INFO SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:861
-17/09/07 00:37:20 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 2 (MapPartitionsRDD[10] at main at NativeMethodAccessorImpl.java:-2)
-17/09/07 00:37:20 INFO TaskSchedulerImpl: Adding task set 2.0 with 2 tasks
-17/09/07 00:37:20 WARN TaskSetManager: Stage 2 contains a task of very large size (252 KB). The maximum recommended task size is 100 KB.
-17/09/07 00:37:20 INFO TaskSetManager: Starting task 0.0 in stage 2.0 (TID 3, localhost, PROCESS_LOCAL, 258395 bytes)
-17/09/07 00:37:20 INFO TaskSetManager: Starting task 1.0 in stage 2.0 (TID 4, localhost, PROCESS_LOCAL, 258395 bytes)
-17/09/07 00:37:20 INFO Executor: Running task 1.0 in stage 2.0 (TID 4)
-17/09/07 00:37:20 INFO Executor: Running task 0.0 in stage 2.0 (TID 3)
-17/09/07 00:37:20 INFO Executor: Finished task 1.0 in stage 2.0 (TID 4). 1158 bytes result sent to driver
-17/09/07 00:37:20 INFO TaskSetManager: Finished task 1.0 in stage 2.0 (TID 4) in 53 ms on localhost (1/2)
-17/09/07 00:37:20 INFO Executor: Finished task 0.0 in stage 2.0 (TID 3). 1158 bytes result sent to driver
-17/09/07 00:37:20 INFO TaskSetManager: Finished task 0.0 in stage 2.0 (TID 3) in 70 ms on localhost (2/2)
-17/09/07 00:37:20 INFO DAGScheduler: ShuffleMapStage 2 (main at NativeMethodAccessorImpl.java:-2) finished in 0.070 s
-17/09/07 00:37:20 INFO TaskSchedulerImpl: Removed TaskSet 2.0, whose tasks have all completed, from pool 
-17/09/07 00:37:20 INFO DAGScheduler: looking for newly runnable stages
-17/09/07 00:37:20 INFO DAGScheduler: running: Set()
-17/09/07 00:37:20 INFO DAGScheduler: waiting: Set(ResultStage 3)
-17/09/07 00:37:20 INFO DAGScheduler: failed: Set()
-17/09/07 00:37:20 INFO DAGScheduler: Missing parents for ResultStage 3: List()
-17/09/07 00:37:20 INFO DAGScheduler: Submitting ResultStage 3 (MapPartitionsRDD[13] at main at NativeMethodAccessorImpl.java:-2), which is now runnable
-17/09/07 00:37:20 INFO MemoryStore: ensureFreeSpace(3376) called with curMem=38081, maxMem=2222739947
-17/09/07 00:37:20 INFO MemoryStore: Block broadcast_3 stored as values in memory (estimated size 3.3 KB, free 2.1 GB)
-17/09/07 00:37:20 INFO MemoryStore: ensureFreeSpace(1908) called with curMem=41457, maxMem=2222739947
-17/09/07 00:37:20 INFO MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 1908.0 B, free 2.1 GB)
-17/09/07 00:37:20 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on localhost:49325 (size: 1908.0 B, free: 2.1 GB)
-17/09/07 00:37:20 INFO SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:861
-17/09/07 00:37:20 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 3 (MapPartitionsRDD[13] at main at NativeMethodAccessorImpl.java:-2)
-17/09/07 00:37:20 INFO TaskSchedulerImpl: Adding task set 3.0 with 1 tasks
-17/09/07 00:37:20 INFO TaskSetManager: Starting task 0.0 in stage 3.0 (TID 5, localhost, PROCESS_LOCAL, 1980 bytes)
-17/09/07 00:37:20 INFO Executor: Running task 0.0 in stage 3.0 (TID 5)
-17/09/07 00:37:20 INFO ShuffleBlockFetcherIterator: Getting 2 non-empty blocks out of 2 blocks
-17/09/07 00:37:20 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
-17/09/07 00:37:20 INFO Executor: Finished task 0.0 in stage 3.0 (TID 5). 1185 bytes result sent to driver
-17/09/07 00:37:20 INFO TaskSetManager: Finished task 0.0 in stage 3.0 (TID 5) in 6 ms on localhost (1/1)
-17/09/07 00:37:20 INFO DAGScheduler: ResultStage 3 (main at NativeMethodAccessorImpl.java:-2) finished in 0.006 s
-17/09/07 00:37:20 INFO TaskSchedulerImpl: Removed TaskSet 3.0, whose tasks have all completed, from pool 
-17/09/07 00:37:20 INFO DAGScheduler: Job 1 finished: main at NativeMethodAccessorImpl.java:-2, took 0.097334 s
-17/09/07 00:37:20 INFO JobScheduler: Finished job streaming job 1504737439520 ms.1 from job set of time 1504737439520 ms
-17/09/07 00:37:20 INFO JobScheduler: Total delay: 0.942 s for time 1504737439520 ms (execution: 0.108 s)
-17/09/07 00:37:20 ERROR StreamingListenerBus: StreamingListenerBus has already stopped! Dropping event StreamingListenerBatchCompleted(BatchInfo(1504737439520 ms,Map(),1504737439623,Some(1504737440354),Some(1504737440462)))
-17/09/07 00:37:20 INFO JobScheduler: Stopped JobScheduler
-17/09/07 00:37:20 INFO StreamingContext: StreamingContext stopped successfully
-17/09/07 00:37:20 INFO SparkContext: Invoking stop() from shutdown hook
-17/09/07 00:37:20 INFO SparkUI: Stopped Spark web UI at http://192.168.0.102:4040
-17/09/07 00:37:20 INFO DAGScheduler: Stopping DAGScheduler
-17/09/07 00:37:20 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
-17/09/07 00:37:20 INFO MemoryStore: MemoryStore cleared
-17/09/07 00:37:20 INFO BlockManager: BlockManager stopped
-17/09/07 00:37:20 INFO BlockManagerMaster: BlockManagerMaster stopped
-17/09/07 00:37:20 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
-17/09/07 00:37:20 INFO SparkContext: Successfully stopped SparkContext
-17/09/07 00:37:20 INFO ShutdownHookManager: Shutdown hook called
-17/09/07 00:37:20 INFO ShutdownHookManager: Deleting directory /private/var/folders/5d/zfph4vmx069g8444mbjrg03r0000gn/T/spark-0c1ebae1-b884-4f4f-a37d-59ff32ee0cce
+17/09/07 11:27:41 INFO SparkContext: Starting job: main at NativeMethodAccessorImpl.java:-2
+17/09/07 11:27:41 INFO DAGScheduler: Registering RDD 10 (main at NativeMethodAccessorImpl.java:-2)
+17/09/07 11:27:41 INFO DAGScheduler: Got job 1 (main at NativeMethodAccessorImpl.java:-2) with 1 output partitions
+17/09/07 11:27:41 INFO DAGScheduler: Final stage: ResultStage 3(main at NativeMethodAccessorImpl.java:-2)
+17/09/07 11:27:41 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 2)
+17/09/07 11:27:41 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 2)
+17/09/07 11:27:41 INFO DAGScheduler: Submitting ShuffleMapStage 2 (MapPartitionsRDD[10] at main at NativeMethodAccessorImpl.java:-2), which has no missing parents
+17/09/07 11:27:41 INFO MemoryStore: ensureFreeSpace(11224) called with curMem=21690, maxMem=2222739947
+17/09/07 11:27:41 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 11.0 KB, free 2.1 GB)
+17/09/07 11:27:41 INFO MemoryStore: ensureFreeSpace(5167) called with curMem=32914, maxMem=2222739947
+17/09/07 11:27:41 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 5.0 KB, free 2.1 GB)
+17/09/07 11:27:41 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on localhost:50700 (size: 5.0 KB, free: 2.1 GB)
+17/09/07 11:27:41 INFO SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:861
+17/09/07 11:27:41 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 2 (MapPartitionsRDD[10] at main at NativeMethodAccessorImpl.java:-2)
+17/09/07 11:27:41 INFO TaskSchedulerImpl: Adding task set 2.0 with 2 tasks
+17/09/07 11:27:41 WARN TaskSetManager: Stage 2 contains a task of very large size (252 KB). The maximum recommended task size is 100 KB.
+17/09/07 11:27:41 INFO TaskSetManager: Starting task 0.0 in stage 2.0 (TID 3, localhost, PROCESS_LOCAL, 258395 bytes)
+17/09/07 11:27:41 INFO TaskSetManager: Starting task 1.0 in stage 2.0 (TID 4, localhost, PROCESS_LOCAL, 258395 bytes)
+17/09/07 11:27:41 INFO Executor: Running task 0.0 in stage 2.0 (TID 3)
+17/09/07 11:27:41 INFO Executor: Running task 1.0 in stage 2.0 (TID 4)
+17/09/07 11:27:41 INFO Executor: Finished task 1.0 in stage 2.0 (TID 4). 1158 bytes result sent to driver
+17/09/07 11:27:41 INFO TaskSetManager: Finished task 1.0 in stage 2.0 (TID 4) in 66 ms on localhost (1/2)
+17/09/07 11:27:41 INFO Executor: Finished task 0.0 in stage 2.0 (TID 3). 1158 bytes result sent to driver
+17/09/07 11:27:41 INFO TaskSetManager: Finished task 0.0 in stage 2.0 (TID 3) in 78 ms on localhost (2/2)
+17/09/07 11:27:41 INFO DAGScheduler: ShuffleMapStage 2 (main at NativeMethodAccessorImpl.java:-2) finished in 0.078 s
+17/09/07 11:27:41 INFO TaskSchedulerImpl: Removed TaskSet 2.0, whose tasks have all completed, from pool 
+17/09/07 11:27:41 INFO DAGScheduler: looking for newly runnable stages
+17/09/07 11:27:41 INFO DAGScheduler: running: Set()
+17/09/07 11:27:41 INFO DAGScheduler: waiting: Set(ResultStage 3)
+17/09/07 11:27:41 INFO DAGScheduler: failed: Set()
+17/09/07 11:27:41 INFO DAGScheduler: Missing parents for ResultStage 3: List()
+17/09/07 11:27:41 INFO DAGScheduler: Submitting ResultStage 3 (MapPartitionsRDD[13] at main at NativeMethodAccessorImpl.java:-2), which is now runnable
+17/09/07 11:27:41 INFO MemoryStore: ensureFreeSpace(3376) called with curMem=38081, maxMem=2222739947
+17/09/07 11:27:41 INFO MemoryStore: Block broadcast_3 stored as values in memory (estimated size 3.3 KB, free 2.1 GB)
+17/09/07 11:27:41 INFO MemoryStore: ensureFreeSpace(1908) called with curMem=41457, maxMem=2222739947
+17/09/07 11:27:41 INFO MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 1908.0 B, free 2.1 GB)
+17/09/07 11:27:41 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on localhost:50700 (size: 1908.0 B, free: 2.1 GB)
+17/09/07 11:27:41 INFO SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:861
+17/09/07 11:27:41 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 3 (MapPartitionsRDD[13] at main at NativeMethodAccessorImpl.java:-2)
+17/09/07 11:27:41 INFO TaskSchedulerImpl: Adding task set 3.0 with 1 tasks
+17/09/07 11:27:41 INFO TaskSetManager: Starting task 0.0 in stage 3.0 (TID 5, localhost, PROCESS_LOCAL, 1980 bytes)
+17/09/07 11:27:41 INFO Executor: Running task 0.0 in stage 3.0 (TID 5)
+17/09/07 11:27:41 INFO ShuffleBlockFetcherIterator: Getting 2 non-empty blocks out of 2 blocks
+17/09/07 11:27:41 INFO ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+17/09/07 11:27:41 INFO Executor: Finished task 0.0 in stage 3.0 (TID 5). 1185 bytes result sent to driver
+17/09/07 11:27:41 INFO TaskSetManager: Finished task 0.0 in stage 3.0 (TID 5) in 6 ms on localhost (1/1)
+17/09/07 11:27:41 INFO DAGScheduler: ResultStage 3 (main at NativeMethodAccessorImpl.java:-2) finished in 0.006 s
+17/09/07 11:27:41 INFO TaskSchedulerImpl: Removed TaskSet 3.0, whose tasks have all completed, from pool 
+17/09/07 11:27:41 INFO DAGScheduler: Job 1 finished: main at NativeMethodAccessorImpl.java:-2, took 0.102811 s
+17/09/07 11:27:41 INFO JobScheduler: Finished job streaming job 1504776460600 ms.1 from job set of time 1504776460600 ms
+17/09/07 11:27:41 INFO JobScheduler: Total delay: 0.791 s for time 1504776460600 ms (execution: 0.115 s)
+17/09/07 11:27:41 ERROR StreamingListenerBus: StreamingListenerBus has already stopped! Dropping event StreamingListenerBatchCompleted(BatchInfo(1504776460600 ms,Map(),1504776460663,Some(1504776461276),Some(1504776461391)))
+17/09/07 11:27:41 INFO JobScheduler: Stopped JobScheduler
+17/09/07 11:27:41 INFO StreamingContext: StreamingContext stopped successfully
+17/09/07 11:27:41 INFO SparkContext: Invoking stop() from shutdown hook
+17/09/07 11:27:41 INFO SparkUI: Stopped Spark web UI at http://137.194.56.59:4040
+17/09/07 11:27:41 INFO DAGScheduler: Stopping DAGScheduler
+17/09/07 11:27:41 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+17/09/07 11:27:41 INFO MemoryStore: MemoryStore cleared
+17/09/07 11:27:41 INFO BlockManager: BlockManager stopped
+17/09/07 11:27:41 INFO BlockManagerMaster: BlockManagerMaster stopped
+17/09/07 11:27:41 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+17/09/07 11:27:41 INFO SparkContext: Successfully stopped SparkContext
+17/09/07 11:27:41 INFO ShutdownHookManager: Shutdown hook called
+17/09/07 11:27:41 INFO ShutdownHookManager: Deleting directory /private/var/folders/5d/zfph4vmx069g8444mbjrg03r0000gn/T/spark-366eb6b9-a111-41b3-b3cc-9e280ea3a25e

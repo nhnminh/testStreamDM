@@ -231,7 +231,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/streamDMJob.scala",
 			"settings":
 			{
-				"buffer_size": 1525,
+				"buffer_size": 1921,
 				"line_ending": "Unix"
 			}
 		},
@@ -247,7 +247,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/tasks/EvaluatePrequential.scala",
 			"settings":
 			{
-				"buffer_size": 7157,
+				"buffer_size": 7098,
 				"line_ending": "Unix"
 			}
 		},
@@ -255,7 +255,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/HoeffdingTree.scala",
 			"settings":
 			{
-				"buffer_size": 29811,
+				"buffer_size": 30867,
 				"line_ending": "Unix"
 			}
 		},
@@ -271,15 +271,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/Node.scala",
 			"settings":
 			{
-				"buffer_size": 22054,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/main/scala/org/apache/spark/streamdm/streams/PrintStreamWriter.scala",
-			"settings":
-			{
-				"buffer_size": 1348,
+				"buffer_size": 22575,
 				"line_ending": "Unix"
 			}
 		},
@@ -287,7 +279,7 @@
 			"file": "src/main/scala/org/apache/spark/streamdm/streams/FileReader.scala",
 			"settings":
 			{
-				"buffer_size": 7033,
+				"buffer_size": 7202,
 				"line_ending": "Windows"
 			}
 		},
@@ -295,87 +287,7 @@
 			"file": "scripts/run/run.sh",
 			"settings":
 			{
-				"buffer_size": 2999,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/run/accuracy.py",
-			"settings":
-			{
-				"buffer_size": 530,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/accuracy.py",
-			"settings":
-			{
-				"buffer_size": 1520,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_10000_NBA_splitMore.res",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_10000_NBA_splitMore_test.res",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_NBA_100000inst.res",
-			"settings":
-			{
-				"buffer_size": 7501,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_NBA_cov.res",
-			"settings":
-			{
-				"buffer_size": 6869,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "data/covtypeNorm.arff",
-			"settings":
-			{
-				"buffer_size": 103350912,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "data/randomtreedata.arff",
-			"settings":
-			{
-				"buffer_size": 133344633,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC.res",
-			"settings":
-			{
-				"buffer_size": 7502,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_cov.res",
-			"settings":
-			{
-				"buffer_size": 0,
+				"buffer_size": 5054,
 				"line_ending": "Unix"
 			}
 		},
@@ -383,223 +295,32 @@
 			"file": "scripts/result/majcl4_t.log",
 			"settings":
 			{
-				"buffer_size": 2572588,
+				"buffer_size": 173102,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "scripts/result/hdt_1000_MC_cov_p_store.res",
+			"file": "scripts/result/hdt_1000_MC_cov_splitAll.res",
 			"settings":
 			{
-				"buffer_size": 58848,
+				"buffer_size": 2004,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "scripts/result/hdt_1000_NBA_cov_p.res",
+			"contents": "/*\n * Copyright (C) 2015 Holmes Team at HUAWEI Noah's Ark Lab.\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n * http://www.apache.org/licenses/LICENSE-2.0\n *\n * Unless required by applicable law or agreed to in writing, software\n * distributed under the License is distributed on an \"AS IS\" BASIS,\n * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n * See the License for the specific language governing permissions and\n * limitations under the License.\n *\n */\n\npackage org.apache.spark.streamdm.streams\n\nimport java.io.File\nimport scala.io.Source\nimport scala.collection.mutable.ArrayBuffer\nimport scala.util.Random\n\nimport org.apache.spark.Logging\nimport org.apache.spark.rdd.RDD\nimport org.apache.spark.streaming.dstream.{ DStream, InputDStream }\nimport org.apache.spark.streaming.{ Time, Duration, StreamingContext }\n\nimport com.github.javacliparser.{ IntOption, FloatOption, StringOption, FileOption }\n\nimport org.apache.spark.streamdm.core._\nimport org.apache.spark.streamdm.core.specification._\nimport org.apache.spark.streamdm.streams.generators.Generator\n\n/**\n  * FileReader is used to read data from one file of full data to simulate a stream data.\n  *\n  * <p>It uses the following options:\n  * <ul>\n  *  <li> Chunk size (<b>-k</b>)\n  *  <li> Slide duration in milliseconds (<b>-d</b>)\n  *  <li> Type of the instance to use, it should be \"dense\" or \"sparse\" (<b>-t</b>)\n  *  <li> Data File Name (<b>-f</b>)\n  *  <li> Data Header Format,uses weka's arff as default.(<b>-h</b>)\n  * </ul>\n  */\n\nclass FileReader extends StreamReader with Logging {\n\n  val chunkSizeOption: IntOption = new IntOption(\"chunkSize\", 'k',\n    \"Chunk Size\", 10000, 1, Integer.MAX_VALUE)\n\n  val slideDurationOption: IntOption = new IntOption(\"slideDuration\", 'd',\n    \"Slide Duration in milliseconds\", 100, 1, Integer.MAX_VALUE)\n\n  val instanceOption: StringOption = new StringOption(\"instanceType\", 't',\n    \"Type of the instance to use\", \"dense\")\n\n  val instanceLimitOption: IntOption = new IntOption(\"instanceLimit\", 'i',\n    \"Limit of number of instance\", 100000,1, Integer.MAX_VALUE)\n\n  val fileNameOption: StringOption = new StringOption(\"fileName\", 'f',\n    \"File Name\", \"../data/hyperplanesampledata\")\n\n  val dataHeadTypeOption: StringOption = new StringOption(\"dataHeadType\", 'h',\n    \"Data Head Format\", \"arff\")\n\n  val headParser = new SpecificationParser\n  var fileName: String = null\n  var headFileName: String = null\n  var isInited: Boolean = false\n  var hasHeadFile: Boolean = false\n  var lines: Iterator[String] = null\n  var spec: ExampleSpecification = null\n  var counter: Int = 0\n\n  def init() {\n    if (!isInited) {\n      fileName = fileNameOption.getValue\n      val file = new File(fileName)\n      if (!file.exists()) {\n        logError(\"file does not exists, input a new file name\")\n        exit()\n      }\n      headFileName = fileNameOption.getValue() + \".\" +\n        dataHeadTypeOption.getValue + \".head\"\n      val hfile: File = new File(headFileName)\n      if (hfile.exists()) {\n        // has a head file\n        hasHeadFile = true\n      }\n      spec = headParser.getSpecification(\n        if (hasHeadFile) headFileName else fileName, dataHeadTypeOption.getValue)\n      for (index <- 0 until spec.out(0).range()) {\n        logInfo(spec.out(0).asInstanceOf[NominalFeatureSpecification](index))\n      }\n\n      isInited = true\n    }\n  }\n\n  /**\n    * Obtains the specification of the examples in the stream.\n    *\n    * @return an ExampleSpecification of the features\n    */\n  override def getExampleSpecification(): ExampleSpecification = {\n    init()\n    spec\n  }\n\n  /**\n    * Get one Example from file\n    *\n    * @return an Example\n    */\n  def getExampleFromFile(): Example = {\n    var exp: Example = null\n    // start to read file from its beginning.\n    if (lines == null || !lines.hasNext) {\n      //get the whole file\n      lines = Source.fromFile(fileName).getLines()\n    }\n    // if reach the end of file, will go to the head again\n    if (!lines.hasNext) {\n      println(\"=============================\")\n      println(\"\\t\\tEnd of file!\")\n      println(\"=============================\")\n      // lines = Source.fromFile(fileName).getLines()\n      //if reach the end of file, return.\n      exp\n    }\n    var line = lines.next()\n    while (!hasHeadFile && (line == \"\" || line.startsWith(\" \") ||\n      line.startsWith(\"%\") || line.startsWith(\"@\"))) {\n      //logInfo(line)\n      line = lines.next()\n    }\n    if (!hasHeadFile) {\n      //logInfo(\"UUUU\" + line)\n      if (\"arff\".equalsIgnoreCase(dataHeadTypeOption.getValue())) {\n        exp = ExampleParser.fromArff(line, spec)\n      } else {\n        if (\"csv\".equalsIgnoreCase(dataHeadTypeOption.getValue())) {\n          //for the csv format, we assume the first is the classification\n          val index: Int = line.indexOf(\",\")\n          line = line.substring(0, index) + \" \" + line.substring(index + 1).trim()\n          exp = Example.parse(line, instanceOption.getValue, \"dense\")\n        }\n      }\n    } else {\n      exp = Example.parse(line, instanceOption.getValue, \"dense\")\n    }\n    exp\n  }\n\n  /**\n    * Obtains a stream of examples.\n    *\n    * @param ssc a Spark Streaming context\n    * @return a stream of Examples\n    */\n  override def getExamples(ssc: StreamingContext): DStream[Example] = {\n    init()\n    new InputDStream[Example](ssc) {\n      override def start(): Unit = {\n        logInfo(\"File reading gets started.\")\n      }\n\n      override def stop(): Unit = {\n        logInfo(\"Reading file stopped.\")\n      }\n\n      override def compute(validTime: Time): Option[RDD[Example]] = {\n        val examples: Array[Example] = Array.fill[Example](chunkSizeOption.getValue)(getExampleFromFile())\n        val examplesRDD = ssc.sparkContext.parallelize(examples)\n        // stop the stream when it gets over N instances.\n        counter = counter + 1\n        val limit = instanceLimitOption.getValue/ chunkSizeOption.getValue\n        if(counter > limit){\n          println(\"Over limit instances. STOP!\" )\n          logInfo(\"Over limit instances. STOP!\" )\n          ssc.stop(stopSparkContext = false, stopGracefully = false)\n        }\n        Some(examplesRDD)\n\n      }\n\n      override def slideDuration = {\n        new Duration(slideDurationOption.getValue)\n      }\n    }\n  }\n}",
 			"settings":
 			{
-				"buffer_size": 22716,
-				"line_ending": "Unix"
+				"buffer_size": 6408,
+				"line_ending": "Unix",
+				"name": "/*"
 			}
 		},
 		{
-			"file": "scripts/result/hdt_1000_NBA_p.res",
+			"file": "scripts/result/hdt_1000_MC_elec_p_splitAll.res",
 			"settings":
 			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_NBA_elec.res",
-			"settings":
-			{
-				"buffer_size": 3620,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "data/electNormNew.arff",
-			"settings":
-			{
-				"buffer_size": 2994413,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_cov_p_store_1.res",
-			"settings":
-			{
-				"buffer_size": 29410,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_NBA.res",
-			"settings":
-			{
-				"buffer_size": 7502,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_NBA_elec_p.res",
-			"settings":
-			{
-				"buffer_size": 2828,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_elec_p.res",
-			"settings":
-			{
-				"buffer_size": 79220,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_NBA_complex_p_1.res",
-			"settings":
-			{
-				"buffer_size": 26650,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "replaceText.py",
-			"settings":
-			{
-				"buffer_size": 403,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_NBA_complex_p_2.res",
-			"settings":
-			{
-				"buffer_size": 26869,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_cov_p_4threads.res",
-			"settings":
-			{
-				"buffer_size": 17289,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_cov_p_8threads_1.res",
-			"settings":
-			{
-				"buffer_size": 20998,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_cov_p_16threads_1.res",
-			"settings":
-			{
-				"buffer_size": 25886,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_p.res",
-			"settings":
-			{
-				"buffer_size": 191184,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_complex_p_4threads.res",
-			"settings":
-			{
-				"buffer_size": 32339,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_cov_p.res",
-			"settings":
-			{
-				"buffer_size": 17081,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_p_or.res",
-			"settings":
-			{
-				"buffer_size": 27928,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_NBA_p_or.res",
-			"settings":
-			{
-				"buffer_size": 28322,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_elec_p_or.res",
-			"settings":
-			{
-				"buffer_size": 20100,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/splitThenMerge/hdt_1000_MC_p.res",
-			"settings":
-			{
-				"buffer_size": 13754145,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/splitThenMerge/hdt_1000_MC_p_splitAll.res",
-			"settings":
-			{
-				"buffer_size": 92044,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_p_splitAll.res",
-			"settings":
-			{
-				"buffer_size": 66364,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_p_splitNTimes.res",
-			"settings":
-			{
-				"buffer_size": 66476,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_cov_splitNTimes.res",
-			"settings":
-			{
-				"buffer_size": 21932,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "scripts/result/hdt_1000_MC_complex_p_splitNTimes.res",
-			"settings":
-			{
-				"buffer_size": 61289,
+				"buffer_size": 3666,
 				"line_ending": "Unix"
 			}
 		},
@@ -607,15 +328,23 @@
 			"file": "scripts/result/hdt_1000_MC_elec_p_splitNTimes.res",
 			"settings":
 			{
-				"buffer_size": 4222,
+				"buffer_size": 3355,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "scripts/result/hdt_1000_MC_elec_p_splitAll.res",
+			"file": "scripts/result/hdt_1000_MC_complex300_p_splitNTimes.res",
 			"settings":
 			{
-				"buffer_size": 4431,
+				"buffer_size": 949,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "scripts/result/log.log",
+			"settings":
+			{
+				"buffer_size": 623677,
 				"line_ending": "Unix"
 			}
 		}
@@ -664,10 +393,56 @@
 	},
 	"file_history":
 	[
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/replaceText.py",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/electNormNew.arff",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/spark.sh",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/PrintStreamWriter.scala",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_p_splitAll.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/accuracy.py",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_p_or.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_elec_p_or.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/splitThenMerge/hdt_1000_MC_p.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/splitThenMerge/hdt_1000_MC_p_splitAll.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_p_splitNTimes.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_cov_splitNTimes.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_complex_p_splitNTimes.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_elec_p_splitAll.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_cov_p_splitAll.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/accuracy.py",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_p_splitAll.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_complex_p_splitAll.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_complex_p_splitAll_2.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_kdd_p_splitAll.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/kdd99.arff",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_kdd_p_splitNTimes.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/randomtreesampledata",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA_splitMore.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_p_or.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_cov_p.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_p.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_complex_p_4threads.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_cov_p_16threads_1.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_cov_p_8threads_1.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_cov_p_4threads.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_complex_p_2.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/replaceText.py",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_complex_p_1.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_elec_p.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_elec_p.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_cov_p_store_1.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/electNormNew.arff",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_elec.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_p.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_cov_p.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_cov_p_store.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_cov.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/randomtreedata.arff",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/covtypeNorm.arff",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA_splitMore_test.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_cov.res",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_MC_elec_p_splitNTimes.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl4_t.log",
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA_100000inst.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/runserver.sh",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_1000_NBA.accuracy",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA.res",
@@ -675,11 +450,9 @@
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA_2threads_1mil.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_100_NBA_small.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_100_NBA.res",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/hdt_10000_NBA_splitMore.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl5_t_1000_NBA.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/streamDM (Spark Streaming).sublime-project",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/Evaluator.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/accuracy.py",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/Utils.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/evaluation/ClusteringEvaluator.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/result/majcl5_t_checkGaussianApproximation.res",
@@ -709,7 +482,6 @@
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/DenseInstance.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/model/LinearModel.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/SplitCriterion.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/randomtreedata.arff",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/hyperplanesampledata",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/hyperplanesampledata.arff.head",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/hdt2.log",
@@ -743,55 +515,12 @@
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/java/com/github/javacliparser/Options.java",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/tasks/ClusteringTrainEvaluate.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/trees/FeatureSplit.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/PrintStreamWriter.scala",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/stage1.log",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/data/covtypeNorm.arff",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/hdt.res",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/StreamReader.scala",
 		"/Users/minhnguyen/StreamingAlgo/replaceText.py",
 		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/spark_cluster.sh",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/evaluation/BasicClassificationEvaluator.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/tasks/EvaluatePrequential.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/new.log",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/target/test-reports/org.apache.spark.streamdm.classifiers.model.ZeroRegularizerSuite.xml",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/project/plugins.sbt",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/instance_server/server.py",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/KafkaReader.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/TextStreamReader.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/SocketTextStreamReader.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/generators/Generator.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streams/generators/HyperplaneGenerator.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/java/com/github/javacliparser/ClassOption.java",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/streamDMJob.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/..sth.log",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/..sth.res",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/HoeffdingTree.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/instance_server/generate_dataset.py",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/run.sh",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/classifiers/MultiClassLearner.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/sth.log",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run/toserver.sh",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/specification/ExampleSpecification.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/Learner.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run.sh",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/scripts/run_server.sh",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/Instance.scala",
-		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/core/ExampleParser.scala",
-		"/Users/minhnguyen/Downloads/reportDrug.ipynb.json",
-		"/Users/minhnguyen/Downloads/sample.java",
-		"/Users/minhnguyen/Downloads/sample.txt",
-		"/Users/minhnguyen/Google Drive/Telecom-ParisTech/Study/P2_IMA203/Tp5/TP_ModelesDeformables/TP_Modeles_Deformables.m",
-		"/Users/minhnguyen/Google Drive/Telecom-ParisTech/Study/P2_SD203 Web /TP/JS/helloworld.js",
-		"/Users/minhnguyen/Downloads/Bus Map/busmapPrediction/data 10.txt",
-		"/Users/minhnguyen/Downloads/Win10_English_x64/autorun.inf",
-		"/Users/minhnguyen/Google Drive/Telecom-ParisTech/Study/MDI210 Optimisation/TP1 /src/simplexeDemo_source_from_cfr/simplexe/Main.java",
-		"/Users/minhnguyen/Google Drive/Telecom-ParisTech/Study/MDI210 Optimisation/TP1 /src/simplexeDemo_source_from_cfr/matrice/Matrice.java",
-		"/Users/minhnguyen/Downloads/Bus Map/busmapPrediction/BusHeatMap-HCR-prediction copy.html",
-		"/Users/minhnguyen/Downloads/Bus Map/bus heat map - Ho con rua/BusHeatMapofFeb1-at6hour.html",
-		"/Users/minhnguyen/Downloads/Bus Map/BusHeatMap-HCR-HVT.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/its/sitebs.html",
-		"/Applications/XAMPP/xamppfiles/htdocs/its/pagebs.css",
-		"/Applications/XAMPP/xamppfiles/htdocs/its/heatmap.html"
+		"/Users/minhnguyen/StreamingAlgo/StreamDM/streamDM/src/main/scala/org/apache/spark/streamdm/evaluation/BasicClassificationEvaluator.scala"
 	],
 	"find":
 	{
@@ -810,6 +539,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"arraySize",
+			"19,10",
+			"polevl",
+			"991",
+			"hoef",
 			"Hoeffding",
 			"HoeffdingTree",
 			"accurac",
@@ -932,12 +666,7 @@
 			"update",
 			"SparkUI",
 			"8080",
-			"delay",
-			"train",
-			"merge",
-			"HoeffdingTreeModel",
-			"{",
-			"merge"
+			"delay"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -955,7 +684,6 @@
 	"groups":
 	[
 		{
-			"selected": 43,
 			"sheets":
 			[
 				{
@@ -963,7 +691,7 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/streamDMJob.scala",
 					"settings":
 					{
-						"buffer_size": 1525,
+						"buffer_size": 1921,
 						"regions":
 						{
 						},
@@ -1019,7 +747,7 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/tasks/EvaluatePrequential.scala",
 					"settings":
 					{
-						"buffer_size": 7157,
+						"buffer_size": 7098,
 						"regions":
 						{
 						},
@@ -1047,7 +775,7 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/HoeffdingTree.scala",
 					"settings":
 					{
-						"buffer_size": 29811,
+						"buffer_size": 30867,
 						"regions":
 						{
 						},
@@ -1103,7 +831,7 @@
 					"file": "src/main/scala/org/apache/spark/streamdm/classifiers/trees/Node.scala",
 					"settings":
 					{
-						"buffer_size": 22054,
+						"buffer_size": 22575,
 						"regions":
 						{
 						},
@@ -1128,38 +856,10 @@
 				},
 				{
 					"buffer": 6,
-					"file": "src/main/scala/org/apache/spark/streamdm/streams/PrintStreamWriter.scala",
-					"settings":
-					{
-						"buffer_size": 1348,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								292,
-								292
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Scala/Scala.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 126.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
 					"file": "src/main/scala/org/apache/spark/streamdm/streams/FileReader.scala",
 					"settings":
 					{
-						"buffer_size": 7033,
+						"buffer_size": 7202,
 						"regions":
 						{
 						},
@@ -1183,11 +883,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "scripts/run/run.sh",
 					"settings":
 					{
-						"buffer_size": 2999,
+						"buffer_size": 5054,
 						"regions":
 						{
 						},
@@ -1203,31 +903,84 @@
 							"syntax": "Packages/ShellScript/Shell-Unix-Generic.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 87.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "scripts/result/majcl4_t.log",
+					"settings":
+					{
+						"buffer_size": 173102,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								26309,
+								26309
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 37033.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 9,
-					"file": "scripts/run/accuracy.py",
+					"file": "scripts/result/hdt_1000_MC_cov_splitAll.res",
 					"settings":
 					{
-						"buffer_size": 530,
+						"buffer_size": 2004,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								439,
-								439
+								491,
+								491
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1896.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"settings":
+					{
+						"buffer_size": 6408,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6408,
+								6408
+							]
+						],
+						"settings":
+						{
+							"auto_name": "/*",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -1237,47 +990,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "scripts/accuracy.py",
-					"settings":
-					{
-						"buffer_size": 1520,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								656,
-								656
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 229.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
 					"buffer": 11,
-					"file": "scripts/result/hdt_10000_NBA_splitMore.res",
+					"file": "scripts/result/hdt_1000_MC_elec_p_splitAll.res",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 3666,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2911,
+								2911
 							]
 						],
 						"settings":
@@ -1292,46 +1017,44 @@
 				},
 				{
 					"buffer": 12,
-					"file": "scripts/result/hdt_10000_NBA_splitMore_test.res",
+					"file": "scripts/result/hdt_1000_MC_elec_p_splitNTimes.res",
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 3355,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								364,
+								364
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 25.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 13,
-					"file": "scripts/result/hdt_1000_NBA_100000inst.res",
+					"file": "scripts/result/hdt_1000_MC_complex300_p_splitNTimes.res",
 					"settings":
 					{
-						"buffer_size": 7501,
+						"buffer_size": 949,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7403,
-								7403
+								470,
+								470
 							]
 						],
 						"settings":
@@ -1339,925 +1062,34 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 3822.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 14,
-					"file": "scripts/result/hdt_1000_NBA_cov.res",
+					"file": "scripts/result/log.log",
 					"settings":
 					{
-						"buffer_size": 6869,
+						"buffer_size": 623677,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								193,
-								193
+								857,
+								857
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 3,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2868.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 15,
-					"file": "data/covtypeNorm.arff",
-					"settings":
-					{
-						"buffer_size": 103350912,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								433,
-								433
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 936.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 16,
-					"file": "data/randomtreedata.arff",
-					"settings":
-					{
-						"buffer_size": 133344633,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								469,
-								469
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 17,
-					"file": "scripts/result/hdt_1000_MC.res",
-					"settings":
-					{
-						"buffer_size": 7502,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7090,
-								7090
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3822.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 18,
-					"file": "scripts/result/hdt_1000_MC_cov.res",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3120.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 19,
-					"file": "scripts/result/majcl4_t.log",
-					"settings":
-					{
-						"buffer_size": 2572588,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2572084,
-								2572084
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 584952.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 20,
-					"file": "scripts/result/hdt_1000_MC_cov_p_store.res",
-					"settings":
-					{
-						"buffer_size": 58848,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								58382,
-								58382
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 29902.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 21,
-					"file": "scripts/result/hdt_1000_NBA_cov_p.res",
-					"settings":
-					{
-						"buffer_size": 22716,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								14452,
-								14452
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 22,
-					"file": "scripts/result/hdt_1000_NBA_p.res",
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 208171.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 23,
-					"file": "scripts/result/hdt_1000_NBA_elec.res",
-					"settings":
-					{
-						"buffer_size": 3620,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3346,
-								3346
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 24,
-					"file": "data/electNormNew.arff",
-					"settings":
-					{
-						"buffer_size": 2994413,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6246,
-								6246
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 15866.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 25,
-					"file": "scripts/result/hdt_1000_MC_cov_p_store_1.res",
-					"settings":
-					{
-						"buffer_size": 29410,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5896,
-								5896
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 16580.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 26,
-					"file": "scripts/result/hdt_1000_NBA.res",
-					"settings":
-					{
-						"buffer_size": 7502,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7363,
-								7363
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 27,
-					"file": "scripts/result/hdt_1000_NBA_elec_p.res",
-					"settings":
-					{
-						"buffer_size": 2828,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2700,
-								2700
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 28,
-					"file": "scripts/result/hdt_1000_MC_elec_p.res",
-					"settings":
-					{
-						"buffer_size": 79220,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 29,
-					"file": "scripts/result/hdt_1000_NBA_complex_p_1.res",
-					"settings":
-					{
-						"buffer_size": 26650,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								26334,
-								26334
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 13627.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 30,
-					"file": "replaceText.py",
-					"settings":
-					{
-						"buffer_size": 403,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								35,
-								35
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 31,
-					"file": "scripts/result/hdt_1000_NBA_complex_p_2.res",
-					"settings":
-					{
-						"buffer_size": 26869,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								26246,
-								26246
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 13771.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 32,
-					"file": "scripts/result/hdt_1000_MC_cov_p_4threads.res",
-					"settings":
-					{
-						"buffer_size": 17289,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								17238,
-								17238
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 9280.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 33,
-					"file": "scripts/result/hdt_1000_MC_cov_p_8threads_1.res",
-					"settings":
-					{
-						"buffer_size": 20998,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 11750.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 34,
-					"file": "scripts/result/hdt_1000_MC_cov_p_16threads_1.res",
-					"settings":
-					{
-						"buffer_size": 25886,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								20274,
-								20278
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 14791.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 35,
-					"file": "scripts/result/hdt_1000_MC_p.res",
-					"settings":
-					{
-						"buffer_size": 191184,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4034,
-								4034
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 100786.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 36,
-					"file": "scripts/result/hdt_1000_MC_complex_p_4threads.res",
-					"settings":
-					{
-						"buffer_size": 32339,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								31707,
-								31707
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 37,
-					"file": "scripts/result/hdt_1000_MC_cov_p.res",
-					"settings":
-					{
-						"buffer_size": 17081,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								16307,
-								16307
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 8489.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 38,
-					"file": "scripts/result/hdt_1000_MC_p_or.res",
-					"settings":
-					{
-						"buffer_size": 27928,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								27928,
-								27928
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 14071.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 39,
-					"file": "scripts/result/hdt_1000_NBA_p_or.res",
-					"settings":
-					{
-						"buffer_size": 28322,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 14287.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 40,
-					"file": "scripts/result/hdt_1000_MC_elec_p_or.res",
-					"settings":
-					{
-						"buffer_size": 20100,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								20028,
-								20028
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 9589.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 41,
-					"file": "scripts/result/splitThenMerge/hdt_1000_MC_p.res",
-					"settings":
-					{
-						"buffer_size": 13754145,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 783.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 42,
-					"file": "scripts/result/splitThenMerge/hdt_1000_MC_p_splitAll.res",
-					"settings":
-					{
-						"buffer_size": 92044,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								21946,
-								21946
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 57118.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 43,
-					"file": "scripts/result/hdt_1000_MC_p_splitAll.res",
-					"settings":
-					{
-						"buffer_size": 66364,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								66297,
-								66297
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 39661.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 44,
-					"file": "scripts/result/hdt_1000_MC_p_splitNTimes.res",
-					"settings":
-					{
-						"buffer_size": 66476,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								66171,
-								66171
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 42252.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 45,
-					"file": "scripts/result/hdt_1000_MC_cov_splitNTimes.res",
-					"settings":
-					{
-						"buffer_size": 21932,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								16047,
-								16047
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 12084.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 46,
-					"file": "scripts/result/hdt_1000_MC_complex_p_splitNTimes.res",
-					"settings":
-					{
-						"buffer_size": 61289,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								61222,
-								61222
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 38382.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 47,
-					"file": "scripts/result/hdt_1000_MC_elec_p_splitNTimes.res",
-					"settings":
-					{
-						"buffer_size": 4222,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4038,
-								4038
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2184.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 48,
-					"file": "scripts/result/hdt_1000_MC_elec_p_splitAll.res",
-					"settings":
-					{
-						"buffer_size": 4431,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4087,
-								4087
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 8778.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -2325,6 +1157,6 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 284.0,
+	"side_bar_width": 434.0,
 	"status_bar_visible": true
 }

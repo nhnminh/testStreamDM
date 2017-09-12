@@ -218,7 +218,7 @@ class NominalFeatureClassObserver(val numClasses: Int, val fIndex: Int, val numF
   override def bestSplit(criterion: SplitCriterion, pre: Array[Double],
                          fValue: Double, isBinarySplit: Boolean): FeatureSplit = {
     var fSplit: FeatureSplit = null
-
+//    println("fValue " + fValue)
 //    println("Pre : " + Utils.arraytoString(pre))
 //
 //    println("NumFeatureVals: " + numFeatureValues)
@@ -377,6 +377,7 @@ class GaussianNumericFeatureClassObserver(val numClasses: Int, val fIndex: Int, 
   override def bestSplit(criterion: SplitCriterion, pre: Array[Double],
     fValue: Double, isBinarySplit: Boolean): FeatureSplit = {
     // println("pre-Distribution:  " + Utils.arraytoString(pre))
+//    println("fValue " + fValue)
     var fSplit: FeatureSplit = null
 
     val points: Array[Double] = splitPoints()

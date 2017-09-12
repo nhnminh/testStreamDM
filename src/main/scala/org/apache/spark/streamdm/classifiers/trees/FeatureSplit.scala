@@ -23,7 +23,7 @@ import scala.math.Ordered
  * Class for recording a split suggestion.
  */
 class FeatureSplit(val conditionalTest: ConditionalTest, val merit: Double, 
-  val result: Array[Array[Double]]) extends Ordered[FeatureSplit] {
+  val result: Array[Array[Double]]) extends Ordered[FeatureSplit] with Serializable{
 
   /** Compares two FeatureSplit objects.
    * @param that the comparison feature 
