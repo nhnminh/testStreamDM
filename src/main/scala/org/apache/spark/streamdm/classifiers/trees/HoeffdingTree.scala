@@ -118,6 +118,7 @@ class HoeffdingTree extends Classifier {
   var espec: ExampleSpecification = null
 
   val t1: Long = System.nanoTime()
+  var trainTime: Double = 0
 
   /* Init the model used for the Learner*/
   override def init(exampleSpecification: ExampleSpecification): Unit = {
@@ -156,8 +157,11 @@ class HoeffdingTree extends Classifier {
 
   override def train(input: DStream[Example]): Unit = {
 
+
+
     input.foreachRDD {
       rdd =>
+        val startTime : Long = System.nanoTime()
         val tmodel = rdd.aggregate(new HoeffdingTreeModel(model))(
 
           (mod, example) => {mod.update(example)}, //map
@@ -178,10 +182,13 @@ class HoeffdingTree extends Classifier {
 
 //        println("After merge: " + model.description())
 //        model.checkforSum()
-        println("Time elapsed: " + (System.nanoTime - t1)/1e9d)
-
+//        println("Time elapsed: " + (System.nanoTime - t1)/1e9d)
+//
+        trainTime =  trainTime + ((System.nanoTime() - startTime)/1e9d)
+        println("Training time: " + trainTime)
 
     }
+
   }
 
 //
