@@ -491,19 +491,34 @@ class ActiveLearningNode(classDistribution: Array[Double])
    */
   def getBestSplitSuggestions(splitCriterion: SplitCriterion, ht: HoeffdingTreeModel): Array[FeatureSplit] = {
     val bestSplits = new ArrayBuffer[FeatureSplit]()
+    val r = scala.util.Random
+
+    // random select the features for splitting
+    val totalNumFeatures = featureObservers.length
+    val restrictedNumFeatures = scala.math.sqrt(totalNumFeatures).toInt
+    var index = 0
+    for (i <- 0 to restrictedNumFeatures-1) {
+       index = r.nextInt(totalNumFeatures)
+      bestSplits.append(featureObservers(index).bestSplit(splitCriterion,classDistribution,index,ht.binaryOnly))
+    }
+
+
+
 //    println("featureObservers: "  )
 //    featureObservers.zipWithIndex.foreach(x=>
 //    println(x._1 + " " + x._2))
 //    featureObservers.zipWithIndex.foreach(x=>
 //      println( " Index: " + x._2 +" : "+ x._1.bestSplit(splitCriterion, classDistribution, x._2, ht.binaryOnly) ))
-    featureObservers.zipWithIndex.foreach(x =>
-      bestSplits.append(x._1.bestSplit(splitCriterion, classDistribution, x._2, ht.binaryOnly)))
+//
+//    featureObservers.zipWithIndex.foreach(x =>
+//      bestSplits.append(x._1.bestSplit(splitCriterion, classDistribution, x._2, ht.binaryOnly)))
 
     if (!ht.noPrePrune) {
       bestSplits.append(new FeatureSplit(null, splitCriterion.merit(classDistribution,
         Array.fill(1)(classDistribution)), new Array[Array[Double]](0))) 
     }
 
+//    println("Length of bestSplits: " + bestSplits.length)
     bestSplits.toArray
   }
 
