@@ -256,7 +256,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
   val splitConfedence: Double = 0.0000001, val learningNodeType: Int = 0,
   val nbThreshold: Int = 0, val noPrePrune: Boolean = true,
   val removePoorFeatures: Boolean = false, val splitAll: Boolean = false, val maxDepth: Int = 20)
-    extends Model with Serializable with Logging {
+    extends ClassificationModel with Serializable with Logging {
 
   type T = HoeffdingTreeModel
 
@@ -667,7 +667,7 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
   }
 
   /* predict the class of example */
-  def predict(example: Example): Double = {
+  override def predict(example: Example): Double = {
     var prediction = 0.0
     if (root != null) {
       val foundNode = root.filterToLeaf(example, null, -1)
@@ -685,6 +685,12 @@ class HoeffdingTreeModel(val espec: ExampleSpecification, val numericObserverTyp
       0.0
     }
   }
+
+  override def prob(instance: Example): Double = {
+    //to do
+    return 0
+  }
+
 
   /* create a new ActiveLearningNode
  * 

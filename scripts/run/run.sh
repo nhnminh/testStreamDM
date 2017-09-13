@@ -55,7 +55,7 @@ start=`date +%s`
 
 
 ### OzaBagging
-#./spark.sh "90 EvaluatePrequential  -l (meta.Bagging -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200 -h 30 )) -s (FileReader -f ../data/randomtreedata.arff -k 10000 -i 1000000 -d 10)" 1> result/bagging/MC_p_splitNTimes1.res 2> result/log.log
+#./spark.sh "600 EvaluatePrequential  -l (meta.Bagging -l (trees.HoeffdingTree -l 0 -t 0.05 -g 200 -h 35 )) -s (FileReader -f ../data/randomtreedata.arff -k 10000 -i 1000000 -d 10)" 1> result/bagging/MC_p_splitNTimes1.res 2> result/log.log
 
 end=`date +%s`
 echo runtime = $((end-start)) "seconds"

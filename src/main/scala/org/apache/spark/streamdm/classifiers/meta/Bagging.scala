@@ -23,6 +23,7 @@ import org.apache.spark.streamdm.classifiers.Classifier
 import org.apache.spark.streamdm.classifiers.model._
 import org.apache.spark.streamdm.core._
 import org.apache.spark.streaming.dstream._
+import org.apache.spark.Logging
 import org.apache.spark.streamdm.utils.Utils
 import org.apache.spark.streamdm.core.specification.ExampleSpecification
 
@@ -37,7 +38,7 @@ import org.apache.spark.streamdm.core.specification.ExampleSpecification
  * </ul>
  */
 
-class Bagging extends Classifier {
+class Bagging extends Classifier with Logging{
 
   type T = LinearModel
 
@@ -65,7 +66,7 @@ class Bagging extends Classifier {
     val sizeEnsemble = ensembleSizeOption.getValue
     classifiers = new Array[Classifier](sizeEnsemble)
 
-    for (i <- 0 until sizeEnsemble) {
+    for (i <- 0 until (sizeEnsemble)) {
       classifiers(i) = Utils.copyClassifier(baseClassifier)
       classifiers(i).init(exampleSpecification)
     }
@@ -111,6 +112,7 @@ class Bagging extends Classifier {
     val sizeEnsemble = ensembleSizeOption.getValue
     val predictions: Array[Double] = new Array(sizeEnsemble)
     for (i <- 0 until sizeEnsemble) {
+      logInfo("Model(" + i + ")")
       predictions(i) = classifiers(i).getModel.asInstanceOf[ClassificationModel].predict(example)
     }
     Utils.majorityVote(predictions, numberClasses)
